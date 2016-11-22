@@ -1,3 +1,4 @@
+using BKind.Web.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -33,6 +34,7 @@ namespace BKind.Web
             // Add framework services.
             
             services.AddMvc();
+            services.AddTransient<IDatabase, Database>();
 
             // Add application services.
         }

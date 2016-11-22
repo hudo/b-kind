@@ -1,8 +1,16 @@
-﻿<!DOCTYPE html>
+﻿@model ViewModelBase
+<!DOCTYPE html>
 
 <html>
 <head>
-    <title>title</title>
+    <title>@Model.Title</title>
+    @RenderSection("header", required: false)
+    <environment names="Development">
+        <link rel="stylesheet" href="~/css/site.css"/>
+    </environment>
+    <environment names="Production,Staging">
+        <link rel="stylesheet" href="~/css/bundled.css" />
+    </environment>
 </head>
 <body>
 <div>
