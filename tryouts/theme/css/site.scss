@@ -1,0 +1,46 @@
+﻿$blue: #5B73A4;
+$blue-light: #CFEBEA;
+$blue-dark: #284B7D;
+$pink: #D84A7F;
+$pink-dark: #715262;
+
+body {
+    > header {
+        color: white;
+    }
+
+    > main {
+        background-color: white;
+        padding: 50px 0;
+    }
+
+    > footer {
+        border-top: 1px solid grey;
+        padding: 20px 0;
+    }
+}
+
+//Navigation
+.navbar-default {
+    background-color: $blue;
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: white;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #333;
+    background-color: #e7e7e7;
+}
+
+// list of stories
+.stories {
+    > div{
+      margin-bottom:20px;
+    }
+}
