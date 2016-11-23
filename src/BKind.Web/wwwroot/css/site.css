@@ -1,1 +1,28 @@
 body { }
+
+body > header {
+  color: white; }
+
+body > main {
+  background-color: white;
+  padding: 50px 0; }
+
+body > footer {
+  border-top: 1px solid grey;
+  padding: 20px 0; }
+
+.navbar-default {
+  background-color: #5B73A4; }
+
+.navbar-default .navbar-brand {
+  color: white; }
+
+.navbar-default .navbar-nav > li > a {
+  color: white; }
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  color: #333;
+  background-color: #e7e7e7; }
+
+.stories > div {
+  margin-bottom: 20px; }

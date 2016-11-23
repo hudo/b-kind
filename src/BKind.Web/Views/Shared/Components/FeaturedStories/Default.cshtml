@@ -1,8 +1,23 @@
 ﻿@model IEnumerable<Story>
 
-<ul>
-    @foreach (var story in Model)
-    {
-        <li>@story.Title</li>
-    }
-</ul>
+@foreach (var story in Model)
+{
+    <div class="col-sm-4">
+        <div class="pannel panel-info">
+            <div class="panel-heading">
+                <h2>
+                    @story.Title
+                </h2>
+            </div>
+            <div class="panel-body">
+                <p>
+                    @story.Content
+                </p>
+            </div>
+            <div class="panel-footer">
+                Date: 27/11/2016, Author: John Snow
+            </div>
+        </div>
+    </div>
+}
+
