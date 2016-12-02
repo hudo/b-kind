@@ -21,7 +21,6 @@ namespace BKind.Web.Controllers
             var model = new HomePageViewModel
             {
                 Title = "Welcome to Be Kind",
-                //FeaturedStories = _database.Stories.ToList()
             };
 
             return View(model);
@@ -29,7 +28,13 @@ namespace BKind.Web.Controllers
 
         public override void OnActionExecuted(ActionExecutedContext context)
         {
-            
+            var model = (context.Result as ViewResult)?.Model as ViewModelBase;
+
+            if (model != null)
+            {
+                model.Title = "Welcome to B-Kind!";
+                model.Description = "SEO stuff";
+            }
         }
 
 
