@@ -1,9 +1,10 @@
-﻿@model HomePageViewModel
+﻿@using BKind.Web.ViewComponents
+@model HomePageViewModel
 
 
 <h2>Stories</h2>
 <div class="row stories">
-    @await Component.InvokeAsync("FeaturedStories")   
+    @(await Component.InvokeAsync<FeaturedStoriesViewComponent>()))
 </div>
 
 
