@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BKind.Web.ViewComponents
 {
-    public class FeaturedStoriesViewComponent : ViewComponent
+    public class StoriesViewComponent : ViewComponent
     {
         private readonly IDatabase _db;
 
-        public FeaturedStoriesViewComponent(IDatabase db)
+        public StoriesViewComponent(IDatabase db)
         {
             _db = db;
         }

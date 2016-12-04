@@ -24,6 +24,20 @@ namespace BKind.Web.Infrastructure
                     Created = DateTime.Now.AddDays(-5),
                     Title = "Sample story",
                     Status = Status.Published
+                },
+                new Story
+                {
+                    ID = 2,
+                    Author = new User
+                    {
+                        ID = 1,
+                        FirstName = "Bob",
+                        LastName = "Rock"
+                    },
+                    Content = "story content 2",
+                    Created = DateTime.Now.AddDays(-5),
+                    Title = "Sample story 2",
+                    Status = Status.Published
                 }
             };
         }
