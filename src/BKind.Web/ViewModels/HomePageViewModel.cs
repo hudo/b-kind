@@ -7,5 +7,12 @@
 
         }
 
+        public StoriesDisplayMode DisplayMode { get; set; }
+    }
+    
+    public enum StoriesDisplayMode
+    {
+        None,
+        FeaturedList
     }
 }

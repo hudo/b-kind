@@ -1,4 +1,4 @@
-using BKind.Web.Infrastructure;
+using BKind.Web.Infrastructure.Persistance;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

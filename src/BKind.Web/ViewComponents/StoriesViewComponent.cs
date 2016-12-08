@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BKind.Web.Infrastructure;
+using BKind.Web.Infrastructure.Persistance;
 using BKind.Web.Model;
+using BKind.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BKind.Web.ViewComponents
@@ -16,9 +17,9 @@ namespace BKind.Web.ViewComponents
             _db = db;
         }
 
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync(StoriesDisplayMode mode)
         {
-            var items = GetStories().Result;
+            var items = await GetStories();
             return View(items);
         }
 

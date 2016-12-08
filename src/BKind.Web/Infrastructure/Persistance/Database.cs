@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using BKind.Web.Model;
 
-namespace BKind.Web.Infrastructure
+namespace BKind.Web.Infrastructure.Persistance
 {
     public class Database : IDatabase
     {
