@@ -16,9 +16,9 @@ namespace BKind.Web.ViewComponents
             _db = db;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public IViewComponentResult Invoke()
         {
-            var items = await GetStories();
+            var items = GetStories().Result;
             return View(items);
         }
 

@@ -9,5 +9,14 @@ namespace BKind.Web.Controllers
         {
             return View(new RegisterInputModel());
         }
+
+        [HttpPost]
+        public IActionResult Register(RegisterInputModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            return RedirectToAction("Register");
+        }
     }
 }
