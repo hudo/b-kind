@@ -58,6 +58,15 @@ namespace BKind.Web
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationScheme = "AuthScheme",
+                LoginPath = "/account/login",
+                AccessDeniedPath = "/account/login",
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true
+            });
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
