@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using BKind.Web.Infrastructure;
+﻿using BKind.Web.Infrastructure.Persistance;
 using BKind.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -21,11 +19,12 @@ namespace BKind.Web.Controllers
             var model = new HomePageViewModel
             {
                 Title = "Welcome to Be Kind",
+                DisplayMode = StoriesDisplayMode.Featured
             };
 
             return View(model);
         }
-
+        
         public override void OnActionExecuted(ActionExecutedContext context)
         {
             var model = (context.Result as ViewResult)?.Model as ViewModelBase;
