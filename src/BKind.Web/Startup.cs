@@ -1,4 +1,5 @@
 using BKind.Web.Infrastructure.Persistance;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -35,6 +36,8 @@ namespace BKind.Web
             
             services.AddMvc();
             services.AddTransient<IDatabase, Database>();
+
+            services.AddMediatR(typeof(Startup));
 
             // Add application services.
         }
