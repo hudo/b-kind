@@ -1,4 +1,5 @@
 using BKind.Web.Infrastructure.Persistance;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,12 +34,13 @@ namespace BKind.Web
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            
-            services.AddMvc();
+
+            services.AddMvc().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>());
+
             services.AddTransient<IDatabase, Database>();
 
             services.AddMediatR(typeof(Startup));
-
+            
             // Add application services.
         }
 

@@ -1,4 +1,4 @@
-﻿using BKind.Web.Infrastructure;
+﻿using BKind.Web.Core;
 using BKind.Web.ViewModels;
 using MediatR;
 

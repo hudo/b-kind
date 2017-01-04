@@ -13,5 +13,7 @@ namespace BKind.Web.Infrastructure.Helpers
         {
             return await helper.InvokeAsync<StoriesViewComponent>(new { mode = displayMode });
         }
+
+        
     }
 }

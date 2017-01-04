@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BKind.Web.Infrastructure.Helpers;
 using BKind.Web.Model;
 
 namespace BKind.Web.Infrastructure.Persistance
@@ -40,15 +41,41 @@ namespace BKind.Web.Infrastructure.Persistance
                     Status = Status.Published
                 }
             };
+
+            _users = new List<User>
+            {
+                new User
+                {
+                    ID = 1,
+                    FirstName = "Bob",
+                    LastName = "Rock",
+                    Username = "bobrock",
+                    Credential = new Credential
+                    {
+                        ID = 1,
+                        Username = "bobrock",
+                        PasswordHash = StringHelpers.ComputeHash("1234", "salt"),
+                        Salt = "salt"
+                    }
+                }
+            };
+
+            _credentials = new List<Credential> { _users[0].Credential };
         }
 
         private static readonly List<Story> _stories;
+        private static readonly List<User> _users;
+        private static readonly List<Credential> _credentials;
 
         public IEnumerable<Story> Stories => _stories;
+        public IEnumerable<User> Users => _users;
+        public IEnumerable<Credential> Credentials => _credentials;
     }
 
     public interface IDatabase
     {
         IEnumerable<Story> Stories { get; }
+        IEnumerable<User> Users { get; }
+        IEnumerable<Credential> Credentials { get; }
     }
 }

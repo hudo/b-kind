@@ -1,4 +1,5 @@
-﻿using BKind.Web.Infrastructure;
+﻿using BKind.Web.Core;
+using BKind.Web.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BKind.Web.Controllers
