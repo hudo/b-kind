@@ -39,8 +39,14 @@ namespace BKind.Web.Controllers
                 return View(inputModel);
             }
 
-            await HttpContext.Authentication.SignInAsync("AuthScheme",
-                new ClaimsPrincipal(new ClaimsIdentity(new List<Claim> { new Claim("username", inputModel.Username) })));
+            // todo: move to command handler or application service?
+            await HttpContext.Authentication.SignInAsync(_authScheme,
+                new ClaimsPrincipal(
+                    new ClaimsIdentity(new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, inputModel.Username),
+                        new Claim("id", "111222")
+                    }, "user")));
 
             return RedirectToAction("Index", "Home");
         }
@@ -58,7 +64,7 @@ namespace BKind.Web.Controllers
 
         public async Task<IActionResult> Signout()
         {
-            await HttpContext.Authentication.SignOutAsync("AuthScheme");
+            await HttpContext.Authentication.SignOutAsync(_authScheme);
             return Redirect("/home/index");
         }
     }
