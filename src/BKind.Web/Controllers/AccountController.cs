@@ -4,6 +4,7 @@ using System.Security.Principal;
 using System.Threading.Tasks;
 using BKind.Web.Features.Account;
 using BKind.Web.Infrastructure.Persistance;
+using BKind.Web.Model;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +16,7 @@ namespace BKind.Web.Controllers
         private readonly IDatabase _db;
         private readonly IMediator _mediator;
 
-        private string _authScheme = "authscheme";
+        private string _authScheme = "AuthScheme";
 
         public AccountController(IDatabase db, IMediator mediator)
         {
@@ -45,8 +46,8 @@ namespace BKind.Web.Controllers
                     new ClaimsIdentity(new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, inputModel.Username),
-                        new Claim("id", "111222")
-                    }, "user")));
+                        new Claim(ClaimTypes.Role, "Reviewer"),
+                    }, "form")));
 
             return RedirectToAction("Index", "Home");
         }
@@ -61,6 +62,9 @@ namespace BKind.Web.Controllers
 
             return RedirectToAction("Register");
         }
+
+        [Authorize(Roles = "Reviewer")]
+        public void Test() => View();
 
         public async Task<IActionResult> Signout()
         {

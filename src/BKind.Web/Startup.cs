@@ -68,7 +68,7 @@ namespace BKind.Web
                 AuthenticationScheme = "AuthScheme",
                 LoginPath = "/account/login",
                 AccessDeniedPath = "/account/login",
-                AutomaticAuthenticate = true,
+                //AutomaticAuthenticate = true,
                 AutomaticChallenge = true
             });
 

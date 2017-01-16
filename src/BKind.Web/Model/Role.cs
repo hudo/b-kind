@@ -5,6 +5,6 @@
     public class Visitor : Role { }
     public class Administrator : Role { }
     public class Author : Role { }
-    public class Reviwer : Role { }
+    public class Reviewer : Role { }
 
 }
