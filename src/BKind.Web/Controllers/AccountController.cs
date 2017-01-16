@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Security.Claims;
-using System.Security.Principal;
 using System.Threading.Tasks;
+using BKind.Web.Core;
 using BKind.Web.Features.Account;
 using BKind.Web.Infrastructure.Persistance;
-using BKind.Web.Model;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,8 +14,6 @@ namespace BKind.Web.Controllers
     {
         private readonly IDatabase _db;
         private readonly IMediator _mediator;
-
-        private string _authScheme = "AuthScheme";
 
         public AccountController(IDatabase db, IMediator mediator)
         {
@@ -41,7 +38,7 @@ namespace BKind.Web.Controllers
             }
 
             // todo: move to command handler or application service?
-            await HttpContext.Authentication.SignInAsync(_authScheme,
+            await HttpContext.Authentication.SignInAsync(Application.AuthScheme,
                 new ClaimsPrincipal(
                     new ClaimsIdentity(new List<Claim>
                     {
@@ -68,7 +65,7 @@ namespace BKind.Web.Controllers
 
         public async Task<IActionResult> Signout()
         {
-            await HttpContext.Authentication.SignOutAsync(_authScheme);
+            await HttpContext.Authentication.SignOutAsync(Application.AuthScheme);
             return Redirect("/home/index");
         }
     }

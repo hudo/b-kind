@@ -1,3 +1,4 @@
+using BKind.Web.Core;
 using BKind.Web.Infrastructure.Persistance;
 using FluentValidation.AspNetCore;
 using MediatR;
@@ -65,10 +66,10 @@ namespace BKind.Web
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                AuthenticationScheme = "AuthScheme",
+                AuthenticationScheme = Application.AuthScheme,
                 LoginPath = "/account/login",
                 AccessDeniedPath = "/account/login",
-                //AutomaticAuthenticate = true,
+                AutomaticAuthenticate = true,
                 AutomaticChallenge = true
             });
 
