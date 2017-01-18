@@ -5,7 +5,6 @@ using BKind.Web.Core;
 using BKind.Web.Features.Account;
 using BKind.Web.Infrastructure.Persistance;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BKind.Web.Controllers
@@ -59,9 +58,6 @@ namespace BKind.Web.Controllers
 
             return RedirectToAction("Register");
         }
-
-        [Authorize(Roles = "Reviewer")]
-        public void Test() => View();
 
         public async Task<IActionResult> Signout()
         {

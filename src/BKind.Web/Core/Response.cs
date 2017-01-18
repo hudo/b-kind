@@ -22,6 +22,11 @@ namespace BKind.Web.Core
         {
             _messages.Add(new ResponseMessage { Key = key, Message = message, MessageType = type });
         }
+
+        public static Response<T> From<T>(T value)
+        {
+            return new Response<T>(value);
+        }
     }
 
     public class Response<T> : Response
