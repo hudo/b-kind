@@ -8,6 +8,9 @@
 *.sln.docstates
 *.tss
 
+src/bkind.web/wwwroot/lib/
+
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
