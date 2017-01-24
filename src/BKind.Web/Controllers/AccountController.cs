@@ -36,15 +36,6 @@ namespace BKind.Web.Controllers
                 return View(inputModel);
             }
 
-            // todo: move to command handler or application service?
-            await HttpContext.Authentication.SignInAsync(Application.AuthScheme,
-                new ClaimsPrincipal(
-                    new ClaimsIdentity(new List<Claim>
-                    {
-                        new Claim(ClaimTypes.Name, inputModel.Username),
-                        new Claim(ClaimTypes.Role, "Reviewer"),
-                    }, "form")));
-
             return RedirectToAction("Index", "Home");
         }
 
