@@ -30,7 +30,7 @@ namespace BKind.Web.Controllers
 
             var response = await _mediator.SendAsync(inputModel);
 
-            if(!response.Result)
+            if(!response.HasErrors)
             {
                 MapToModelState(response);
                 return View(inputModel);

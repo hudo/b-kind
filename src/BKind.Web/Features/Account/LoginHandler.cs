@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace BKind.Web.Features.Account
 {
-    public class LoginHandler : IAsyncRequestHandler<LoginInputModel, Response<bool>>
+    public class LoginHandler : IAsyncRequestHandler<LoginInputModel, Response>
     {
         private readonly IDatabase _db;
         private readonly IHttpContextAccessor _httpContext;
@@ -23,9 +23,10 @@ namespace BKind.Web.Features.Account
             _httpContext = httpContext;
         }
 
-        public async Task<Response<bool>> Handle(LoginInputModel message)
+        public async Task<Response> Handle(LoginInputModel message)
         {
-            var response = new Response<bool>(false);
+            var response = Response.Empty();
+
             var user = _db.Users.FirstOrDefault(x => x.Credential.Username == message.Username);
 
             if (user != null && user.Credential.PasswordHash == StringHelpers.ComputeHash(message.Password, user.Credential.Salt))
@@ -37,8 +38,6 @@ namespace BKind.Web.Features.Account
                         new Claim(ClaimTypes.Name, user.Username),
                         new Claim(ClaimTypes.Role, "Reviewer")
                     }, "form")));
-
-                response = new Response<bool>(true);
             }
             else
             {

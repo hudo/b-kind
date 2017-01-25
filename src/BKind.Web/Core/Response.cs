@@ -27,6 +27,9 @@ namespace BKind.Web.Core
         {
             return new Response<T>(value);
         }
+
+        public static Response Empty() => new Response();
+        public static Response<T> Empty<T>() => new Response<T>(default(T));
     }
 
     public class Response<T> : Response
