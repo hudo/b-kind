@@ -56,7 +56,8 @@ namespace BKind.Web.Infrastructure.Persistance
                         Username = "bobrock",
                         PasswordHash = StringHelpers.ComputeHash("1234", "salt"),
                         Salt = "salt"
-                    }
+                    },
+                    Roles = new List<Role> { new Visitor(), new Author() }
                 }
             };
 
