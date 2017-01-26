@@ -28,7 +28,7 @@ namespace BKind.Web.Controllers
             if (!ModelState.IsValid)
                 return View(inputModel);
 
-            var response = await _mediator.SendAsync(inputModel);
+            var response = await _mediator.Send(inputModel);
 
             if(!response.HasErrors)
             {
