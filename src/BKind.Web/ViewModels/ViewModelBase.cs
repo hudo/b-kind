@@ -2,7 +2,13 @@
 {
     public abstract class ViewModelBase
     {
-        public string Title { get; set; }
+        private string _title;
+
+        public string Title
+        {
+            get { return _title; }
+            set { _title = $"{value} | B Kind"; }
+        }
         public string Description { get; set; }
     }
 }

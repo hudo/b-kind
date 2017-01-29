@@ -12,5 +12,6 @@ namespace BKind.Web.Model
         public virtual Credential Credential { get; set; }
         public DateTime Registered { get; set; }
         public DateTime LastLogin { get; set; }
+
     }
 }

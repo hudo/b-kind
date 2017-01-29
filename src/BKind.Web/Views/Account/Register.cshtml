@@ -1,0 +1,31 @@
+﻿@model BKind.Web.Features.Account.RegisterInputModel
+
+<div asp-validation-summary="All"></div>
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Username"></label>
+        <input asp-for="Username" class="form-control" type="email" placeholder="e-mail" />
+        <span asp-validation-for="Username"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Firstname"></label>
+        <input asp-for="Firstname" class="form-control" placeholder="first name"/>
+        <span asp-validation-for="Firstname"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Lastname"></label>
+        <input asp-for="Lastname" class="form-control" placeholder="last name"/>
+        <span asp-validation-for="Lastname"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" placeholder="password"/>
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PasswordConfirm"></label>
+        <input asp-for="PasswordConfirm" class="form-control" placeholder="confirm password"/>
+        <span asp-validation-for="PasswordConfirm"></span>
+    </div>
+    <button type="submit" class="btn btn-default">Register</button>
+</form>

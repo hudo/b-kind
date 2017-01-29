@@ -254,3 +254,6 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+src/bkind.web/wwwroot/lib/
+src/bkind.web/bower_components/

@@ -1,4 +1,5 @@
-﻿@model ViewModelBase
+﻿@using BKind.Web.ViewComponents
+@model ViewModelBase
 <!DOCTYPE html>
 
 <html>
@@ -40,6 +41,7 @@
     </header>
     <main>
         <div class="container">
+            @(await Component.InvokeAsync<AccountViewComponent>())
             @RenderBody()
         </div>
     </main>

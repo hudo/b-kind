@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace BKind.Web.Model
 {
@@ -15,11 +14,4 @@ namespace BKind.Web.Model
         public int ThumbsUp { get; set; }
         public DateTime Deleted { get; set; }
     }
-
-
-    public enum Status
-    {
-        Draft, Published, Declined
-    }
-  
 }

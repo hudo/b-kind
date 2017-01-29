@@ -1,7 +1,10 @@
-using BKind.Web.Infrastructure;
+using BKind.Web.Core;
 using BKind.Web.Infrastructure.Persistance;
+using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -33,10 +36,15 @@ namespace BKind.Web
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            
-            services.AddMvc();
+
+            services.AddMvc().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>());
+
             services.AddTransient<IDatabase, Database>();
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddMediatR(typeof(Startup));
+            
             // Add application services.
         }
 
@@ -58,6 +66,15 @@ namespace BKind.Web
             app.UseStaticFiles();
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationScheme = Application.AuthScheme,
+                LoginPath = "/account/login",
+                AccessDeniedPath = "/account/login",
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true
+            });
 
             app.UseMvc(routes =>
             {
