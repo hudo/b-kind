@@ -5,6 +5,10 @@
         public abstract string Name { get; }
     }
 
+    // each role can have some additional properties and methods
+    // we can then use role domain entity to perform specific action permitted just
+    // for that role. 
+
     public class Visitor : Role
     {
         public override string Name => "Visitor";

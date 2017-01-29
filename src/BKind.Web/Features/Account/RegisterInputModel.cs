@@ -5,7 +5,7 @@ using MediatR;
 
 namespace BKind.Web.Features.Account
 {
-    public class RegisterInputModel : ViewModelBase, IRequest<Response<bool>>
+    public class RegisterInputModel : ViewModelBase, IRequest<Response>
     {
         [Display(Name = "E-mail")]
         public string Username { get; set; }

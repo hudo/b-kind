@@ -9,12 +9,10 @@ namespace BKind.Web.Infrastructure.Helpers
 {
     public static class ViewHelpers
     {
-        public static async Task<IHtmlContent> RenderStories(
-            this IViewComponentHelper component, 
-            StoriesDisplayMode mode)
+        public static async Task<IHtmlContent> RenderStories(this IViewComponentHelper helper, StoriesDisplayMode displayMode)
         {
-           
-            return await component.InvokeAsync("Stories", new { displayModel = mode });
+            return await helper.InvokeAsync<StoriesViewComponent>(new { mode = displayMode });
         }
+
     }
 }

@@ -7,7 +7,7 @@ namespace BKind.Web.Core
 
     public interface IUnitOfWork
     {
-        void Add(Entity entity);
+        void AddOrAttach(Entity entity);
         void Delete(Entity entity);
 
         Task Commit();

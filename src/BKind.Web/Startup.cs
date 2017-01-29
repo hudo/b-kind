@@ -39,7 +39,9 @@ namespace BKind.Web
 
             services.AddMvc().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>());
 
-            services.AddTransient<IDatabase, Database>();
+            services.AddTransient<IDatabase, InMemoryFakeDatabase>();
+
+            services.AddTransient<IUnitOfWork, InMemoryUnitOfWork>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

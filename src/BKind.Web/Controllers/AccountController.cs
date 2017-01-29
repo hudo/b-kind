@@ -42,12 +42,20 @@ namespace BKind.Web.Controllers
         public IActionResult Register() => View(new RegisterInputModel());
         
         [HttpPost]
-        public IActionResult Register(RegisterInputModel model)
+        public async Task<IActionResult> Register(RegisterInputModel model)
         {
             if (!ModelState.IsValid)
                 return View(model);
 
-            return RedirectToAction("Register");
+            var response = await _mediator.Send(model);
+
+            if(response.HasErrors)
+            {
+                MapToModelState(response);
+                return View(model);
+            }
+
+            return RedirectToAction("Login");
         }
 
         public async Task<IActionResult> Signout()

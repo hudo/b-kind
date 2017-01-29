@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BKind.Web.Model
 {
@@ -13,5 +14,14 @@ namespace BKind.Web.Model
         public DateTime Registered { get; set; }
         public DateTime LastLogin { get; set; }
 
+        public bool Is<T>() where T:Role
+        {
+            return Roles.OfType<T>().Any();
+        }
+
+        public T GetRole<T>() where T:Role
+        {
+            return Roles.OfType<T>().FirstOrDefault();
+        }
     }
 }

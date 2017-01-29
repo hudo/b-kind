@@ -23,6 +23,11 @@ namespace BKind.Web.Core
             _messages.Add(new ResponseMessage { Key = key, Message = message, MessageType = type });
         }
 
+        public void AddError(string key, string message)
+        {
+            _messages.Add(new ResponseMessage { Key = key, Message = message, MessageType = ResponseMessageType.Error });
+        }
+
         public static Response<T> From<T>(T value)
         {
             return new Response<T>(value);

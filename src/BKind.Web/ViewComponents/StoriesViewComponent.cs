@@ -23,7 +23,7 @@ namespace BKind.Web.ViewComponents
             return View(items);
         }
 
-        public Task<IEnumerable<Story>> GetStories()
+        public Task<List<Story>> GetStories()
         {
             return Task.FromResult(_db.Stories);
         }
