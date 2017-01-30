@@ -3,6 +3,9 @@
     public abstract class Role : Entity
     {
         public abstract string Name { get; }
+
+        public virtual User User { get; set; }
+        public int UserId { get; set; }
     }
 
     // each role can have some additional properties and methods

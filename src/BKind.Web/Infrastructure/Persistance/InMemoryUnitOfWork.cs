@@ -16,7 +16,7 @@ namespace BKind.Web.Infrastructure.Persistance
 
         public void AddOrAttach(Entity entity)
         {
-            if(entity.ID > 0) return; 
+            if(entity.Id > 0) return; 
              
             if(entity is User)
                 _db.Users.Add((User)entity);

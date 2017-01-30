@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using BKind.Web.Core;
 using BKind.Web.Features.Account;
 using BKind.Web.Infrastructure.Persistance;

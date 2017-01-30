@@ -14,10 +14,10 @@ namespace BKind.Web.Infrastructure.Persistance
             {
                 new Story
                 {
-                    ID = 1,
+                    Id = 1,
                     Author = new User
                     {
-                        ID = 1,
+                        Id = 1,
                         FirstName = "Bob", 
                         LastName = "Rock"
                     },
@@ -28,10 +28,10 @@ namespace BKind.Web.Infrastructure.Persistance
                 },
                 new Story
                 {
-                    ID = 2,
+                    Id = 2,
                     Author = new User
                     {
-                        ID = 1,
+                        Id = 1,
                         FirstName = "Bob",
                         LastName = "Rock"
                     },
@@ -46,13 +46,13 @@ namespace BKind.Web.Infrastructure.Persistance
             {
                 new User
                 {
-                    ID = 1,
+                    Id = 1,
                     FirstName = "Bob",
                     LastName = "Rock",
                     Username = "bobrock",
                     Credential = new Credential
                     {
-                        ID = 1,
+                        Id = 1,
                         Username = "bobrock",
                         PasswordHash = StringHelpers.ComputeHash("1234", "salt"),
                         Salt = "salt"
