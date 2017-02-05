@@ -19,6 +19,7 @@ namespace BKind.Web.Features.Account
         {
             _db = db;
             _unitOfWork = unitOfWork;
+
         }
 
         public Task<Response> Handle(RegisterInputModel message)

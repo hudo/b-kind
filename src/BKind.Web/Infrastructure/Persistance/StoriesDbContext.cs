@@ -1,16 +1,33 @@
-﻿using BKind.Web.Model;
+﻿using System;
+using System.IO;
+using BKind.Web.Model;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 namespace BKind.Web.Infrastructure.Persistance
 {
     public class StoriesDbContext : DbContext
     {
+        private readonly IHostingEnvironment _env;
+
+        public StoriesDbContext(IHostingEnvironment env)
+        {
+            _env = env;
+        }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Story> Stories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Filename=./stories.db");
+            var appData = Path.Combine(_env.ContentRootPath, "wwwroot/App_Data");
+            if (!Directory.Exists(appData))
+            {
+                Directory.CreateDirectory(appData);
+            }
+
+            optionsBuilder.UseSqlite($"Filename={appData}/stories.db");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

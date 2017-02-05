@@ -1,19 +1,25 @@
-﻿using System;
-using System.Linq;
+﻿using BKind.Web.Core.StandardQueries;
 using BKind.Web.Infrastructure.Persistance;
+using BKind.Web.Model;
 using BKind.Web.ViewModels;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace BKind.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IDatabase _db;
+        private readonly IMediator _mediator;
 
-        public HomeController(IDatabase db)
+        public HomeController(IDatabase db, IMediator mediator)
         {
             _db = db;
+            _mediator = mediator;
+
+            var story = _mediator.Send(new GetOneQuery<Story>(1)).Result;
         }
 
         public IActionResult Index()
