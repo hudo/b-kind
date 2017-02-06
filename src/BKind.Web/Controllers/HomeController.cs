@@ -1,5 +1,7 @@
-﻿using BKind.Web.Core.StandardQueries;
+﻿using System.Reflection;
+using BKind.Web.Core.StandardQueries;
 using BKind.Web.Infrastructure.Persistance;
+using BKind.Web.Infrastructure.Persistance.StandardHandlers;
 using BKind.Web.Model;
 using BKind.Web.ViewModels;
 using MediatR;
@@ -16,6 +18,11 @@ namespace BKind.Web.Controllers
 
         public HomeController(IDatabase db, IMediator mediator)
         {
+            var type1 = typeof(IAsyncRequestHandler<,>);
+            var type = typeof(GetOneHandler<>);
+
+            var impl = type.GetInterfaces()[0].GetGenericTypeDefinition() == type1;
+
             _db = db;
             _mediator = mediator;
 

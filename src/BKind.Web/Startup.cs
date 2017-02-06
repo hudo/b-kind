@@ -1,3 +1,4 @@
+using System;
 using BKind.Web.Core;
 using BKind.Web.Infrastructure.Persistance;
 using BKind.Web.Infrastructure.Persistance.StandardHandlers;
@@ -6,10 +7,20 @@ using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
+using StructureMap;
+using StructureMap.Pipeline;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using BKind.Web.Core.StandardQueries;
+using BKind.Web.Model;
+using StructureMap.Graph;
+using StructureMap.Graph.Scanning;
 
 namespace BKind.Web
 {
@@ -34,24 +45,44 @@ namespace BKind.Web
 
         public IConfigurationRoot Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>());
-
-            services.AddTransient<IDatabase, InMemoryFakeDatabase>();
-
             services.AddDbContext<StoriesDbContext>();
 
-            services.AddTransient<IUnitOfWork, InMemoryUnitOfWork>();
+            var container = new Container(c =>
+            {
+                c.Scan(scanner =>
+                {
+                    scanner.AssemblyContainingType<Startup>();
+                    scanner.AssemblyContainingType<IMediator>();
+                    scanner.WithDefaultConventions();
+                    //scanner.With(new AddRequestHandlersWithGenericParametersToRegistry());
+                    scanner.ConnectImplementationsToTypesClosing(typeof(IRequestHandler<,>));
+                    scanner.ConnectImplementationsToTypesClosing(typeof(IAsyncRequestHandler<,>));
+                    scanner.ConnectImplementationsToTypesClosing(typeof(ICancellableAsyncRequestHandler<>));
+                    scanner.ConnectImplementationsToTypesClosing(typeof(INotificationHandler<>));
+                    scanner.ConnectImplementationsToTypesClosing(typeof(IAsyncNotificationHandler<>));
+                    scanner.ConnectImplementationsToTypesClosing(typeof(ICancellableAsyncNotificationHandler<>));
+                });
+                c.For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t));
+                c.For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
+                c.For<TextWriter>().Use(Console.Out);
+                c.For<IMediator>().Use<Mediator>();
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+                c.For<IDatabase>().Use<InMemoryFakeDatabase>();
+                c.For<IUnitOfWork>().Use<InMemoryUnitOfWork>();
+                c.For<DbContext>().Use<StoriesDbContext>().ContainerScoped();
+                c.For<IHttpContextAccessor>().Use<HttpContextAccessor>().Singleton();
+            });
 
-            //services.AddScoped(typeof(IAsyncRequestHandler<>), typeof(GetAllHandler<>));
-            services.AddScoped(typeof(IAsyncRequestHandler<>), typeof(GetOneHandler<>));
+            Console.Write(container.WhatDoIHave());
 
-            services.AddMediatR(typeof(Startup));
+            container.Populate(services);
+
+            return container.GetInstance<IServiceProvider>();
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
