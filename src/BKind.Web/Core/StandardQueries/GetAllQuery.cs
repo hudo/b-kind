@@ -5,7 +5,7 @@ using MediatR;
 
 namespace BKind.Web.Core.StandardQueries
 {
-    public class GetAllQuery<T> : IRequest<T[]> where T : Entity
+    public class GetAllQuery<T> : IRequest<PagedList<T>> where T : Entity
     {
         public GetAllQuery(Expression<Func<T, bool>> @where, PagedOptions<T> pageOption = null)
         {

@@ -9,8 +9,8 @@ using BKind.Web.Model;
 namespace BKind.Web.Migrations
 {
     [DbContext(typeof(StoriesDbContext))]
-    [Migration("20170130225450_initial")]
-    partial class initial
+    [Migration("20170206225142_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,13 +28,13 @@ namespace BKind.Web.Migrations
 
                     b.Property<string>("Salt");
 
-                    b.Property<int>("UserId");
+                    b.Property<int?>("UserCredentialId");
 
                     b.Property<string>("Username");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
+                    b.HasIndex("UserCredentialId")
                         .IsUnique();
 
                     b.ToTable("Credentials");
@@ -151,10 +151,10 @@ namespace BKind.Web.Migrations
 
             modelBuilder.Entity("BKind.Web.Model.Credential", b =>
                 {
-                    b.HasOne("BKind.Web.Model.User", "User")
+                    b.HasOne("BKind.Web.Model.User")
                         .WithOne("Credential")
-                        .HasForeignKey("BKind.Web.Model.Credential", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BKind.Web.Model.Credential", "UserCredentialId")
+                        .HasPrincipalKey("BKind.Web.Model.User", "CredentialId");
                 });
 
             modelBuilder.Entity("BKind.Web.Model.Role", b =>

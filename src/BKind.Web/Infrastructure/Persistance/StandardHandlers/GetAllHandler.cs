@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BKind.Web.Infrastructure.Persistance.StandardHandlers
 {
-    public class GetAllHandler<T> : IAsyncRequestHandler<GetAllQuery<T>, T[]> where T : Entity
+    public class GetAllHandler<T> : IAsyncRequestHandler<GetAllQuery<T>, PagedList<T>> where T : Entity
     {
         private readonly DbContext _db;
 
@@ -16,25 +16,30 @@ namespace BKind.Web.Infrastructure.Persistance.StandardHandlers
             _db = db;
         }
 
-        public Task<T[]> Handle(GetAllQuery<T> message)
+        public async Task<PagedList<T>> Handle(GetAllQuery<T> message)
         {
-            var entities = _db.Set<T>().AsNoTracking();
+            var query = _db.Set<T>().AsNoTracking();
 
-            entities = entities.Where(message.Where);
+            query = query.Where(message.Where);
+
+            int count = 0;
 
             if (message.PageOption != null)
             {
-                if (message.PageOption.Ascending)
-                    entities = entities.OrderBy(message.PageOption.OrderBy);
-                else
-                    entities = entities.OrderByDescending(message.PageOption.OrderBy);
+                count = await query.CountAsync();
 
-                entities = entities
-                    .Skip((message.PageOption.Page + 1) * message.PageOption.PageSize)
+                query = message.PageOption.Ascending 
+                    ? query.OrderBy(message.PageOption.OrderBy) 
+                    : query.OrderByDescending(message.PageOption.OrderBy);
+
+                query = query
+                    .Skip((message.PageOption.Page - 1) * message.PageOption.PageSize)
                     .Take(message.PageOption.PageSize);
             }
 
-            return entities.ToArrayAsync();
+            var entities = await query.ToListAsync();
+
+            return new PagedList<T>(entities, message.PageOption?.Page ?? 0, message.PageOption?.PageSize ?? 0, count);
         }
     }
 }

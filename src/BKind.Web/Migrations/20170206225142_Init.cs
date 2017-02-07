@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BKind.Web.Migrations
 {
-    public partial class initial : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,6 +24,7 @@ namespace BKind.Web.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                    table.UniqueConstraint("AK_Users_CredentialId", x => x.CredentialId);
                 });
 
             migrationBuilder.CreateTable(
@@ -35,18 +36,18 @@ namespace BKind.Web.Migrations
                     IsActive = table.Column<bool>(nullable: false),
                     PasswordHash = table.Column<string>(nullable: true),
                     Salt = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false),
+                    UserCredentialId = table.Column<int>(nullable: true),
                     Username = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Credentials", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Credentials_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Credentials_Users_UserCredentialId",
+                        column: x => x.UserCredentialId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "CredentialId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -96,9 +97,9 @@ namespace BKind.Web.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Credentials_UserId",
+                name: "IX_Credentials_UserCredentialId",
                 table: "Credentials",
-                column: "UserId",
+                column: "UserCredentialId",
                 unique: true);
 
             migrationBuilder.CreateIndex(

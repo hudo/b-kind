@@ -57,7 +57,7 @@ namespace BKind.Web
                     scanner.AssemblyContainingType<Startup>();
                     scanner.AssemblyContainingType<IMediator>();
                     scanner.WithDefaultConventions();
-                    //scanner.With(new AddRequestHandlersWithGenericParametersToRegistry());
+                    scanner.With(new AddRequestHandlersWithGenericParametersToRegistry());
                     scanner.ConnectImplementationsToTypesClosing(typeof(IRequestHandler<,>));
                     scanner.ConnectImplementationsToTypesClosing(typeof(IAsyncRequestHandler<,>));
                     scanner.ConnectImplementationsToTypesClosing(typeof(ICancellableAsyncRequestHandler<>));
@@ -76,8 +76,6 @@ namespace BKind.Web
                 c.For<IHttpContextAccessor>().Use<HttpContextAccessor>().Singleton();
             });
 
-            Console.Write(container.WhatDoIHave());
-
             container.Populate(services);
 
             return container.GetInstance<IServiceProvider>();
@@ -88,7 +86,7 @@ namespace BKind.Web
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            loggerFactory.AddDebug(LogLevel.Debug);
 
             if (env.IsDevelopment())
             {

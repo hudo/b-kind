@@ -8,6 +8,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.CodeAnalysis.CSharp;
+using StructureMap.TypeRules;
 
 namespace BKind.Web.Controllers
 {
@@ -21,12 +22,12 @@ namespace BKind.Web.Controllers
             var type1 = typeof(IAsyncRequestHandler<,>);
             var type = typeof(GetOneHandler<>);
 
-            var impl = type.GetInterfaces()[0].GetGenericTypeDefinition() == type1;
-
             _db = db;
             _mediator = mediator;
 
             var story = _mediator.Send(new GetOneQuery<Story>(1)).Result;
+
+            var stories = mediator.Send(new GetAllQuery<Story>(x => x.Id == 1, new PagedOptions<Story>(0, 10, x => x.Id)));
         }
 
         public IActionResult Index()

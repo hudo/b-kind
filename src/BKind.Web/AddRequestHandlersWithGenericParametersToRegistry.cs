@@ -18,16 +18,16 @@ namespace BKind.Web
             {
                 if (typeof(Entity).IsAssignableFrom(concreteClass))
                 {
-                    Register(registry, typeof(GetOneQuery<>), typeof(GetOneHandler<>), concreteClass);
-                    Register(registry, typeof(GetAllQuery<>), typeof(GetAllHandler<>), concreteClass);
+                    Register(registry, typeof(GetOneQuery<>), typeof(GetOneHandler<>), concreteClass, concreteClass);
+                    Register(registry, typeof(GetAllQuery<>), typeof(GetAllHandler<>), concreteClass, typeof(PagedList<>).MakeGenericType(concreteClass));
                 }
             }
         }
 
-        private void Register(Registry registry, Type genericRequest, Type genericHandler, Type concreteClass)
+        private void Register(Registry registry, Type genericRequest, Type genericHandler, Type concreteClass, Type handlerOutputType)
         {
             var genericCommand = genericRequest.MakeGenericType(concreteClass);
-            var interfaceHandlerType = typeof(IAsyncRequestHandler<,>).MakeGenericType(genericCommand, concreteClass);
+            var interfaceHandlerType = typeof(IAsyncRequestHandler<,>).MakeGenericType(genericCommand, handlerOutputType);
             var concreteHandlerType = genericHandler.MakeGenericType(concreteClass);
             registry.For(interfaceHandlerType).Use(concreteHandlerType);
         }
