@@ -11,9 +11,9 @@ namespace BKind.Web.Model
         public string LastName { get; set; }
         public virtual IEnumerable<Role> Roles { get; set; }
         public virtual Credential Credential { get; set; }
-        public int CredentialId { get; set; }
+        public int? CredentialId { get; set; }
         public DateTime Registered { get; set; }
-        public DateTime LastLogin { get; set; }
+        public DateTime? LastLogin { get; set; }
 
         public bool Is<T>() where T:Role
         {

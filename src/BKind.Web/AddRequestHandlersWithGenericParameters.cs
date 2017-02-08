@@ -10,16 +10,17 @@ using StructureMap.Graph.Scanning;
 
 namespace BKind.Web
 {
-    public class AddRequestHandlersWithGenericParametersToRegistry : IRegistrationConvention
+    public class AddRequestHandlersWithGenericParameters : IRegistrationConvention
     {
         public void ScanTypes(TypeSet types, Registry registry)
         {
-            foreach (var concreteClass in types.FindTypes(TypeClassification.Concretes))
+            foreach (var responseType in types.FindTypes(TypeClassification.Concretes))
             {
-                if (typeof(Entity).IsAssignableFrom(concreteClass))
+                if (typeof(Entity).IsAssignableFrom(responseType))
                 {
-                    Register(registry, typeof(GetOneQuery<>), typeof(GetOneHandler<>), concreteClass, concreteClass);
-                    Register(registry, typeof(GetAllQuery<>), typeof(GetAllHandler<>), concreteClass, typeof(PagedList<>).MakeGenericType(concreteClass));
+                    Register(registry, typeof(GetByIdQuery<>), typeof(GetByIdHandler<>), responseType, responseType);
+                    Register(registry, typeof(GetOneQuery<>), typeof(GetOneHandler<>), responseType, responseType);
+                    Register(registry, typeof(GetAllQuery<>), typeof(GetAllHandler<>), responseType, typeof(PagedList<>).MakeGenericType(responseType));
                 }
             }
         }

@@ -34,11 +34,15 @@ namespace BKind.Web.Infrastructure.Persistance
         {
             modelBuilder.Entity<User>()
                 .HasOne(x => x.Credential)
-                .WithOne()
-                .HasPrincipalKey<User>(x => x.CredentialId)
+                .WithMany()
+                .HasForeignKey(x => x.CredentialId)
                 .IsRequired(false);
 
-            modelBuilder.Entity<Credential>().ToTable("Credentials");
+            modelBuilder.Entity<Credential>()
+                .HasOne(x => x.User)
+                .WithMany()
+                .HasForeignKey(x => x.UserId)
+                .IsRequired(true);
 
             modelBuilder.Entity<Visitor>().HasBaseType<Role>();
             modelBuilder.Entity<Administrator>().HasBaseType<Role>();

@@ -27,16 +27,13 @@ namespace BKind.Web.Migrations
 
                     b.Property<string>("Salt");
 
-                    b.Property<int?>("UserCredentialId");
-
-                    b.Property<string>("Username");
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserCredentialId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
-                    b.ToTable("Credentials");
+                    b.ToTable("Credential");
                 });
 
             modelBuilder.Entity("BKind.Web.Model.Role", b =>
@@ -91,11 +88,11 @@ namespace BKind.Web.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CredentialId");
+                    b.Property<int?>("CredentialId");
 
                     b.Property<string>("FirstName");
 
-                    b.Property<DateTime>("LastLogin");
+                    b.Property<DateTime?>("LastLogin");
 
                     b.Property<string>("LastName");
 
@@ -104,6 +101,8 @@ namespace BKind.Web.Migrations
                     b.Property<string>("Username");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CredentialId");
 
                     b.ToTable("Users");
                 });
@@ -150,10 +149,10 @@ namespace BKind.Web.Migrations
 
             modelBuilder.Entity("BKind.Web.Model.Credential", b =>
                 {
-                    b.HasOne("BKind.Web.Model.User")
-                        .WithOne("Credential")
-                        .HasForeignKey("BKind.Web.Model.Credential", "UserCredentialId")
-                        .HasPrincipalKey("BKind.Web.Model.User", "CredentialId");
+                    b.HasOne("BKind.Web.Model.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("BKind.Web.Model.Role", b =>
@@ -169,6 +168,13 @@ namespace BKind.Web.Migrations
                     b.HasOne("BKind.Web.Model.User", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorId");
+                });
+
+            modelBuilder.Entity("BKind.Web.Model.User", b =>
+                {
+                    b.HasOne("BKind.Web.Model.Credential", "Credential")
+                        .WithMany()
+                        .HasForeignKey("CredentialId");
                 });
         }
     }

@@ -28,7 +28,7 @@ namespace BKind.Web.Features.Account
         {
             var response = Response.Empty();
 
-            var user = _db.Users.FirstOrDefault(x => x.Credential.Username == message.Username);
+            var user = _db.Users.FirstOrDefault(x => x.Username == message.Username);
 
             if (user != null && user.Credential.PasswordHash == StringHelpers.ComputeHash(message.Password, user.Credential.Salt))
             {
@@ -43,7 +43,7 @@ namespace BKind.Web.Features.Account
                 try
                 {
                     user.LastLogin = DateTime.UtcNow; 
-                    _unitOfWork.AddOrAttach(user);
+                    //_unitOfWork.AddOrAttach(user);
 
                     await _unitOfWork.Commit();
                 }

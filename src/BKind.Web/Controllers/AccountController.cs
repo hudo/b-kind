@@ -9,12 +9,10 @@ namespace BKind.Web.Controllers
 {
     public class AccountController : ControllerBase
     {
-        private readonly IDatabase _db;
         private readonly IMediator _mediator;
 
         public AccountController(IDatabase db, IMediator mediator)
         {
-            _db = db;
             _mediator = mediator;
         }
 

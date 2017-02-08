@@ -1,33 +1,21 @@
-﻿using System.Reflection;
-using BKind.Web.Core.StandardQueries;
-using BKind.Web.Infrastructure.Persistance;
-using BKind.Web.Infrastructure.Persistance.StandardHandlers;
-using BKind.Web.Model;
+﻿using BKind.Web.Infrastructure.Persistance;
 using BKind.Web.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.CodeAnalysis.CSharp;
-using StructureMap.TypeRules;
+using Microsoft.Extensions.Logging;
 
 namespace BKind.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IDatabase _db;
         private readonly IMediator _mediator;
+        private readonly ILogger _logger;
 
-        public HomeController(IDatabase db, IMediator mediator)
+        public HomeController(IDatabase db, IMediator mediator, ILogger<HomeController> logger)
         {
-            var type1 = typeof(IAsyncRequestHandler<,>);
-            var type = typeof(GetOneHandler<>);
-
-            _db = db;
             _mediator = mediator;
-
-            var story = _mediator.Send(new GetOneQuery<Story>(1)).Result;
-
-            var stories = mediator.Send(new GetAllQuery<Story>(x => x.Id == 1, new PagedOptions<Story>(0, 10, x => x.Id)));
+            _logger = logger;
         }
 
         public IActionResult Index()

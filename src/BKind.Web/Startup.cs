@@ -1,7 +1,6 @@
 using System;
 using BKind.Web.Core;
 using BKind.Web.Infrastructure.Persistance;
-using BKind.Web.Infrastructure.Persistance.StandardHandlers;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -10,17 +9,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using StructureMap;
-using StructureMap.Pipeline;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using BKind.Web.Core.StandardQueries;
-using BKind.Web.Model;
-using StructureMap.Graph;
-using StructureMap.Graph.Scanning;
 
 namespace BKind.Web
 {
@@ -47,7 +38,10 @@ namespace BKind.Web
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>());
+            services.AddMvc()
+                .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>())
+                .AddControllersAsServices();
+
             services.AddDbContext<StoriesDbContext>();
 
             var container = new Container(c =>
@@ -57,7 +51,7 @@ namespace BKind.Web
                     scanner.AssemblyContainingType<Startup>();
                     scanner.AssemblyContainingType<IMediator>();
                     scanner.WithDefaultConventions();
-                    scanner.With(new AddRequestHandlersWithGenericParametersToRegistry());
+                    scanner.With(new AddRequestHandlersWithGenericParameters());
                     scanner.ConnectImplementationsToTypesClosing(typeof(IRequestHandler<,>));
                     scanner.ConnectImplementationsToTypesClosing(typeof(IAsyncRequestHandler<,>));
                     scanner.ConnectImplementationsToTypesClosing(typeof(ICancellableAsyncRequestHandler<>));
@@ -67,16 +61,20 @@ namespace BKind.Web
                 });
                 c.For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t));
                 c.For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
+
                 c.For<TextWriter>().Use(Console.Out);
                 c.For<IMediator>().Use<Mediator>();
 
                 c.For<IDatabase>().Use<InMemoryFakeDatabase>();
-                c.For<IUnitOfWork>().Use<InMemoryUnitOfWork>();
+                c.For<IUnitOfWork>().Use<EfUnitOfWork>().ContainerScoped();
                 c.For<DbContext>().Use<StoriesDbContext>().ContainerScoped();
+
                 c.For<IHttpContextAccessor>().Use<HttpContextAccessor>().Singleton();
             });
 
             container.Populate(services);
+
+            Console.WriteLine(container.WhatDoIHave());
 
             return container.GetInstance<IServiceProvider>();
         }

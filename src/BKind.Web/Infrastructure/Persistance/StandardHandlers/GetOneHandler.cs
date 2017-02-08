@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using BKind.Web.Core.StandardQueries;
 using BKind.Web.Model;
 using MediatR;
@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BKind.Web.Infrastructure.Persistance.StandardHandlers
 {
-    public class GetOneHandler<T> : IAsyncRequestHandler<GetOneQuery<T>, T> where T:Entity 
+    public class GetOneHandler<T> : IAsyncRequestHandler<GetOneQuery<T>, T> where T : Entity
     {
         private readonly DbContext _db;
 
@@ -17,7 +17,7 @@ namespace BKind.Web.Infrastructure.Persistance.StandardHandlers
 
         public async Task<T> Handle(GetOneQuery<T> message)
         {
-            var entity = await _db.Set<T>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == message.Id);
+            var entity = await _db.Set<T>().FirstOrDefaultAsync(message.Condition);
             return entity;
         }
     }

@@ -53,7 +53,6 @@ namespace BKind.Web.Infrastructure.Persistance
                     Credential = new Credential
                     {
                         Id = 1,
-                        Username = "bobrock",
                         PasswordHash = StringHelpers.ComputeHash("1234", "salt"),
                         Salt = "salt"
                     },

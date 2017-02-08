@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BKind.Web.Core;
+using BKind.Web.Core.StandardQueries;
 using BKind.Web.Infrastructure.Helpers;
-using BKind.Web.Infrastructure.Persistance;
 using BKind.Web.Model;
 using MediatR;
 
@@ -12,21 +12,22 @@ namespace BKind.Web.Features.Account
 {
     public class RegisterHandler : IAsyncRequestHandler<RegisterInputModel, Response>
     {
-        private readonly IDatabase _db;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMediator _mediator;
 
-        public RegisterHandler(IDatabase db, IUnitOfWork unitOfWork)
+        public RegisterHandler(IUnitOfWork unitOfWork, IMediator mediator)
         {
-            _db = db;
             _unitOfWork = unitOfWork;
-
+            _mediator = mediator;
         }
 
-        public Task<Response> Handle(RegisterInputModel message)
+        public async Task<Response> Handle(RegisterInputModel message)
         {
             var response = new Response();
 
-            if(_db.Users.Any(x => x.Username == message.Username))
+            var existing = await _mediator.Send(new GetOneQuery<User>(x => x.Username == message.Username));
+
+            if(existing != null)
                 response.AddError("username", $"Username {message.Username} already in use");
 
             if(!response.HasErrors)
@@ -41,7 +42,6 @@ namespace BKind.Web.Features.Account
                     Registered = DateTime.UtcNow,
                     Credential = new Credential
                     {
-                        Username = message.Username,
                         PasswordHash = StringHelpers.ComputeHash(message.Password, salt),
                         Salt = salt,
                         IsActive = true
@@ -51,8 +51,8 @@ namespace BKind.Web.Features.Account
 
                 try
                 {
-                    _unitOfWork.AddOrAttach(user);
-                    _unitOfWork.Commit();
+                    _unitOfWork.Add(user);
+                    await _unitOfWork.Commit();
                 }
                 catch(Exception e)
                 {
@@ -60,7 +60,7 @@ namespace BKind.Web.Features.Account
                 }
             }
 
-            return Task.FromResult(response);
+            return response;
         }
     }
 }
