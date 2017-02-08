@@ -12,7 +12,7 @@ namespace BKind.Web.Controllers
         private readonly IMediator _mediator;
         private readonly ILogger _logger;
 
-        public HomeController(IDatabase db, IMediator mediator, ILogger<HomeController> logger)
+        public HomeController(IMediator mediator, ILogger<HomeController> logger)
         {
             _mediator = mediator;
             _logger = logger;

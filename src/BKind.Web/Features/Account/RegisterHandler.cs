@@ -39,13 +39,9 @@ namespace BKind.Web.Features.Account
                     Username = message.Username,
                     FirstName = message.Firstname,
                     LastName = message.Lastname,
+                    PasswordHash = StringHelpers.ComputeHash(message.Password, salt),
+                    Salt = salt,
                     Registered = DateTime.UtcNow,
-                    Credential = new Credential
-                    {
-                        PasswordHash = StringHelpers.ComputeHash(message.Password, salt),
-                        Salt = salt,
-                        IsActive = true
-                    },
                     Roles = new List<Role> { new Visitor() }
                 };
 

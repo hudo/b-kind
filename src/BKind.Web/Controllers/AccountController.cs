@@ -11,7 +11,7 @@ namespace BKind.Web.Controllers
     {
         private readonly IMediator _mediator;
 
-        public AccountController(IDatabase db, IMediator mediator)
+        public AccountController(IMediator mediator)
         {
             _mediator = mediator;
         }

@@ -9,11 +9,12 @@ namespace BKind.Web.Model
         public string Username { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public virtual IEnumerable<Role> Roles { get; set; }
-        public virtual Credential Credential { get; set; }
-        public int? CredentialId { get; set; }
+        public virtual ICollection<Role> Roles { get; set; }
         public DateTime Registered { get; set; }
         public DateTime? LastLogin { get; set; }
+
+        public string PasswordHash { get; set; }
+        public string Salt { get; set; }
 
         public bool Is<T>() where T:Role
         {

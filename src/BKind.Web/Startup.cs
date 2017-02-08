@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using StructureMap;
 using System.IO;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace BKind.Web
 {
@@ -32,9 +33,12 @@ namespace BKind.Web
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+
+            HostingEnvironment = env;
         }
 
         public IConfigurationRoot Configuration { get; }
+        private IHostingEnvironment HostingEnvironment;
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
@@ -65,7 +69,6 @@ namespace BKind.Web
                 c.For<TextWriter>().Use(Console.Out);
                 c.For<IMediator>().Use<Mediator>();
 
-                c.For<IDatabase>().Use<InMemoryFakeDatabase>();
                 c.For<IUnitOfWork>().Use<EfUnitOfWork>().ContainerScoped();
                 c.For<DbContext>().Use<StoriesDbContext>().ContainerScoped();
 
@@ -73,8 +76,6 @@ namespace BKind.Web
             });
 
             container.Populate(services);
-
-            Console.WriteLine(container.WhatDoIHave());
 
             return container.GetInstance<IServiceProvider>();
         }
@@ -85,6 +86,7 @@ namespace BKind.Web
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug(LogLevel.Debug);
+            //loggerFactory.AddProvider(new Infrastructure.Persistance.ConsoleLoggerProvider());
 
             if (env.IsDevelopment())
             {
@@ -114,6 +116,18 @@ namespace BKind.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            ConfigureEFLogger();
+        }
+
+        private void ConfigureEFLogger()
+        {
+            using (var db = new StoriesDbContext(HostingEnvironment))
+            {
+                var serviceProvider = db.GetInfrastructure<IServiceProvider>();
+                var dbloggerFactory = serviceProvider.GetService<ILoggerFactory>();
+                dbloggerFactory.AddProvider(new ConsoleLoggerProvider());
+            }
         }
     }
 }

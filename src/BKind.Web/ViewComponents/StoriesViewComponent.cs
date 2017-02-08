@@ -10,11 +10,8 @@ namespace BKind.Web.ViewComponents
 {
     public class StoriesViewComponent : ViewComponent
     {
-        private readonly IDatabase _db;
-
-        public StoriesViewComponent(IDatabase db)
+        public StoriesViewComponent()
         {
-            _db = db;
         }
 
         public async Task<IViewComponentResult> InvokeAsync(StoriesDisplayMode mode)
@@ -25,7 +22,7 @@ namespace BKind.Web.ViewComponents
 
         public Task<List<Story>> GetStories()
         {
-            return Task.FromResult(_db.Stories);
+            return Task.FromResult(new List<Story>());
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using BKind.Web.Core;
+using BKind.Web.Core.StandardQueries;
 using BKind.Web.Infrastructure.Helpers;
-using BKind.Web.Infrastructure.Persistance;
+using BKind.Web.Model;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 
@@ -13,24 +13,24 @@ namespace BKind.Web.Features.Account
 {
     public class LoginHandler : IAsyncRequestHandler<LoginInputModel, Response>
     {
-        private readonly IDatabase _db;
         private readonly IHttpContextAccessor _httpContext;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMediator _mediator;
 
-        public LoginHandler(IDatabase db, IHttpContextAccessor httpContext, IUnitOfWork unitOfWork)
+        public LoginHandler(IHttpContextAccessor httpContext, IUnitOfWork unitOfWork, IMediator mediator)
         {
-            _db = db;
             _httpContext = httpContext;
             _unitOfWork = unitOfWork;
+            _mediator = mediator;
         }
 
         public async Task<Response> Handle(LoginInputModel message)
         {
             var response = Response.Empty();
 
-            var user = _db.Users.FirstOrDefault(x => x.Username == message.Username);
+            var user = await _mediator.Send(new GetOneQuery<User>(x => x.Username == message.Username));
 
-            if (user != null && user.Credential.PasswordHash == StringHelpers.ComputeHash(message.Password, user.Credential.Salt))
+            if (user != null && user.PasswordHash == StringHelpers.ComputeHash(message.Password, user.Salt))
             {
                 var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Username) };
 
@@ -42,8 +42,9 @@ namespace BKind.Web.Features.Account
 
                 try
                 {
-                    user.LastLogin = DateTime.UtcNow; 
-                    //_unitOfWork.AddOrAttach(user);
+                    user.LastLogin = DateTime.UtcNow;
+
+                    _unitOfWork.Update(user);
 
                     await _unitOfWork.Commit();
                 }

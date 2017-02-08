@@ -3,7 +3,6 @@ using System.IO;
 using BKind.Web.Model;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
 
 namespace BKind.Web.Infrastructure.Persistance
 {
@@ -32,17 +31,7 @@ namespace BKind.Web.Infrastructure.Persistance
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>()
-                .HasOne(x => x.Credential)
-                .WithMany()
-                .HasForeignKey(x => x.CredentialId)
-                .IsRequired(false);
-
-            modelBuilder.Entity<Credential>()
-                .HasOne(x => x.User)
-                .WithMany()
-                .HasForeignKey(x => x.UserId)
-                .IsRequired(true);
+            modelBuilder.Entity<User>().HasKey(x => x.Id);
 
             modelBuilder.Entity<Visitor>().HasBaseType<Role>();
             modelBuilder.Entity<Administrator>().HasBaseType<Role>();

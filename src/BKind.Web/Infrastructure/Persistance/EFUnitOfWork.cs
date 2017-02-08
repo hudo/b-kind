@@ -20,8 +20,6 @@ namespace BKind.Web.Infrastructure.Persistance
 
         public void Add<T>(T entity) where T:Entity
         {
-            AttachIfNeeded(entity);
-
             _db.Set<T>().Add(entity);
         }
 
