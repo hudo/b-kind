@@ -1,13 +1,12 @@
 ﻿using System.Threading.Tasks;
+using BKind.Web.Controllers;
 using BKind.Web.Core;
-using BKind.Web.Features.Account;
-using BKind.Web.Infrastructure.Persistance;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BKind.Web.Controllers
+namespace BKind.Web.Features.Account
 {
-    public class AccountController : ControllerBase
+    public class AccountController : StoriesControllerBase
     {
         private readonly IMediator _mediator;
 
@@ -26,7 +25,7 @@ namespace BKind.Web.Controllers
 
             var response = await _mediator.Send(inputModel);
 
-            if(!response.HasErrors)
+            if(response.HasErrors)
             {
                 MapToModelState(response);
                 return View(inputModel);

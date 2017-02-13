@@ -86,7 +86,7 @@ namespace BKind.Web
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug(LogLevel.Debug);
-            //loggerFactory.AddProvider(new Infrastructure.Persistance.ConsoleLoggerProvider());
+            loggerFactory.AddProvider(new Infrastructure.Persistance.ConsoleLoggerProvider());
 
             if (env.IsDevelopment())
             {

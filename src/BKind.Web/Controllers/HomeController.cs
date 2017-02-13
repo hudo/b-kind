@@ -1,5 +1,4 @@
-﻿using BKind.Web.Infrastructure.Persistance;
-using BKind.Web.ViewModels;
+﻿using BKind.Web.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -7,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace BKind.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : StoriesControllerBase
     {
         private readonly IMediator _mediator;
         private readonly ILogger _logger;

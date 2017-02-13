@@ -17,7 +17,7 @@ namespace BKind.Web.Infrastructure.Persistance.StandardHandlers
 
         public async Task<T> Handle(GetOneQuery<T> message)
         {
-            var entity = await _db.Set<T>().FirstOrDefaultAsync(message.Condition);
+            var entity = await _db.Set<T>().AsNoTracking().FirstOrDefaultAsync(message.Condition);
             return entity;
         }
     }

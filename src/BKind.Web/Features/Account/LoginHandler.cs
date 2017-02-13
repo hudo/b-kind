@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using BKind.Web.Core;
-using BKind.Web.Core.StandardQueries;
 using BKind.Web.Infrastructure.Helpers;
-using BKind.Web.Model;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 
@@ -28,7 +26,7 @@ namespace BKind.Web.Features.Account
         {
             var response = Response.Empty();
 
-            var user = await _mediator.Send(new GetOneQuery<User>(x => x.Username == message.Username));
+            var user = await _mediator.Send(new GetUserQuery(message.Username));
 
             if (user != null && user.PasswordHash == StringHelpers.ComputeHash(message.Password, user.Salt))
             {
@@ -50,8 +48,7 @@ namespace BKind.Web.Features.Account
                 }
                 catch(Exception e)
                 {
-                    // log
-                    // we will allow user to login and just log why last login date couldn't be saved
+                    response.AddError("", e.Unwrap().Message);
                 }
             }
             else

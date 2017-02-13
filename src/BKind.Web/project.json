@@ -73,6 +73,9 @@
       "**/*.cshtml",
       "appsettings.json",
       "web.config"
+    ],
+    "exclude": [
+      "wwwroot/App_Data"
     ]
   },
 

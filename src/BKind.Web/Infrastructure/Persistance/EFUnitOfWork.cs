@@ -39,6 +39,7 @@ namespace BKind.Web.Infrastructure.Persistance
 
         public async Task Commit()
         {
+            // review this 
             using (var transaction = await _db.Database.BeginTransactionAsync())
             {
                 try

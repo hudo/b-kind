@@ -1,10 +1,9 @@
 ﻿using BKind.Web.Core;
-using BKind.Web.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BKind.Web.Controllers
 {
-    public abstract class ControllerBase : Controller
+    public abstract class StoriesControllerBase : Controller
     {
         protected void MapToModelState(Response response)
         {
