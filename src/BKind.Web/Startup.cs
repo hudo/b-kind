@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using StructureMap;
 using System.IO;
+using BKind.Web.Infrastructure;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace BKind.Web
@@ -86,7 +87,7 @@ namespace BKind.Web
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug(LogLevel.Debug);
-            loggerFactory.AddProvider(new Infrastructure.Persistance.ConsoleLoggerProvider());
+            loggerFactory.AddProvider(new ConsoleLoggerProvider());
 
             if (env.IsDevelopment())
             {

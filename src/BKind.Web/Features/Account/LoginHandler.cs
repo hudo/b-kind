@@ -28,11 +28,11 @@ namespace BKind.Web.Features.Account
 
             var user = await _mediator.Send(new GetUserQuery(message.Username));
 
-            if (user != null && user.PasswordHash == StringHelpers.ComputeHash(message.Password, user.Salt))
+            if (user.HasResult && user.Result.PasswordHash == StringHelpers.ComputeHash(message.Password, user.Result.Salt))
             {
-                var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Username) };
+                var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Result.Username) };
 
-                foreach (var role in user.Roles)
+                foreach (var role in user.Result.Roles)
                     claims.Add(new Claim(ClaimTypes.Role, role.Name));
 
                 await _httpContext.HttpContext.Authentication.SignInAsync(Application.AuthScheme,
@@ -40,9 +40,9 @@ namespace BKind.Web.Features.Account
 
                 try
                 {
-                    user.LastLogin = DateTime.UtcNow;
+                    user.Result.LastLogin = DateTime.UtcNow;
 
-                    _unitOfWork.Update(user);
+                    _unitOfWork.Update(user.Result);
 
                     await _unitOfWork.Commit();
                 }

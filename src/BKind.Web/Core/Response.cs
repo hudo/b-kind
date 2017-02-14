@@ -50,6 +50,8 @@ namespace BKind.Web.Core
         }
 
         public T Result { get; }
+
+        public bool HasResult => Result != null;
     }
 
     public enum ResponseMessageType

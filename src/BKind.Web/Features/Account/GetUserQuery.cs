@@ -1,11 +1,12 @@
 ﻿using System.Threading.Tasks;
+using BKind.Web.Core;
 using BKind.Web.Model;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace BKind.Web.Features.Account
 {
-    public class GetUserQuery : IRequest<User>
+    public class GetUserQuery : IRequest<Response<User>>
     {
         public GetUserQuery(string username)
         {
@@ -14,7 +15,7 @@ namespace BKind.Web.Features.Account
 
         public string Username { get; set; }
 
-        public class Handler : IAsyncRequestHandler<GetUserQuery, User>
+        public class Handler : IAsyncRequestHandler<GetUserQuery, Response<User>>
         {
             private readonly DbContext _db;
 
@@ -23,12 +24,12 @@ namespace BKind.Web.Features.Account
                 _db = db;
             }
 
-            public async Task<User> Handle(GetUserQuery message)
+            public async Task<Response<User>> Handle(GetUserQuery message)
             {
-                return await _db.Set<User>()
+                return Response.From(await _db.Set<User>()
                     .AsNoTracking()
                     .Include(x => x.Roles)
-                    .FirstOrDefaultAsync(x => x.Username == message.Username);
+                    .FirstOrDefaultAsync(x => x.Username == message.Username));
             }
         }
     }
