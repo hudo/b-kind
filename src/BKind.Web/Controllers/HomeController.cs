@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace BKind.Web.Controllers
 {
-    public class HomeController : StoriesControllerBase
+    public class HomeController : BkindControllerBase
     {
         private readonly IMediator _mediator;
         private readonly ILogger _logger;
@@ -22,7 +22,8 @@ namespace BKind.Web.Controllers
             var model = new HomePageViewModel
             {
                 Title = "Welcome to Be Kind",
-                DisplayMode = StoriesDisplayMode.FeaturedList
+                DisplayMode = StoriesDisplayMode.FeaturedList,
+                CanWriteStory = User.Identity.IsAuthenticated
             };
 
             return View(model);

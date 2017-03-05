@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace BKind.Web.ViewComponents
+namespace BKind.Web.Features.Account
 {
     public class AccountViewComponent : ViewComponent
     {

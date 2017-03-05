@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using BKind.Web.ViewComponents;
+using BKind.Web.Features.Stories;
 using BKind.Web.ViewModels;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc;

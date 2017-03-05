@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BKind.Web.Controllers
 {
-    public abstract class StoriesControllerBase : Controller
+    public abstract class BkindControllerBase : Controller
     {
         protected void MapToModelState(Response response)
         {

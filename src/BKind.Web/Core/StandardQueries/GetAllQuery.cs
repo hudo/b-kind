@@ -13,6 +13,11 @@ namespace BKind.Web.Core.StandardQueries
             PageOption = pageOption;
         }
 
+        public GetAllQuery(PagedOptions<T> pageOption = null)
+        {
+            PageOption = pageOption;
+        }
+
         public Expression<Func<T, bool>> Where { get; set; }
         public PagedOptions<T> PageOption { get; set; }
     }

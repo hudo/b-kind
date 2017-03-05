@@ -8,6 +8,7 @@
         }
 
         public StoriesDisplayMode DisplayMode { get; set; }
+        public bool CanWriteStory { get;set; }
     }
     
     public enum StoriesDisplayMode

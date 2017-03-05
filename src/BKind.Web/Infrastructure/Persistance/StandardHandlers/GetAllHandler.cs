@@ -20,7 +20,8 @@ namespace BKind.Web.Infrastructure.Persistance.StandardHandlers
         {
             var query = _db.Set<T>().AsNoTracking();
 
-            query = query.Where(message.Where);
+            if(message.Where != null)
+                query = query.Where(message.Where);
 
             int count = 0;
 

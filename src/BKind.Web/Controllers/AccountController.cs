@@ -1,12 +1,12 @@
 ﻿using System.Threading.Tasks;
-using BKind.Web.Controllers;
 using BKind.Web.Core;
+using BKind.Web.Features.Account;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BKind.Web.Features.Account
+namespace BKind.Web.Controllers.Account
 {
-    public class AccountController : StoriesControllerBase
+    public class AccountController : BkindControllerBase
     {
         private readonly IMediator _mediator;
 

@@ -1,10 +1,19 @@
 ﻿@using BKind.Web.Infrastructure.Helpers
-@using BKind.Web.ViewComponents
 @model HomePageViewModel
 
 
 <h2>Stories</h2>
 <div class="row stories">
+    @if(Model.CanWriteStory)
+    {
+        <section>
+            <form action="/stories/share" method="POST">
+                <div>Share your story:</div>
+                <input name="story" type="text" />
+                <input type="submit" value="Share" />
+            </form>
+        </section>
+    }
     @await Component.RenderStories(Model.DisplayMode)
 </div>
 
