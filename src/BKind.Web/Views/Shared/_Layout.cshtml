@@ -12,8 +12,13 @@
         
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
+    <!--
+        change env variable, 
+        on linux: export ASPNETCORE_ENVIRONMENT=development
+        on windows: setx ASPNETCORE_ENVIRONMENT "Development"
+     -->
     <environment names="Production,Staging">
-        <link rel="stylesheet" href="~/css/bundled.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
     </environment>
 </head>
 <body>
