@@ -123,7 +123,7 @@ namespace BKind.Web
 
         private void ConfigureEFLogger()
         {
-            using (var db = new StoriesDbContext(HostingEnvironment))
+            using (var db = new StoriesDbContext())
             {
                 var serviceProvider = db.GetInfrastructure<IServiceProvider>();
                 var dbloggerFactory = serviceProvider.GetService<ILoggerFactory>();
