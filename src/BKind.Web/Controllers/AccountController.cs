@@ -8,13 +8,8 @@ namespace BKind.Web.Controllers.Account
 {
     public class AccountController : BkindControllerBase
     {
-        private readonly IMediator _mediator;
-
-        public AccountController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
+        public AccountController(IMediator mediator) : base(mediator) {}
+        
         public IActionResult Login() => View(new LoginInputModel());
      
         [HttpPost]

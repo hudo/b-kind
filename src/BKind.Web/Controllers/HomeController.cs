@@ -8,12 +8,10 @@ namespace BKind.Web.Controllers
 {
     public class HomeController : BkindControllerBase
     {
-        private readonly IMediator _mediator;
         private readonly ILogger _logger;
 
-        public HomeController(IMediator mediator, ILogger<HomeController> logger)
+        public HomeController(IMediator mediator, ILogger<HomeController> logger) : base(mediator)
         {
-            _mediator = mediator;
             _logger = logger;
         }
 
@@ -39,7 +37,6 @@ namespace BKind.Web.Controllers
                 model.Description = "SEO stuff";
             }
         }
-
 
         public IActionResult Error()
         {
