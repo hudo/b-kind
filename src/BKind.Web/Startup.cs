@@ -29,7 +29,7 @@ namespace BKind.Web
             if (env.IsDevelopment())
             {
                 // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
-                builder.AddUserSecrets();
+                
             }
 
             builder.AddEnvironmentVariables();
@@ -40,6 +40,12 @@ namespace BKind.Web
 
         public IConfigurationRoot Configuration { get; }
         private IHostingEnvironment HostingEnvironment;
+        private IContainer Container;
+
+        public void ConfigureServices2(IServiceCollection services)
+        {
+            services.AddDbContext<StoriesDbContext>(o => o.UseNpgsql("User ID=user;Password=user;Host=localhost;Port=5432;Database=bkind;Pooling=true;"));
+        }
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
@@ -47,7 +53,8 @@ namespace BKind.Web
                 .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>())
                 .AddControllersAsServices();
 
-            services.AddDbContext<StoriesDbContext>();
+            services.AddDbContext<StoriesDbContext>(o => 
+                o.UseNpgsql("User ID=user;Password=user;Host=localhost;Port=5432;Database=bkind;Pooling=true;"));
 
             var container = new Container(c =>
             {
@@ -77,6 +84,8 @@ namespace BKind.Web
             });
 
             container.Populate(services);
+
+            Container = container;
 
             return container.GetInstance<IServiceProvider>();
         }
@@ -123,7 +132,7 @@ namespace BKind.Web
 
         private void ConfigureEFLogger()
         {
-            using (var db = new StoriesDbContext())
+            using (var db = Container.GetInstance<StoriesDbContext>())
             {
                 var serviceProvider = db.GetInfrastructure<IServiceProvider>();
                 var dbloggerFactory = serviceProvider.GetService<ILoggerFactory>();

@@ -9,13 +9,14 @@ using BKind.Web.Model;
 namespace BKind.Web.Migrations
 {
     [DbContext(typeof(StoriesDbContext))]
-    [Migration("20170208202150_init")]
+    [Migration("20170326211109_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.1.0-rtm-22752");
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
+                .HasAnnotation("ProductVersion", "1.1.1");
 
             modelBuilder.Entity("BKind.Web.Model.Role", b =>
                 {
