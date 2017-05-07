@@ -1,0 +1,13 @@
+<section>
+    <form asp-controller="Stories" asp-action="Share" method="post">
+        @Html.AntiForgeryToken()
+        <div>Share your story:</div>
+        Title:
+        <input name="StoryTitle" type="text"/>
+        <br/>
+        Content:
+        <input name="Content" type="text"/>
+        <br/>
+        <input type="submit" value="Share"/>
+    </form>
+</section>

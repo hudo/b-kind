@@ -1,0 +1,16 @@
+﻿@model StoryButtonsViewModel
+
+<div>
+   @if(Model.CanVote)
+   {
+       <a href="#">Vote</a>
+   }
+   @if(Model.CanUnpublish)
+   {
+       <a href="#">Unpublish</a>
+   }
+   @if(Model.CanEdit)
+   {
+       <a href="#">Edit</a>
+   }
+</div>

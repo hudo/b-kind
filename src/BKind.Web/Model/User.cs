@@ -25,5 +25,6 @@ namespace BKind.Web.Model
         {
             return Roles.OfType<T>().FirstOrDefault();
         }
+        
     }
 }

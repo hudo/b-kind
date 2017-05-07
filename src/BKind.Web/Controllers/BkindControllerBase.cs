@@ -11,6 +11,8 @@ namespace BKind.Web.Controllers
     {
         protected IMediator _mediator;
 
+        private User _loggedUser;
+
         protected BkindControllerBase(IMediator mediator)
         {
             _mediator = mediator;
@@ -29,7 +31,11 @@ namespace BKind.Web.Controllers
             if(!this.User.Identity.IsAuthenticated)
                 return null;
 
+            if (_loggedUser != null) return _loggedUser;
+
             var user = await _mediator.Send(new GetOneQuery<User>(x => x.Username == User.Identity.Name));
+
+            _loggedUser = user;
 
             return user;
         }

@@ -3,13 +3,14 @@ using BKind.Web.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using BKind.Web.Core.StandardQueries;
+using BKind.Web.Model;
 using Story = BKind.Web.Model.Story;
 
 namespace BKind.Web.Features.Stories
 {
     public class StoriesViewComponent : ViewComponent
     {
-        IMediator _mediator;
+        readonly IMediator _mediator;
 
         public StoriesViewComponent(IMediator mediator)
         {
@@ -18,8 +19,17 @@ namespace BKind.Web.Features.Stories
 
         public async Task<IViewComponentResult> InvokeAsync(StoriesDisplayMode mode)
         {
-            var stories = await _mediator.Send(new GetAllQuery<Story>(new PagedOptions<Story>(orderBy: x => x.Modified, ascending: false)));   
-            return View(stories);
+            if (mode == StoriesDisplayMode.WriteNew)
+                return View("Write");
+
+            var model = new StoryListViewModel();
+
+            model.Stories = await _mediator.Send(new GetAllQuery<Story>(new PagedOptions<Story>(orderBy: x => x.Modified, ascending: false)));
+
+            if(User.Identity.IsAuthenticated)
+                model.UserWithRoles = await _mediator.Send(new GetOneQuery<User>(x => x.Username == User.Identity.Name, u => u.Roles));
+
+            return View(model);
         }
     }
 }

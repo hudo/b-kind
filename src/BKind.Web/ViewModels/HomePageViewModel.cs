@@ -14,6 +14,7 @@
     public enum StoriesDisplayMode
     {
         None,
-        FeaturedList
+        FeaturedList,
+        WriteNew
     }
 }

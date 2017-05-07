@@ -1,6 +1,6 @@
-﻿@model IEnumerable<Story>
+﻿@model StoryListViewModel
 
-@foreach (var story in Model)
+@foreach (var story in Model.Stories)
 {
     <div class="col-sm-4">
         <div class="pannel panel-info">
@@ -15,7 +15,8 @@
                 </p>
             </div>
             <div class="panel-footer">
-                Date: @story.Created, Author: John Snow
+                Date: @story.Created, Author: John Snow<br/>
+                @await Component.InvokeAsync("StoryButtons", new { story = story, userWithRoles = Model.UserWithRoles })
             </div>
         </div>
     </div>

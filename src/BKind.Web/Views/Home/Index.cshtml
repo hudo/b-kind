@@ -1,24 +1,11 @@
 ﻿@using BKind.Web.Infrastructure.Helpers
 @model HomePageViewModel
 
-
 <h2>Stories</h2>
 <div class="row stories">
     @if(Model.CanWriteStory)
     {
-        <section>
-            <form asp-controller="Stories" asp-action="Share" method="post">
-                @Html.AntiForgeryToken()
-                <div>Share your story:</div>
-                Title:
-                <input name="Title" type="text"/>
-                <br/>
-                Content:
-                <input name="Content" type="text"/>
-                <br/>
-                <input type="submit" value="Share"/>
-            </form>
-        </section>
+        @await Component.RenderStories(StoriesDisplayMode.WriteNew)
     }
     @await Component.RenderStories(Model.DisplayMode)
 </div>

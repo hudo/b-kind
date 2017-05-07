@@ -1,6 +1,5 @@
 ﻿@model BKind.Web.Features.Account.RegisterInputModel
 
-<div asp-validation-summary="All"></div>
 <form method="post">
     <div class="form-group">
         <label asp-for="Username"></label>
@@ -19,12 +18,12 @@
     </div>
     <div class="form-group">
         <label asp-for="Password"></label>
-        <input asp-for="Password" class="form-control" placeholder="password"/>
+        <input asp-for="Password" class="form-control" placeholder="password" type="password"/>
         <span asp-validation-for="Password"></span>
     </div>
     <div class="form-group">
         <label asp-for="PasswordConfirm"></label>
-        <input asp-for="PasswordConfirm" class="form-control" placeholder="confirm password"/>
+        <input asp-for="PasswordConfirm" class="form-control" placeholder="confirm password" type="password"/>
         <span asp-validation-for="PasswordConfirm"></span>
     </div>
     <button type="submit" class="btn btn-default">Register</button>

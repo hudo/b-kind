@@ -33,8 +33,8 @@ namespace BKind.Web.Features.Stories
 
             var story = new Story
             {
-                Author = user,
-                Title = message.Title,
+                AuthorId = user.Id,
+                Title = message.StoryTitle,
                 Content = message.Content,
                 Created = DateTime.UtcNow,
                 Modified = DateTime.UtcNow
