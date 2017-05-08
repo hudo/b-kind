@@ -11,6 +11,6 @@
    }
    @if(Model.CanEdit)
    {
-       <a href="#">Edit</a>
+       <a asp-controller="Stories" asp-action="Edit" asp-route-id="@Model.StoryId">Edit</a>
    }
 </div>

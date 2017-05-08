@@ -24,7 +24,7 @@ namespace BKind.Web.Features.Stories
 
             var model = new StoryListViewModel();
 
-            model.Stories = await _mediator.Send(new GetAllQuery<Story>(new PagedOptions<Story>(orderBy: x => x.Modified, ascending: false)));
+            model.Stories = await _mediator.Send(new ListStoriesQuery());
 
             if(User.Identity.IsAuthenticated)
                 model.UserWithRoles = await _mediator.Send(new GetOneQuery<User>(x => x.Username == User.Identity.Name, u => u.Roles));

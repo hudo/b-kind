@@ -1,6 +1,8 @@
 using System;
 using System.Threading.Tasks;
+using BKind.Web.Core.StandardQueries;
 using BKind.Web.Features.Stories;
+using BKind.Web.Model;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +34,29 @@ namespace BKind.Web.Controllers
             }
 
             return Redirect("/");
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var model = new EditStoryInputModel();
+            model.Story = await _mediator.Send(new GetByIdQuery<Story>(id));
+
+            var user = await LoggedUser();
+
+            if (model.Story.AuthorId != user.Id || model.Story == null) return NotFound();
+
+            model.Title = $"Edit {model.Story.Title}";
+
+            return View(model);
+        }
+
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        [HttpPost]
+        public async Task<IAsyncResult> Edit(EditStoryInputModel model)
+        {
+            
         }
     }
 }
