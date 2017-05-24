@@ -10,8 +10,7 @@ namespace BKind.Web.Features.Stories
 {
     public class ListStoriesQuery : IRequest<List<StoryProjection>>
     {
-        public bool IncludeUnpublished { get; set; }
-        public int? AuthorId { get; set; }
+        public User UserWithRoles { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
         public int MaxStories { get; set; } = 10;
@@ -30,29 +29,41 @@ namespace BKind.Web.Features.Stories
             {
                 IQueryable<Story> query = _db.Set<Story>().AsNoTracking();
 
-                if (!message.IncludeUnpublished)
-                    query = query.Where(x => x.Status == Status.Published);
+                // admin can see everything
+                // reviewer can see everything
+                // author can see all his stories and others published stories 
+                // visitor/anonymous can see just published stories
 
-                if (message.AuthorId.HasValue)
-                    query = query.Where(x => x.AuthorId == message.AuthorId.Value);
-
+                if (message.UserWithRoles != null)
+                {
+                    if (message.UserWithRoles.Is<Reviewer>())
+                        query = query.Where(story => story.Status == Status.Published);
+                    else if (message.UserWithRoles.Is<Author>())
+                        query = query.Where(story => story.AuthorId == message.UserWithRoles.Id || story.Status == Status.Published);
+                    else // visitor
+                        query = query.Where(story => story.Status == Status.Published);
+                }
+                else // anonymous
+                    query = query.Where(story => story.Status == Status.Published);
+                
                 if (message.FromDate.HasValue)
-                    query = query.Where(x => x.Created > message.FromDate.Value);
+                    query = query.Where(story => story.Created > message.FromDate.Value);
 
                 if (message.ToDate.HasValue)
-                    query = query.Where(x => x.Created < message.ToDate.Value);
+                    query = query.Where(story => story.Created < message.ToDate.Value);
 
-                return await query.OrderByDescending(x => x.Created)
+                return await query.OrderByDescending(story => story.Created)
                     .Skip(0).Take(message.MaxStories)
-                    .Select(x => new StoryProjection
+                    .Select(story => new StoryProjection
                     {
-                        Id = x.Id,
-                        Title = x.Title,
-                        Content = x.Content,
-                        Created = x.Created,
-                        AuthorId = x.AuthorId,
-                        AuthorName = x.Author.FirstName + " " + x.Author.LastName,
-                        ThumbsUp = x.ThumbsUp
+                        Id = story.Id,
+                        Title = story.Title,
+                        Content = story.Content,
+                        Created = story.Created,
+                        AuthorId = story.AuthorId,
+                        AuthorName = story.Author.FirstName + " " + story.Author.LastName,
+                        ThumbsUp = story.ThumbsUp,
+                        Status = story.Status
                     }).ToListAsync();
             }
         }

@@ -3,11 +3,12 @@
 @foreach (var story in Model.Stories)
 {
     <div class="col-sm-4">
-        <div class="pannel panel-info">
+        <div class="panel panel-info">
             <div class="panel-heading">
                 <h2>
                     @story.Title
                 </h2>
+                <span>@story.Status.ToString()</span>
             </div>
             <div class="panel-body">
                 <p>

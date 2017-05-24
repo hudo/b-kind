@@ -13,14 +13,14 @@ namespace BKind.Web.Controllers
     {
         public StoriesController(IMediator mediator) : base(mediator) {}
 
-        public ActionResult Share() => View(new CreateStoryInputModel());
+        public ActionResult Share() => View(new SaveStoryInputModel());
 
         [Authorize]
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public async Task<IActionResult> Share(CreateStoryInputModel model)
+        public async Task<IActionResult> Share(SaveStoryInputModel model)
         {
-            model.UserId = LoggedUser().Id;
+            model.UserId = (await LoggedUser()).Id;
 
             if (!ModelState.IsValid)
                 return View("Share", model);
@@ -49,14 +49,14 @@ namespace BKind.Web.Controllers
             model.Title = $"Edit {model.Story.Title}";
 
             return View(model);
-        }
+        } 
 
         [ValidateAntiForgeryToken]
         [Authorize]
         [HttpPost]
         public async Task<IAsyncResult> Edit(EditStoryInputModel model)
         {
-            
+            return null;
         }
     }
 }

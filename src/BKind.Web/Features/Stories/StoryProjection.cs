@@ -1,4 +1,5 @@
 using System;
+using BKind.Web.Model;
 
 namespace BKind.Web.Features.Stories
 {
@@ -11,5 +12,6 @@ namespace BKind.Web.Features.Stories
         public string AuthorName { get; set; }
         public int AuthorId { get; set; }
         public DateTime Created { get; set; }
+        public Status Status { get; set; }
     }
 }

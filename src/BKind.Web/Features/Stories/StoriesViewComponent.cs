@@ -24,11 +24,11 @@ namespace BKind.Web.Features.Stories
 
             var model = new StoryListViewModel();
 
-            model.Stories = await _mediator.Send(new ListStoriesQuery());
-
-            if(User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
                 model.UserWithRoles = await _mediator.Send(new GetOneQuery<User>(x => x.Username == User.Identity.Name, u => u.Roles));
 
+            model.Stories = await _mediator.Send(new ListStoriesQuery { UserWithRoles = model.UserWithRoles });
+            
             return View(model);
         }
     }
