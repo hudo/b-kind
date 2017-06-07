@@ -26,14 +26,14 @@ namespace BKind.Web.Controllers
             }
         }
 
-        protected async Task<User> LoggedUser()
+        protected async Task<User> GetLoggedUserAsync()
         {
             if(!this.User.Identity.IsAuthenticated)
                 return null;
 
             if (_loggedUser != null) return _loggedUser;
 
-            var user = await _mediator.Send(new GetOneQuery<User>(x => x.Username == User.Identity.Name));
+            var user = await _mediator.Send(new GetOneQuery<User>(x => x.Username == User.Identity.Name, x => x.Roles));
 
             _loggedUser = user;
 

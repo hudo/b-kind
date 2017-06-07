@@ -37,11 +37,18 @@ namespace BKind.Web.Features.Stories
                 if (message.UserWithRoles != null)
                 {
                     if (message.UserWithRoles.Is<Reviewer>())
-                        query = query.Where(story => story.Status == Status.Published);
+                    {
+                        query = query.Where(story => story.Status == Status.Published || story.Status == Status.Draft);
+                    }
                     else if (message.UserWithRoles.Is<Author>())
-                        query = query.Where(story => story.AuthorId == message.UserWithRoles.Id || story.Status == Status.Published);
+                    {
+                        var author = message.UserWithRoles.GetRole<Author>();
+                        query = query.Where(story => story.AuthorId == author.Id || story.Status == Status.Published);
+                    }
                     else // visitor
+                    {
                         query = query.Where(story => story.Status == Status.Published);
+                    }
                 }
                 else // anonymous
                     query = query.Where(story => story.Status == Status.Published);

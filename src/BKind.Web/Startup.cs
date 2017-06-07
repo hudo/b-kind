@@ -56,6 +56,10 @@ namespace BKind.Web
             services.AddDbContext<StoriesDbContext>(o => 
                 o.UseNpgsql("User ID=user;Password=user;Host=localhost;Port=5432;Database=bkind;Pooling=true;"));
 
+            services.AddDistributedMemoryCache();
+
+            services.AddSession();
+
             var container = new Container(c =>
             {
                 c.Scan(scanner =>
@@ -108,6 +112,8 @@ namespace BKind.Web
             }
 
             app.UseStaticFiles();
+
+            app.UseSession();
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 

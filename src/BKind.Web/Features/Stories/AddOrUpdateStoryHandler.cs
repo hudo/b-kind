@@ -45,16 +45,18 @@ namespace BKind.Web.Features.Stories
             else author = user.GetRole<Author>();
 
             var story = message.StoryId.HasValue
-                ? await _mediator.Send(new GetByIdQuery<Story>(message.StoryId.Value))
+                ? await GetAndUpdateAsync(message)
                 : author.CreateNewStory(message.StoryTitle, message.Content);
+
+            story.Modified = DateTime.UtcNow;
+
+            if (message.StoryId.HasValue)
+                _unitOfWork.Update(story);
+            else
+                _unitOfWork.Add(story);
 
             try
             {
-                if(message.StoryId.HasValue)
-                    _unitOfWork.Update(story);
-                else
-                    _unitOfWork.Add(story);
-
                 await _unitOfWork.Commit();
 
                 response.Result = story;
@@ -65,6 +67,14 @@ namespace BKind.Web.Features.Stories
             }
 
             return response;
+        }
+
+        private async Task<Story> GetAndUpdateAsync(AddOrUpdateStoryInputModel message)
+        {
+            var story = await _mediator.Send(new GetByIdQuery<Story>(message.StoryId.Value));
+            story.Title = message.StoryTitle;
+            story.Content = message.Content;
+            return story;
         }
     }
 }

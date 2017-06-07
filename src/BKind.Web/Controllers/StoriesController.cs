@@ -11,6 +11,8 @@ namespace BKind.Web.Controllers
 {
     public class StoriesController : BkindControllerBase
     {
+        private const string TempDataSaveInfo = "__savedInfo";
+
         public StoriesController(IMediator mediator) : base(mediator) {}
 
         public ActionResult Share() => View(new AddOrUpdateStoryInputModel());
@@ -20,7 +22,7 @@ namespace BKind.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Share(AddOrUpdateStoryInputModel model)
         {
-            model.UserId = (await LoggedUser()).Id;
+            model.UserId = (await GetLoggedUserAsync()).Id;
 
             if (!ModelState.IsValid)
                 return View("Share", model);
@@ -42,11 +44,14 @@ namespace BKind.Web.Controllers
             var model = new EditStoryInputModel();
             model.Story = await _mediator.Send(new GetByIdQuery<Story>(id));
 
-            var user = await LoggedUser();
+            var user = await GetLoggedUserAsync();
 
-            if (model.Story.AuthorId != user.Id || model.Story == null) return NotFound();
+            if (model.Story.AuthorId != user.GetRole<Author>()?.Id || model.Story == null) return NotFound();
 
             model.Title = $"Edit {model.Story.Title}";
+
+            if(TempData.ContainsKey(TempDataSaveInfo))
+                model.Informations.Add((string)TempData[TempDataSaveInfo]);
 
             return View(model);
         } 
@@ -54,9 +59,25 @@ namespace BKind.Web.Controllers
         [ValidateAntiForgeryToken]
         [Authorize]
         [HttpPost]
-        public async Task<IAsyncResult> Edit(EditStoryInputModel model)
+        public async Task<IActionResult> Edit(EditStoryInputModel model)
         {
-            return null;
+            var updateMessage = AddOrUpdateStoryInputModel.From(model.Story);
+            var user = await GetLoggedUserAsync();
+            updateMessage.UserId = user.Id;
+
+            var response = await _mediator.Send(updateMessage);
+
+            if (response.HasErrors)
+            {
+                foreach (var responseError in response.Errors)
+                    ModelState.AddModelError(responseError.Key, responseError.Message);
+
+                return View(model);
+            }
+
+            TempData[TempDataSaveInfo] = "Story succesfully saved!";
+
+            return RedirectToAction("Edit", new { id = response.Result.Id });
         }
     }
 }

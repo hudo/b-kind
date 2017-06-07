@@ -38,10 +38,10 @@ namespace BKind.Web.Infrastructure.Persistance.StandardHandlers
                     .Take(message.PageOption.PageSize);
             }
 
-            var entities = await query.ToListAsync();
-
             if (message.Include != null)
                 query = query.Include(message.Include);
+
+            var entities = await query.ToListAsync();
 
             return new PagedList<T>(entities, message.PageOption?.Page ?? 0, message.PageOption?.PageSize ?? 0, count);
         }

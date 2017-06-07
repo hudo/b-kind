@@ -17,8 +17,12 @@ namespace BKind.Web.Infrastructure.Persistance.StandardHandlers
 
         public async Task<T> Handle(GetByIdQuery<T> message)
         {
-            var entity = await _db.Set<T>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == message.Id);
-            return entity;
+            var query = _db.Set<T>().AsNoTracking();
+
+            if (message.Include != null)
+                query = query.Include(message.Include);
+                
+            return await query.FirstOrDefaultAsync(x => x.Id == message.Id); 
         }
     }
 }

@@ -16,5 +16,15 @@ namespace BKind.Web.Features.Stories
         public string StoryTitle { get; set; }
         public string Content { get; set; }
         public int UserId { get; set; }
+
+        public static AddOrUpdateStoryInputModel From(Story story)
+        {
+            return new AddOrUpdateStoryInputModel
+            {
+                StoryId = story.Id,
+                StoryTitle = story.Title,
+                Content = story.Content
+            };
+        }
     }
 }

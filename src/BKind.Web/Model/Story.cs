@@ -4,7 +4,7 @@ namespace BKind.Web.Model
 {
     public class Story : Entity
     {
-        protected Story() { }
+        public Story() { }
 
         public Story(string title, string content, int authorId, Status status)
         {

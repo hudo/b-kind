@@ -1,5 +1,4 @@
 using BKind.Web.Model;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BKind.Web.Features.Stories
@@ -13,8 +12,8 @@ namespace BKind.Web.Features.Stories
 
             var model = new StoryButtonsViewModel();
 
-            model.CanEdit = story.AuthorId == userWithRoles.Id;
-            model.CanUnpublish = model.CanEdit || userWithRoles.Is<Administrator>() || userWithRoles.Is<Reviewer>();
+            model.CanEdit = userWithRoles.GetRole<Author>()?.Id == story.AuthorId;
+            model.CanUnpublish = story.Status == Status.Published && (model.CanEdit || userWithRoles.Is<Administrator>() || userWithRoles.Is<Reviewer>());
             model.CanVote = !model.CanEdit;
 
             model.StoryId = story.Id;
