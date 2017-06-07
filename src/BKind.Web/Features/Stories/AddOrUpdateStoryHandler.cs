@@ -8,18 +8,18 @@ using MediatR;
 
 namespace BKind.Web.Features.Stories
 {
-    public class SaveStoryHandler : IAsyncRequestHandler<SaveStoryInputModel, Response<Story>>
+    public class AddOrUpdateStoryHandler : IAsyncRequestHandler<AddOrUpdateStoryInputModel, Response<Story>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMediator _mediator;
 
-        public SaveStoryHandler(IUnitOfWork unitOfWork, IMediator mediator)
+        public AddOrUpdateStoryHandler(IUnitOfWork unitOfWork, IMediator mediator)
         {
             _unitOfWork = unitOfWork;
             _mediator = mediator;
         }
 
-        public async Task<Response<Story>> Handle(SaveStoryInputModel message)
+        public async Task<Response<Story>> Handle(AddOrUpdateStoryInputModel message)
         {
             var response = new Response<Story>();
 
@@ -33,16 +33,9 @@ namespace BKind.Web.Features.Stories
 
             var story = message.StoryId.HasValue
                 ? await _mediator.Send(new GetByIdQuery<Story>(message.StoryId.Value))
-                : new Story
-                {
-                    AuthorId = user.Id,
-                    Title = message.StoryTitle,
-                    Content = message.Content,
-                    Created = DateTime.UtcNow,
-                    Modified = DateTime.UtcNow
-                };
+                : new Story(message.StoryTitle, message.Content, user.Id, Status.Draft);
 
-            if (user.Is<Visitor>())
+            if (!user.Is<Author>())
             {
                 user.Roles.Add(new Author());
                 _unitOfWork.Update(user);

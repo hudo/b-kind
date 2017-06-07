@@ -13,12 +13,12 @@ namespace BKind.Web.Controllers
     {
         public StoriesController(IMediator mediator) : base(mediator) {}
 
-        public ActionResult Share() => View(new SaveStoryInputModel());
+        public ActionResult Share() => View(new AddOrUpdateStoryInputModel());
 
         [Authorize]
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public async Task<IActionResult> Share(SaveStoryInputModel model)
+        public async Task<IActionResult> Share(AddOrUpdateStoryInputModel model)
         {
             model.UserId = (await LoggedUser()).Id;
 

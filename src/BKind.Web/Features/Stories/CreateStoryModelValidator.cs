@@ -2,7 +2,7 @@
 
 namespace BKind.Web.Features.Stories
 {
-    public class CreateStoryModelValidator : AbstractValidator<SaveStoryInputModel>
+    public class CreateStoryModelValidator : AbstractValidator<AddOrUpdateStoryInputModel>
     {
         public CreateStoryModelValidator()
         {

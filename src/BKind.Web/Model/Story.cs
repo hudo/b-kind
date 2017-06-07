@@ -4,6 +4,19 @@ namespace BKind.Web.Model
 {
     public class Story : Entity
     {
+        protected Story() { }
+
+        public Story(string title, string content, int authorId, Status status)
+        {
+            Title = title;
+            Content = content;
+            AuthorId = authorId;
+            Status = status;
+
+            Created = DateTime.UtcNow;
+            Modified = DateTime.UtcNow;
+        }
+
         public string Title { get; set; }
         public string Content { get; set; }
         public User Author { get; set; }

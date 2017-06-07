@@ -5,9 +5,9 @@ using MediatR;
 
 namespace BKind.Web.Features.Stories
 {
-    public class SaveStoryInputModel : ViewModelBase, IRequest<Response<Story>>, IUserIdentifier
+    public class AddOrUpdateStoryInputModel : ViewModelBase, IRequest<Response<Story>>, IUserIdentifier
     {
-        public SaveStoryInputModel()
+        public AddOrUpdateStoryInputModel()
         {
             this.Title = "Create or edit story";        
         }
