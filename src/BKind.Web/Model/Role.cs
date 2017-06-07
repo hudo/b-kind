@@ -1,4 +1,6 @@
-﻿namespace BKind.Web.Model
+﻿using System.Collections.Generic;
+
+namespace BKind.Web.Model
 {
     public abstract class Role : Entity
     {
@@ -25,6 +27,12 @@
     public class Author : Role
     {
         public override string Name => "Author";
+        public virtual ICollection<Story> Stories { get; set; }
+
+        public Story CreateNewStory(string title, string content)
+        {
+            return new Story(title, content, this.Id, Status.Draft);
+        }
     }
 
     public class Reviewer : Role

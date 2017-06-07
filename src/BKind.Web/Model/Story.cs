@@ -19,7 +19,7 @@ namespace BKind.Web.Model
 
         public string Title { get; set; }
         public string Content { get; set; }
-        public User Author { get; set; }
+        public Author Author { get; set; }
         public int AuthorId { get; set; }
         
         public DateTime Created { get; set; }

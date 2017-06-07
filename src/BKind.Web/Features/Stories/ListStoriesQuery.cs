@@ -61,7 +61,7 @@ namespace BKind.Web.Features.Stories
                         Content = story.Content,
                         Created = story.Created,
                         AuthorId = story.AuthorId,
-                        AuthorName = story.Author.FirstName + " " + story.Author.LastName,
+                        AuthorName = story.Author.User.FirstName + " " + story.Author.User.LastName,
                         ThumbsUp = story.ThumbsUp,
                         Status = story.Status
                     }).ToListAsync();

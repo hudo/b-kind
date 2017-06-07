@@ -9,8 +9,8 @@ using BKind.Web.Model;
 namespace BKind.Web.Migrations
 {
     [DbContext(typeof(StoriesDbContext))]
-    [Migration("20170326211109_init")]
-    partial class init
+    [Migration("20170607141334_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,7 +42,7 @@ namespace BKind.Web.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("AuthorId");
+                    b.Property<int>("AuthorId");
 
                     b.Property<string>("Content");
 
@@ -139,9 +139,10 @@ namespace BKind.Web.Migrations
 
             modelBuilder.Entity("BKind.Web.Model.Story", b =>
                 {
-                    b.HasOne("BKind.Web.Model.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId");
+                    b.HasOne("BKind.Web.Model.Author", "Author")
+                        .WithMany("Stories")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }

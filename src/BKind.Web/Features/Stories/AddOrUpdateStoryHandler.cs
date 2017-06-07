@@ -31,15 +31,22 @@ namespace BKind.Web.Features.Stories
                 return response;
             }
 
-            var story = message.StoryId.HasValue
-                ? await _mediator.Send(new GetByIdQuery<Story>(message.StoryId.Value))
-                : new Story(message.StoryTitle, message.Content, user.Id, Status.Draft);
+            Author author;
 
             if (!user.Is<Author>())
             {
-                user.Roles.Add(new Author());
+                author = new Author();
+                user.Roles.Add(author);
+
                 _unitOfWork.Update(user);
+
+                await _unitOfWork.Commit();
             }
+            else author = user.GetRole<Author>();
+
+            var story = message.StoryId.HasValue
+                ? await _mediator.Send(new GetByIdQuery<Story>(message.StoryId.Value))
+                : author.CreateNewStory(message.StoryTitle, message.Content);
 
             try
             {
