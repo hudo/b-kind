@@ -13,4 +13,8 @@
    {
        <a asp-controller="Stories" asp-action="Edit" asp-route-id="@Model.StoryId">Edit</a>
    }
+   @if (Model.CanPublish)
+   {
+       <a asp-controller="Stories" asp-action="Publish" asp-route-id="@Model.StoryId">Publish</a>
+   }
 </div>

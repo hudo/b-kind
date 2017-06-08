@@ -1,7 +1,9 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using BKind.Web.Core.StandardQueries;
 using BKind.Web.Features.Stories;
+using BKind.Web.Features.Stories.Contracts;
 using BKind.Web.Model;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -11,7 +13,7 @@ namespace BKind.Web.Controllers
 {
     public class StoriesController : BkindControllerBase
     {
-        private const string TempDataSaveInfo = "__savedInfo";
+        private const string _TDKey = "__savedInfo";
 
         public StoriesController(IMediator mediator) : base(mediator) {}
 
@@ -50,8 +52,8 @@ namespace BKind.Web.Controllers
 
             model.Title = $"Edit {model.Story.Title}";
 
-            if(TempData.ContainsKey(TempDataSaveInfo))
-                model.Informations.Add((string)TempData[TempDataSaveInfo]);
+            if(TempData.ContainsKey(_TDKey))
+                model.Informations.Add((string)TempData[_TDKey]);
 
             return View(model);
         } 
@@ -75,9 +77,29 @@ namespace BKind.Web.Controllers
                 return View(model);
             }
 
-            TempData[TempDataSaveInfo] = "Story succesfully saved!";
+            TempData[_TDKey] = "Story succesfully saved!";
 
             return RedirectToAction("Edit", new { id = response.Result.Id });
+        }
+
+        public async Task<IActionResult> Read(int id)
+        {
+            var story = await _mediator.Send(new GetByIdQuery<Story>(id));
+            return View(story);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Publish(int id)
+        {
+            var user = await GetLoggedUserAsync();
+            var response = await _mediator.Send(new ChangeStatusCommand(id, user, Status.Published));
+
+            if (response.HasErrors)
+            {
+                TempData[_TDKey] = string.Join(", ", response.Errors.Select(x => x.Message));
+            }
+
+            return RedirectToAction("Read", new { id });
         }
     }
 }

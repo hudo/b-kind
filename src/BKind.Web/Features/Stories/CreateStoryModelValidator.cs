@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using BKind.Web.Features.Stories.Contracts;
+using FluentValidation;
 
 namespace BKind.Web.Features.Stories
 {

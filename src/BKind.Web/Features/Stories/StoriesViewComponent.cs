@@ -3,6 +3,7 @@ using BKind.Web.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using BKind.Web.Core.StandardQueries;
+using BKind.Web.Features.Stories.Contracts;
 using BKind.Web.Model;
 using Story = BKind.Web.Model.Story;
 

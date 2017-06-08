@@ -8,6 +8,8 @@ namespace BKind.Web.Features.Stories
 
         public bool CanUnpublish { get; set; }
 
+        public bool CanPublish { get; set; }
+
         public bool CanEdit { get; set; }
     }
 }

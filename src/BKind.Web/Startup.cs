@@ -12,8 +12,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using StructureMap;
 using System.IO;
+using System.Linq;
 using BKind.Web.Infrastructure;
+using BKind.Web.Model;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using System.Threading.Tasks;
 
 namespace BKind.Web
 {
@@ -57,7 +60,6 @@ namespace BKind.Web
                 o.UseNpgsql("User ID=user;Password=user;Host=localhost;Port=5432;Database=bkind;Pooling=true;"));
 
             services.AddDistributedMemoryCache();
-
             services.AddSession();
 
             var container = new Container(c =>
@@ -94,8 +96,6 @@ namespace BKind.Web
             return container.GetInstance<IServiceProvider>();
         }
 
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
@@ -134,6 +134,14 @@ namespace BKind.Web
             });
 
             ConfigureEFLogger();
+
+            Task.Run(() => 
+            { 
+                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    serviceScope.ServiceProvider.GetService<StoriesDbContext>().EnsureDataSeed();
+                }
+            });
         }
 
         private void ConfigureEFLogger()

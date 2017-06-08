@@ -3,7 +3,7 @@ using BKind.Web.Model;
 using BKind.Web.ViewModels;
 using MediatR;
 
-namespace BKind.Web.Features.Stories
+namespace BKind.Web.Features.Stories.Contracts
 {
     public class AddOrUpdateStoryInputModel : ViewModelBase, IRequest<Response<Story>>, IUserIdentifier
     {

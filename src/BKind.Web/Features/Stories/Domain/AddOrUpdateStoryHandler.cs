@@ -2,11 +2,12 @@
 using System.Threading.Tasks;
 using BKind.Web.Core;
 using BKind.Web.Core.StandardQueries;
+using BKind.Web.Features.Stories.Contracts;
 using BKind.Web.Infrastructure.Helpers;
 using BKind.Web.Model;
 using MediatR;
 
-namespace BKind.Web.Features.Stories
+namespace BKind.Web.Features.Stories.Domain
 {
     public class AddOrUpdateStoryHandler : IAsyncRequestHandler<AddOrUpdateStoryInputModel, Response<Story>>
     {
