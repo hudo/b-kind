@@ -5,6 +5,7 @@ using BKind.Web.Core.StandardQueries;
 using BKind.Web.Features.Stories;
 using BKind.Web.Features.Stories.Contracts;
 using BKind.Web.Model;
+using BKind.Web.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,8 @@ namespace BKind.Web.Controllers
 {
     public class StoriesController : BkindControllerBase
     {
-        private const string _TDKey = "__savedInfo";
+        private const string _ErrorKey = "__errors";
+        private const string _InfoKey = "__info";
 
         public StoriesController(IMediator mediator) : base(mediator) {}
 
@@ -52,8 +54,8 @@ namespace BKind.Web.Controllers
 
             model.Title = $"Edit {model.Story.Title}";
 
-            if(TempData.ContainsKey(_TDKey))
-                model.Informations.Add((string)TempData[_TDKey]);
+            if(TempData.ContainsKey(_ErrorKey))
+                model.Informations.Add((string)TempData[_ErrorKey]);
 
             return View(model);
         } 
@@ -77,7 +79,7 @@ namespace BKind.Web.Controllers
                 return View(model);
             }
 
-            TempData[_TDKey] = "Story succesfully saved!";
+            TempData[_ErrorKey] = "Story succesfully saved!";
 
             return RedirectToAction("Edit", new { id = response.Result.Id });
         }
@@ -85,18 +87,31 @@ namespace BKind.Web.Controllers
         public async Task<IActionResult> Read(int id)
         {
             var story = await _mediator.Send(new GetByIdQuery<Story>(id));
-            return View(story);
+
+            if (story == null) return NotFound();
+
+            var model = new ReadStoryViewModel(story);
+
+            if (TempData.ContainsKey(_ErrorKey))
+                model.Errors.Add((string)TempData[_ErrorKey]);
+
+            return View();
         }
 
         [Authorize]
-        public async Task<IActionResult> Publish(int id)
+        public async Task<IActionResult> Publish(int id) => await ChangeStatus(id, Status.Published);
+
+        [Authorize]
+        public async Task<IActionResult> Unpublish(int id) => await ChangeStatus(id, Status.Draft);
+
+        private async Task<IActionResult> ChangeStatus(int id, Status newStatus)
         {
             var user = await GetLoggedUserAsync();
-            var response = await _mediator.Send(new ChangeStatusCommand(id, user, Status.Published));
+            var response = await _mediator.Send(new ChangeStatusCommand(id, user, newStatus));
 
             if (response.HasErrors)
             {
-                TempData[_TDKey] = string.Join(", ", response.Errors.Select(x => x.Message));
+                TempData[_ErrorKey] = string.Join(", ", response.Errors.Select(x => x.Message));
             }
 
             return RedirectToAction("Read", new { id });

@@ -29,7 +29,7 @@ namespace BKind.Web.Features.Stories.Domain
             if (story == null) return response.AddError("", "Story not found");
 
             if ((message.NewStatus == Status.Published || message.NewStatus == Status.Declined) &&
-                (!message.User.Is<Reviewer>() || !message.User.Is<Administrator>()))
+                !(message.User.Is<Reviewer>() || message.User.Is<Administrator>()))
                 return response.AddError("", "Permission needed");
 
             story.Status = message.NewStatus;

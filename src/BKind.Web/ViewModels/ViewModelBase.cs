@@ -27,6 +27,15 @@ namespace BKind.Web.ViewModels
 
         public List<string> Informations { get; set; }
         public List<string> Errors { get; set; }
-        
+    }
+
+    public class FormModel<T> : FormModelBase
+    {
+        public FormModel(T model)
+        {
+            Model = model;
+        }
+
+        public T Model { get; set; }
     }
 }
