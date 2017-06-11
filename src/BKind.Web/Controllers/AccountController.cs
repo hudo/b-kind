@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using BKind.Web.Core;
-using BKind.Web.Features.Account;
+using BKind.Web.Features.Account.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,10 +29,10 @@ namespace BKind.Web.Controllers.Account
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult Register() => View(new RegisterInputModel());
+        public IActionResult Register() => View(new ProfileInputModel());
         
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterInputModel model)
+        public async Task<IActionResult> Register(ProfileInputModel model)
         {
             if (!ModelState.IsValid)
                 return View(model);

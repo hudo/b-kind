@@ -1,4 +1,4 @@
-namespace BKind.Web.Features.Stories
+namespace BKind.Web.Features.Stories.Contracts
 {
     public class StoryButtonsViewModel
     {

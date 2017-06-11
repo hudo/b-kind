@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BKind.Web.Core;
 using BKind.Web.Core.StandardQueries;
+using BKind.Web.Features.Account.Contracts;
 using BKind.Web.Infrastructure.Helpers;
 using BKind.Web.Model;
 using MediatR;
 
-namespace BKind.Web.Features.Account
+namespace BKind.Web.Features.Account.Domain
 {
-    public class RegisterHandler : IAsyncRequestHandler<RegisterInputModel, Response>
+    public class RegisterHandler : IAsyncRequestHandler<ProfileInputModel, Response>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMediator _mediator;
@@ -20,7 +21,7 @@ namespace BKind.Web.Features.Account
             _mediator = mediator;
         }
 
-        public async Task<Response> Handle(RegisterInputModel message)
+        public async Task<Response> Handle(ProfileInputModel message)
         {
             var response = new Response();
 

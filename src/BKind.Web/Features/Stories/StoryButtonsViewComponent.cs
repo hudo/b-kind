@@ -1,3 +1,4 @@
+using BKind.Web.Features.Stories.Contracts;
 using BKind.Web.Model;
 using Microsoft.AspNetCore.Mvc;
 

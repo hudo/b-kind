@@ -1,8 +1,9 @@
-﻿using FluentValidation;
+﻿using BKind.Web.Features.Account.Contracts;
+using FluentValidation;
 
 namespace BKind.Web.Features.Account
 {
-    public class RegisterInputModelValidator : AbstractValidator<RegisterInputModel>
+    public class RegisterInputModelValidator : AbstractValidator<ProfileInputModel>
     {
         public RegisterInputModelValidator()
         {

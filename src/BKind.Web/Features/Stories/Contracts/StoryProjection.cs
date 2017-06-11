@@ -1,7 +1,7 @@
 using System;
 using BKind.Web.Model;
 
-namespace BKind.Web.Features.Stories
+namespace BKind.Web.Features.Stories.Contracts
 {
     public class StoryProjection
     {

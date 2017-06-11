@@ -2,7 +2,7 @@
 using BKind.Web.ViewModels;
 using MediatR;
 
-namespace BKind.Web.Features.Account
+namespace BKind.Web.Features.Account.Contracts
 {
     public class LoginInputModel : ViewModelBase, IRequest<Response>
     {

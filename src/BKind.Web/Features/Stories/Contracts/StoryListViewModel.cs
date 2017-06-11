@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using BKind.Web.Model;
 
-namespace BKind.Web.Features.Stories
+namespace BKind.Web.Features.Stories.Contracts
 {
     public class StoryListViewModel
     {

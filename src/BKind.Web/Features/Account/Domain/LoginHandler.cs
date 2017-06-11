@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using BKind.Web.Core;
+using BKind.Web.Features.Account.Contracts;
 using BKind.Web.Infrastructure.Helpers;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 
-namespace BKind.Web.Features.Account
+namespace BKind.Web.Features.Account.Domain
 {
     public class LoginHandler : IAsyncRequestHandler<LoginInputModel, Response>
     {

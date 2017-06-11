@@ -1,19 +1,33 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using BKind.Web.Core;
+using BKind.Web.Model;
 using BKind.Web.ViewModels;
 using MediatR;
 
-namespace BKind.Web.Features.Account
+namespace BKind.Web.Features.Account.Contracts
 {
-    public class RegisterInputModel : ViewModelBase, IRequest<Response>
+    public class ProfileInputModel : FormModelBase, IRequest<Response>
     {
+        public ProfileInputModel()
+        {
+            
+        }
+
+        public ProfileInputModel(User user)
+        {
+            Username = user.Username;
+            Firstname = user.FirstName;
+            Lastname = user.LastName;
+        }
+
+
         [Display(Name = "E-mail")]
         public string Username { get; set; }
 
         [Display(Name = "First name")]
         public string Firstname { get; set; }
 
-        [Display(Name = "Lastname")]
+        [Display(Name = "Last name")]
         public string Lastname { get; set; }
 
         public string Password { get; set; }
