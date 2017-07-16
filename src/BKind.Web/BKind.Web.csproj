@@ -1,14 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
-    <DebugType>portable</DebugType>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <AssemblyName>BKind.Web</AssemblyName>
-    <OutputType>Exe</OutputType>
     <PackageId>BKind.Web</PackageId>
     <UserSecretsId>aspnet-WebApplication-0799fe3e-6eaf-4c5f-b40e-7c6bfd5dfa9a</UserSecretsId>
-    <RuntimeFrameworkVersion>1.1.0</RuntimeFrameworkVersion>
-    <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;dnxcore50;portable-net45+win8</PackageTargetFallback>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
   </PropertyGroup>
   <ItemGroup>
     <Content Update="wwwroot\**\*;**\*.cshtml;appsettings.json;web.config">
