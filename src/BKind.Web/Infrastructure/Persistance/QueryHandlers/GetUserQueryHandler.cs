@@ -18,7 +18,7 @@ namespace BKind.Web.Infrastructure.Persistance.QueryHandlers
 
         public async Task<Response<User>> Handle(GetUserQuery message)
         {
-            return Response.From(await EntityFrameworkQueryableExtensions.AsNoTracking<User>(_db.Set<User>())
+            return Response.From(await _db.Set<User>().AsNoTracking()
                 .Include(x => x.Roles)
                 .FirstOrDefaultAsync(x => x.Username == message.Username));
         }
