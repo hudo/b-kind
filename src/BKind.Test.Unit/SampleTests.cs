@@ -1,8 +1,12 @@
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
+using BKind.Web;
 using BKind.Web.Controllers;
+using BKind.Web.Controllers.Account;
 using BKind.Web.Core;
 using BKind.Web.Core.StandardQueries;
 using BKind.Web.Features.Account.Contracts;
@@ -14,29 +18,38 @@ using BKind.Web.Infrastructure.Persistance.QueryHandlers;
 using BKind.Web.Model;
 using BKind.Web.ViewModels;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc.ViewComponents;
+using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Moq;
+using StructureMap.TypeRules;
 using Xunit;
 
 namespace BKind.Test.Unit
 {
     public class SampleTests
     {
-        [Fact]
-        public void ValidatorSimpleTest()
+        [Theory]
+        [InlineData("","", false)]
+        [InlineData("a", "b", true)]
+        public void ValidatorSimpleTest(string title, string content, bool success)
         {
             var validator = new CreateStoryModelValidator();
 
             var result = validator.Validate(new AddOrUpdateStoryInputModel
             {
-                StoryTitle = "title",
-                Content = "content"
+                StoryTitle = title,
+                Content = content
             });
 
-            Assert.True(result.IsValid);
+            Assert.Equal(success, result.IsValid);
         }
 
         [Fact]
@@ -62,6 +75,20 @@ namespace BKind.Test.Unit
             var viewResult = Assert.IsType<ViewResult>(actionResult);
             var model = Assert.IsType<HomePageViewModel>(viewResult.Model);
             Assert.True(model.CanWriteStory);
+        }
+
+        [Fact]
+        public async Task ControllerModelState()
+        {
+            var mediator = new Mock<IMediator>();
+            var controller = new AccountController(mediator.Object);
+            controller.ModelState.AddModelError("1", "error");
+
+            var response = await controller.Login(new LoginInputModel());
+
+            var viewResult = Assert.IsType<ViewResult>(response);
+
+            mediator.Verify(x => x.Send(It.IsAny<LoginInputModel>(), It.IsAny<CancellationToken>()), Times.Never);
         }
 
         [Fact]
@@ -114,6 +141,43 @@ namespace BKind.Test.Unit
 
             Assert.True(response.HasResult);
             Assert.True(response.Result.Is<Administrator>());
+        }
+
+        [Fact]
+        public async Task Integration()
+        {
+            var server = new TestServer(new WebHostBuilder()
+                .UseContentRoot(@"D:\Projects\b-kind\src\BKind.Web")
+                .UseStartup<Startup>()
+                .ConfigureServices(services =>
+                {
+                    var manager = new ApplicationPartManager();
+                    manager.ApplicationParts.Add(new AssemblyPart(typeof(Startup).GetAssembly()));
+                    manager.ApplicationParts.Add(new AssemblyPart(typeof(SampleTests).GetAssembly()));
+                    manager.FeatureProviders.Add(new ControllerFeatureProvider());
+                    manager.FeatureProviders.Add(new ViewComponentFeatureProvider());
+                    services.AddSingleton(manager);
+                }));
+
+            var client = server.CreateClient();
+
+            var response = await client.GetAsync("/home/test");
+            response.EnsureSuccessStatusCode();
+        }
+    }
+
+    public class ResponseHandler : DelegatingHandler
+    {
+        public ResponseHandler()
+        {
+            
+        }
+
+
+
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK));
         }
     }
 }

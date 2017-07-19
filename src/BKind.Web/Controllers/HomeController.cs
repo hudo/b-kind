@@ -27,6 +27,11 @@ namespace BKind.Web.Controllers
             return View(model);
         }
 
+        public IActionResult Test()
+        {
+            return Json("hello!");
+        }
+
         public override void OnActionExecuted(ActionExecutedContext context)
         {
             var model = (context.Result as ViewResult)?.Model as ViewModelBase;
