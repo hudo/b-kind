@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
@@ -146,8 +148,9 @@ namespace BKind.Test.Unit
         [Fact]
         public async Task Integration()
         {
+            var path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"../../../../BKind.Test.Unit"));
             var server = new TestServer(new WebHostBuilder()
-                .UseContentRoot(@"D:\Projects\b-kind\src\BKind.Web")
+                .UseContentRoot(path)
                 .UseStartup<Startup>()
                 .ConfigureServices(services =>
                 {
