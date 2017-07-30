@@ -1,16 +1,64 @@
-﻿using BKind.Web.Model;
+﻿using System.Threading.Tasks;
+using BKind.Web.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace BKind.Web.Infrastructure.Persistance
 {
     public class StoriesDbContext : DbContext
     {
+        private IDbContextTransaction _tx;
+
         public StoriesDbContext(DbContextOptions<StoriesDbContext> options)
             : base(options)
         { }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Story> Stories { get; set; }
+
+        public void BeginTransaction()
+        {
+            _tx = Database.BeginTransaction();
+        }
+
+        public async Task CommitTransactionAsync()
+        {
+            try
+            {
+                await SaveChangesAsync();
+
+                _tx?.Commit();
+            }
+            catch
+            {
+                Rollback();
+                throw;
+            }
+            finally
+            {
+                if (_tx != null)
+                {
+                    _tx.Dispose();
+                    _tx = null;
+                }
+            }
+        }
+
+        public void Rollback()
+        {
+            try
+            {
+                _tx?.Rollback();
+            }
+            finally 
+            {
+                if (_tx != null)
+                {
+                    _tx.Dispose();
+                    _tx = null;
+                }
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
