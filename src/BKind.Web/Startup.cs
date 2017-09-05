@@ -45,11 +45,6 @@ namespace BKind.Web
         private IHostingEnvironment HostingEnvironment;
         private IContainer Container;
 
-        public void ConfigureServices2(IServiceCollection services)
-        {
-            services.AddDbContext<StoriesDbContext>(o => o.UseNpgsql("User ID=user;Password=user;Host=localhost;Port=5432;Database=bkind;Pooling=true;"));
-        }
-
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(opt =>
@@ -59,8 +54,7 @@ namespace BKind.Web
                 .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>())
                 .AddControllersAsServices();
 
-            services.AddDbContext<StoriesDbContext>(o => 
-                o.UseNpgsql("User ID=user;Password=user;Host=localhost;Port=5432;Database=bkind;Pooling=true;"));
+            services.AddDbContext<StoriesDbContext>(o => o.UseNpgsql(Configuration.GetConnectionString("BkindPsql")));
 
             services.AddDistributedMemoryCache();
             services.AddSession();
