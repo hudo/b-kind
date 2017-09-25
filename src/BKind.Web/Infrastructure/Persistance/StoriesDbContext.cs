@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using BKind.Web.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace BKind.Web.Infrastructure.Persistance
@@ -77,6 +78,18 @@ namespace BKind.Web.Infrastructure.Persistance
                 .HasMany(x => x.Roles)
                 .WithOne(x => x.User)
                 .HasForeignKey(x => x.UserId);
+
+            modelBuilder.Entity<StoryVotes>()
+                .HasOne(x => x.Story)
+                .WithMany(x => x.Votes)
+                .HasForeignKey(x => x.StoryId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<StoryVotes>()
+                .HasOne(x => x.User)
+                .WithMany(x => x.Votes)
+                .HasForeignKey(x => x.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

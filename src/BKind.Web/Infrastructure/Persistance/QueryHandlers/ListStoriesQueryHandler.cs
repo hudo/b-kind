@@ -52,6 +52,9 @@ namespace BKind.Web.Infrastructure.Persistance.QueryHandlers
             if (message.ToDate.HasValue)
                 query = query.Where(story => story.Created < message.ToDate.Value);
 
+            if (message.StoryId > 0)
+                query = query.Where(x => x.Id == message.StoryId);
+
             return await query.OrderByDescending(story => story.Created)
                 .Skip(0).Take(message.MaxStories)
                 .Select(story => new StoryProjection

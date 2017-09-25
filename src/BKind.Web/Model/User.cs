@@ -25,6 +25,7 @@ namespace BKind.Web.Model
         {
             return Roles.OfType<T>().FirstOrDefault();
         }
-        
+
+        public IList<StoryVotes> Votes { get; set; }
     }
 }

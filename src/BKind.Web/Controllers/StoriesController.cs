@@ -1,11 +1,8 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using BKind.Web.Core.StandardQueries;
-using BKind.Web.Features.Stories;
 using BKind.Web.Features.Stories.Contracts;
 using BKind.Web.Model;
-using BKind.Web.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -86,16 +83,17 @@ namespace BKind.Web.Controllers
 
         public async Task<IActionResult> Read(int id)
         {
-            var story = await _mediator.Send(new GetByIdQuery<Story>(id));
+            var user = await GetLoggedUserAsync();
+            var stories = await _mediator.Send(new ListStoriesQuery { StoryId = id, UserWithRoles = user });
 
-            if (story == null) return NotFound();
+            if (stories == null || !stories.Any()) return NotFound();
 
-            var model = new ReadStoryViewModel(story);
+            var model = new ReadStoryViewModel(stories[0], user);
 
             if (TempData.ContainsKey(_ErrorKey))
                 model.Errors.Add((string)TempData[_ErrorKey]);
 
-            return View();
+            return View(model);
         }
 
         [Authorize]
@@ -103,6 +101,14 @@ namespace BKind.Web.Controllers
 
         [Authorize]
         public async Task<IActionResult> Unpublish(int id) => await ChangeStatus(id, Status.Draft);
+
+        [Authorize]
+        public async Task<IActionResult> ThumbsUp(int id)
+        {
+            var user = await GetLoggedUserAsync();
+
+            return RedirectToAction("Read", new { id });
+        }
 
         private async Task<IActionResult> ChangeStatus(int id, Status newStatus)
         {

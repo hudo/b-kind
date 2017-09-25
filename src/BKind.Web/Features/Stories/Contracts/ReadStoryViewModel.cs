@@ -5,12 +5,15 @@ namespace BKind.Web.Features.Stories.Contracts
 {
     public class ReadStoryViewModel : FormModelBase
     {
-        public ReadStoryViewModel(Story story)
+        public ReadStoryViewModel(StoryProjection story, User loggedUser)
         {
             Story = story;
+            LoggedUser = loggedUser;
         }
 
-        public Story Story { get; set; }
+        public StoryProjection Story { get; set; }
+
+        public User LoggedUser { get; set; }
 
         // comments, votes, etc
     }

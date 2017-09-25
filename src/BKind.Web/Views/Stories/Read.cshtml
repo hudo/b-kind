@@ -1,7 +1,10 @@
-@model ReadStoryViewModel
-
+@model BKind.Web.Features.Stories.Contracts.ReadStoryViewModel
+    
 <h2>@Model.Story.Title</h2>
 <div>
     @Model.Story.Content
+</div>
+`<div>
+    @await Component.InvokeAsync("StoryButtons", new { story = Model.Story, userWithRoles = Model.LoggedUser })
 </div>
 

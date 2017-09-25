@@ -8,7 +8,7 @@
    }
    @if(Model.CanUnpublish)
    {
-       <a href="#">Unpublish</a>
+       <a asp-controller="Stories" asp-action="Unpublish" asp-route-id="@Model.StoryId">Unpublish</a>
    }
    @if(Model.CanEdit)
    {
