@@ -508,6 +508,16 @@ img{ max-width:100%; height:auto;}
 
 }
 
+
+/*SINGLE STORY*/
+
+.story {
+	margin: 50px auto 30px auto;
+}
+
+
+
+
 /*MAIN MENU*/
 .menu-toggle{
 	display:block;
