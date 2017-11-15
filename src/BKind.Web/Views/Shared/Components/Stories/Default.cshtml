@@ -2,22 +2,18 @@
 
 @foreach (var story in Model.Stories)
 {
-    <div class="col-sm-4">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h2>
-                    @story.Title
-                </h2>
-                <span>@story.Status.ToString()</span>
-            </div>
-            <div class="panel-body">
-                <p>
+    <div class="col mb-5">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">@story.Title</h2>
+                <h6 class="card-subtitle mb-2 text-muted">@story.Status.ToString()</h6>
+                <p class="card-text">
                     @story.Content
                 </p>
-            </div>
-            <div class="panel-footer">
-                Date: @story.Created, Author: John Snow<br/>
-                @await Component.InvokeAsync("StoryButtons", new { story = story, userWithRoles = Model.UserWithRoles })
+                <div class="panel-footer">
+                    Date: @story.Created, Author: John Snow<br />
+                    @await Component.InvokeAsync("StoryButtons", new { story = story, userWithRoles = Model.UserWithRoles })
+                </div>
             </div>
         </div>
     </div>

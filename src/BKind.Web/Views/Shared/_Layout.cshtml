@@ -1,47 +1,90 @@
 ﻿@model ViewModelBase
 <!DOCTYPE html>
 
-<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
 <head>
     <title>@Model.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="~/images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="~/images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="~/images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="~/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="~/images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/images/icons/favicon-16x16.png">
+    <link rel="manifest" href="~/images/icons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="~/css/main.css" rel="stylesheet" />
     @RenderSection("header", required: false)
     <environment names="Development">
-         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
+        <!-- Latest compiled and minified CSS -->
+
     </environment>
-    <!-- 
-        change env variable, 
+    <!--
+        change env variable,
         on linux: export ASPNETCORE_ENVIRONMENT=development
         on windows: setx ASPNETCORE_ENVIRONMENT "Development"
      -->
     <environment names="Production,Staging">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="~/css/site.css" />
+
     </environment>
 </head>
 <body>
-    @Html.Partial("Navigation")
-    <main>
-        <div class="container">
-            <div asp-validation-summary="All"></div>
-            @(await Component.InvokeAsync<AccountViewComponent>())
-            @RenderBody()
-        </div>
-    </main>
-    <footer>
-        <div class="container">
-            <span>© @DateTime.Now.Year BKind</span>
-        </div>
-    </footer>
-    <environment names="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-    </environment>
-    <environment names="Production,Staging">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    </environment>
-    <script src="~/js/site.js"></script>
+    <div class="container-fluid ra-bg-light">
+        <header class="row">
+            <div class="col">
+                <nav class="navbar navbar-light ra-navbar">
+                    <span class="navbar-brand text-white" href="#">Ripple | act</span>
+                    <ul class="navbar-nav flex-row">
+                        <li class="nav-item active mr-3">
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                        <li class="nav-item mr-3">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item mr-3">
+                            <a class="nav-link" href="#">Log in</a>
+                        </li>
+                        <li class="nav-item mr-3">
+                            <a class="nav-link" href="#">Sign up</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </nav>
+            </div>
+        </header>
+    </div>
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+    <div class="container-fluid">
+        <footer>
+            <div id="colophon" class="wrapper clearfix">
+                ©2017 RippleAct
+            </div>
+        </footer>
+    </div>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="https://unpkg.com/popper.js@1.12.8/dist/umd/popper.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
 </body>
 </html>
+

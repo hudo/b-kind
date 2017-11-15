@@ -1,0 +1,51 @@
+﻿
+@import "variables";
+
+// Typography
+//...................................
+
+html, body {
+    color: $font-color;
+    font-family: $font-base;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+
+// Navigation
+//...................................
+.ra-bg-light {
+    background-color: $brand-primary;
+    opacity: 0.8;
+}
+
+.navbar-brand {
+    font-family: $font-logo;
+}
+
+.navbar-light.ra-navbar .navbar-nav .active > .nav-link,
+.navbar-light.ra-navbar .navbar-nav .nav-link.active {
+    color: white;
+}
+
+.navbar-light.ra-navbar .navbar-nav .active > .nav-link,
+.navbar-light.ra-navbar .navbar-nav .nav-link.active,
+.navbar-light.ra-navbar .navbar-nav .nav-link {
+    color: white;
+}
+
+.navbar-light.ra-navbar .navbar-nav .active {
+    border-bottom: 2px solid white;
+}
+
+.nav-link {
+    padding: 0.5rem 1rem 0;
+}
+
+// STORIES
+//...................................
+.ra-stories > div {
+    flex-direction: column;
+    flex: 1;
+}
