@@ -34,8 +34,11 @@ namespace BKind.Web.Features.Stories.Domain
             if (storyVote != null)
                 return response.AddError("", "Can't vote twice");
 
+            story.ThumbsUp++;
+
             var vote = new StoryVotes { StoryId = message.StoryId, UserId = message.LoggedUser.Id, Voted = DateTime.Now };
 
+            _unitOfWork.Update(story);
             _unitOfWork.Add(vote);
 
             try

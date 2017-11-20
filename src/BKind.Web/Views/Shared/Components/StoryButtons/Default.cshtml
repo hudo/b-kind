@@ -4,7 +4,7 @@
 <div>
    @if(Model.CanVote)
    {
-       <a href="#">Vote</a>
+       <a asp-controller="Stories" asp-action="ThumbsUp" asp-route-id="@Model.StoryId">Vote</a>
    }
    @if(Model.CanUnpublish)
    {

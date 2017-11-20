@@ -4,6 +4,12 @@ namespace BKind.Web.ViewModels
 {
     public abstract class ViewModelBase
     {
+        public ViewModelBase()
+        {
+            Informations = new List<string>();    
+            Errors = new List<string>();
+        }
+
         private string _title;
 
         public string Title
@@ -12,24 +18,14 @@ namespace BKind.Web.ViewModels
             set => _title = $"{value} | B Kind";
         }
         public string Description { get; set; }
-    }
-
-    /// <summary>
-    /// View model that contains additional UI messages 
-    /// </summary>
-    public abstract class FormModelBase : ViewModelBase
-    {
-        public FormModelBase()
-        {
-            Informations = new List<string>();
-            Errors = new List<string>();
-        }
 
         public List<string> Informations { get; set; }
         public List<string> Errors { get; set; }
     }
 
-    public class FormModel<T> : FormModelBase
+
+
+    public class FormModel<T> : ViewModelBase
     {
         public FormModel(T model)
         {

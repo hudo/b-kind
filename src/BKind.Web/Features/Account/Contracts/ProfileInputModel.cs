@@ -6,7 +6,7 @@ using MediatR;
 
 namespace BKind.Web.Features.Account.Contracts
 {
-    public class ProfileInputModel : FormModelBase, IRequest<Response>
+    public class ProfileInputModel : ViewModelBase, IRequest<Response>
     {
         public ProfileInputModel()
         {
