@@ -108,7 +108,7 @@ namespace BKind.Web.Controllers
             var user = await GetLoggedUserAsync();
 
             var result = await _mediator.Send(new ThumbsUpCommand(user, id));
-            
+
             return RedirectToAction("Read", new { id });
         }
 

@@ -72,9 +72,20 @@
             </div>
         </header>
     </div>
-    <div class="container-fluid">
-        @RenderBody()
-    </div>
+<div class="container-fluid">
+    
+    @if (Model.Errors.Any())
+    {
+        <div>
+            @foreach (var error in Model.Errors)
+            {
+                <div>@error</div>
+            }
+        </div>
+    }
+
+    @RenderBody()
+</div>
     <div class="container-fluid">
         <footer>
             <div id="colophon" class="wrapper clearfix">
