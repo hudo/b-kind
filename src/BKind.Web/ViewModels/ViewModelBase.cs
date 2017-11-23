@@ -17,6 +17,8 @@ namespace BKind.Web.ViewModels
             get => _title;
             set => _title = $"{value} | B Kind";
         }
+
+        public string BodyClass { get; set; }
         public string Description { get; set; }
 
         public List<string> Informations { get; set; }

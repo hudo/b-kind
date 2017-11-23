@@ -1,13 +1,15 @@
 ﻿@using BKind.Web.Infrastructure.Helpers
 @model HomePageViewModel
 
+@{
+    Model.BodyClass = "home";
+}
+
 @*@if (Model.CanWriteStory)
-{
-    @await Component.RenderStories(StoriesDisplayMode.WriteNew)
-}*@
+    {
+        @await Component.RenderStories(StoriesDisplayMode.WriteNew)
+    }*@
 <h2>Latest Stories</h2>
 <div class="row flex-column ra-stories">
     @await Component.RenderStories(Model.DisplayMode)
 </div>
-
-

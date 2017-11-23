@@ -1,12 +1,7 @@
 ﻿@model ViewModelBase
-<!DOCTYPE html>
 
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js">
-<!--<![endif]-->
+<!DOCTYPE html>
+<html>
 <head>
     <title>@Model.Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
@@ -30,6 +25,7 @@
     <meta name="theme-color" content="#ffffff">
 
     <link href="~/css/main.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     @RenderSection("header", required: false)
     <environment names="Development">
         <!-- Latest compiled and minified CSS -->
@@ -44,15 +40,15 @@
 
     </environment>
 </head>
-<body>
+<body class="@Model.BodyClass">
     <div class="container-fluid ra-bg-light">
         <header class="row">
             <div class="col">
                 <nav class="navbar navbar-light ra-navbar">
-                    <span class="navbar-brand text-white" href="#">Ripple | act</span>
+                    <a class="navbar-brand text-white" href="/">Ripple | act</a>
                     <ul class="navbar-nav flex-row">
                         <li class="nav-item active mr-3">
-                            <a class="nav-link" href="#">Home</a>
+                            <a class="nav-link" href="/">Home</a>
                         </li>
                         <li class="nav-item mr-3">
                             <a class="nav-link" href="#">About</a>
@@ -64,28 +60,62 @@
                             <a class="nav-link" asp-controller="Account" asp-action="Register">Sign up</a>
                         </li>
                     </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-                    </form>
                 </nav>
             </div>
         </header>
     </div>
-<div class="container-fluid">
-    
-    @if (Model.Errors.Any())
-    {
-        <div>
-            @foreach (var error in Model.Errors)
-            {
-                <div>@error</div>
-            }
+    <div class="container-fluid">
+        @if (Model.Errors.Any())
+        {
+            <div>
+                @foreach (var error in Model.Errors)
+                {
+                    <div>@error</div>
+                }
+            </div>
+        }
+        <div class="container">
+            <section class="row">
+                <main class="col-8">
+                    @RenderBody()
+                </main>
+                <aside role="main" class="col-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <form class="form-inline">
+                                <div class="input-group">
+                                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                                    <button class="input-group-addon" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <section class="mb-3">
+                                <h5 class="mb-3">News</h5>
+                                <ul>
+                                    <li>One</li>
+                                    <li>Two</li>
+                                    <li>Three</li>
+                                </ul>
+                            </section>
+                            <hr/>
+                            <section class="mb-3 tags-widget">
+                                <h5 class="mb-3">Tags</h5>
+                                <ul class="tags-widget">
+                                    <li><a class="btn btn-outline-info" href="#">One</a></li>
+                                    <li><a class="btn btn-outline-info" href="#">Two</a></li>
+                                    <li><a class="btn btn-outline-info" href="#">Three or Four</a></li>
+                                    <li><a class="btn btn-outline-info" href="#">Ten</a></li>
+                                </ul>
+                            </section>
+                        </div>
+                    </div>
+                </aside>
+            </section>
         </div>
-    }
-
-    @RenderBody()
-</div>
+    </div>
     <div class="container-fluid">
         <footer>
             <div id="colophon" class="wrapper clearfix">
@@ -98,4 +128,3 @@
     <script src="~/js/bootstrap.min.js"></script>
 </body>
 </html>
-

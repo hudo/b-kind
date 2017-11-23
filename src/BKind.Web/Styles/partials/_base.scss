@@ -5,6 +5,7 @@
 //...................................
 
 html, body {
+    background-color: #f7f7f7;
     color: $font-color;
     font-family: $font-base;
     font-size: 1rem;
@@ -43,9 +44,50 @@ html, body {
     padding: 0.5rem 1rem 0;
 }
 
+.ra-navbar {
+    cursor: pointer;
+}
+
 // STORIES
 //...................................
 .ra-stories > div {
     flex-direction: column;
     flex: 1;
+}
+
+//Widgets
+//...................................
+.tags-widget {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+        float: left;
+        margin: 0 10px 10px 0;
+
+        a {
+            font-weight: 500;
+            font-size: 13px;
+            padding: 3px 7px;
+            border-radius:0;
+        }
+    }
+}
+
+// Layout
+//...................................
+aside[role=main] {
+    h5 {
+        text-transform: uppercase;
+        border-left: 3px solid red;
+        padding-left: 10px;
+    }
+}
+
+// BS Override
+//...................................
+.card {
+    border-radius: 0;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,0.2);
 }
