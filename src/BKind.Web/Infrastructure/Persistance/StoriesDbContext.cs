@@ -16,6 +16,8 @@ namespace BKind.Web.Infrastructure.Persistance
 
         public DbSet<User> Users { get; set; }
         public DbSet<Story> Stories { get; set; }
+        public DbSet<StoryTags> StoryTags { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
         public void BeginTransaction()
         {
@@ -90,6 +92,18 @@ namespace BKind.Web.Infrastructure.Persistance
                 .WithMany(x => x.Votes)
                 .HasForeignKey(x => x.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<StoryTags>()
+                .HasOne(x => x.Story)
+                .WithMany(x => x.StoryTags);
+
+            modelBuilder.Entity<StoryTags>()
+                .HasOne(x => x.Tag)
+                .WithMany(x => x.StoryTags);
+
+            modelBuilder.Entity<StoryTags>()
+                .HasKey(x => new { x.StoryId, x.TagId });
+                
         }
     }
 }
