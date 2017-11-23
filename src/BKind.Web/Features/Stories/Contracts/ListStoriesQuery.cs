@@ -12,6 +12,6 @@ namespace BKind.Web.Features.Stories.Contracts
         public DateTime? ToDate { get; set; }
         public int StoryId { get; set; }
         public int MaxStories { get; set; } = 10;
-
+        public bool IncludeTags { get; set; }
     }
 }

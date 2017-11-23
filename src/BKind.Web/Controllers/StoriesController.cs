@@ -84,7 +84,7 @@ namespace BKind.Web.Controllers
         public async Task<IActionResult> Read(int id)
         {
             var user = await GetLoggedUserAsync();
-            var stories = await _mediator.Send(new ListStoriesQuery { StoryId = id, UserWithRoles = user });
+            var stories = await _mediator.Send(new ListStoriesQuery { StoryId = id, UserWithRoles = user, IncludeTags = true});
 
             if (stories == null || !stories.Any()) return NotFound();
 

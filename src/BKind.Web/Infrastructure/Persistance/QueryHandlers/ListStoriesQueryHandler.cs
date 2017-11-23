@@ -20,7 +20,7 @@ namespace BKind.Web.Infrastructure.Persistance.QueryHandlers
 
         public async Task<List<StoryProjection>> Handle(ListStoriesQuery message)
         {
-            IQueryable<Story> query = EntityFrameworkQueryableExtensions.AsNoTracking<Story>(_db.Set<Story>());
+            IQueryable<Story> query = _db.Set<Story>().AsNoTracking();
 
             // admin can see everything
             // reviewer can see everything
@@ -55,7 +55,8 @@ namespace BKind.Web.Infrastructure.Persistance.QueryHandlers
             if (message.StoryId > 0)
                 query = query.Where(x => x.Id == message.StoryId);
 
-            return await query.OrderByDescending(story => story.Created)
+
+            var result = await query.OrderByDescending(story => story.Created)
                 .Skip(0).Take(message.MaxStories)
                 .Select(story => new StoryProjection
                 {
@@ -68,6 +69,26 @@ namespace BKind.Web.Infrastructure.Persistance.QueryHandlers
                     ThumbsUp = story.ThumbsUp,
                     Status = story.Status
                 }).ToListAsync();
+
+            if(message.IncludeTags)
+            {
+                var storyIds = result.Select(x => x.Id).ToArray();
+
+                var tags = _db.Set<StoryTags>()
+                    .Where(x => storyIds.Contains(x.StoryId))
+                    .Select(x => new { x.Tag.Title, x.StoryId })
+                    .ToList();
+
+                foreach (var projection in result)
+                {
+                    projection.Tags = tags
+                        .Where(x => x.StoryId == projection.Id)
+                        .Select(x => x.Title)
+                        .ToList(); 
+                }
+            }
+
+            return result;
         }
     }
 }
