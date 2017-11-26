@@ -43,6 +43,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="1.1.0">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="System.ValueTuple" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />

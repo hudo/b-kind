@@ -84,11 +84,13 @@ namespace BKind.Web.Controllers
         public async Task<IActionResult> Read(int id)
         {
             var user = await GetLoggedUserAsync();
-            var stories = await _mediator.Send(new ListStoriesQuery { StoryId = id, UserWithRoles = user });
+            var stories = await _mediator.Send(new ListStoriesQuery { StoryId = id, UserWithRoles = user, IncludeTags = true});
 
             if (stories == null || !stories.Any()) return NotFound();
 
             var model = new ReadStoryViewModel(stories[0], user);
+
+            _mediator.Send(new IncreaseStoryViewCountCommand(stories[0].Id));
 
             if (TempData.ContainsKey(_ErrorKey))
                 model.Errors.Add((string)TempData[_ErrorKey]);
