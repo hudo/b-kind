@@ -40,7 +40,7 @@
 
     </environment>
 </head>
-<body class="@Model.BodyClass d-flex flex-column">
+<body class="@Model.BodyClass">
     @if (Model.Errors.Any())
     {
         <div>
@@ -71,6 +71,12 @@
             </header>
         </div>
     </nav>
+    @*<section class="ra-banner">
+        <h2>
+            Ensign Babyface! <br />
+            Fate protects fools, little children and ships named Enterprise. Well, I'll say this for him - he's sure of himself. and attack the Romulans.
+        </h2>
+    </section>*@
     <main role="main" class="container-fluid">
         @RenderBody()
     </main>

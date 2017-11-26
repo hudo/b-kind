@@ -5877,6 +5877,9 @@ html, body {
   padding: 0;
   height: 100%; }
 
+h2 {
+  font-size: 1.75rem; }
+
 a {
   color: #FF6F15; }
   a:hover {
@@ -5947,23 +5950,40 @@ a {
     padding: 3px 7px;
     border-radius: 0; }
 
-body.secondary nav,
-body.secondary main,
-body.secondary footer {
-  display: flex; }
+body.secondary {
+  display: flex;
+  flex-direction: column;
+  background-image: url("../images/free-happy-wallpapers.jpg");
+  background-repeat: no-repeat;
+  background-position: center 85%;
+  background-size: 100%; }
+  body.secondary nav,
+  body.secondary main,
+  body.secondary footer {
+    display: flex; }
+  body.secondary main {
+    flex: 1; }
 
-body.secondary main {
-  flex: 1; }
-
+/*.ra-banner {
+    height: 500px;
+    background-image: url('../images/free-happy-wallpapers.jpg');
+    background-repeat: no-repeat;
+    background-position: center 85%;
+    background-size: 100%;
+}*/
 aside[role=article] .side-widget h5 {
   text-transform: uppercase;
-  border-bottom-width: 2px;
-  border-bottom-style: solid; }
+  border-bottom: 1px solid #ccc; }
+  aside[role=article] .side-widget h5 span {
+    border-bottom-width: 3px;
+    border-bottom-style: solid;
+    margin-bottom: -1px;
+    display: table; }
 
-aside[role=article] .side-widget.news h5 {
+aside[role=article] .side-widget.news h5 span {
   border-bottom-color: #8ABF51; }
 
-aside[role=article] .side-widget.tags h5 {
+aside[role=article] .side-widget.tags h5 span {
   border-bottom-color: #60adf8; }
 
 footer[role=main] {

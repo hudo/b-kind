@@ -14,6 +14,11 @@ html, body {
     height: 100%;
 }
 
+h2 {
+    font-size: 1.75rem;
+}
+
+
 a {
     color: $link-color;
 
@@ -125,7 +130,15 @@ a {
 
 // Layout
 //...................................
+
 body.secondary {
+    display:flex;
+    flex-direction:column;
+    background-image: url('../images/free-happy-wallpapers.jpg');
+    background-repeat: no-repeat;
+    background-position: center 85%;
+    background-size: 100%;
+
     nav,
     main,
     footer {
@@ -135,23 +148,35 @@ body.secondary {
     main {
         flex: 1;
     }
+
 }
 
-main[role=main] {
-}
+/*.ra-banner {
+    height: 500px;
+    background-image: url('../images/free-happy-wallpapers.jpg');
+    background-repeat: no-repeat;
+    background-position: center 85%;
+    background-size: 100%;
+}*/
 
 aside[role=article] {
     .side-widget h5 {
         text-transform: uppercase;
-        border-bottom-width: 2px;
-        border-bottom-style: solid;
+        border-bottom: 1px solid $gray-medium;
+
+        span {
+            border-bottom-width: 3px;
+            border-bottom-style: solid;
+            margin-bottom: -1px;
+            display: table;
+        }
     }
 
-    .side-widget.news h5 {
+    .side-widget.news h5 span {
         border-bottom-color: $green;
     }
 
-    .side-widget.tags h5 {
+    .side-widget.tags h5 span {
         border-bottom-color: $blue-light-20;
     }
 }
