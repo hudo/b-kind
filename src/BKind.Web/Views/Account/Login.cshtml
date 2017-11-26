@@ -1,18 +1,26 @@
 ﻿@model BKind.Web.Features.Account.Contracts.LoginInputModel
 
-<h2>Login</h2>
+@{
+    Layout = "_OneColumnLayout";
+    Model.BodyClass = "secondary";
+}
 
-<form asp-action="Login" method="post">
-    @Html.AntiForgeryToken()
-    <div class="form-group">
-        <label asp-for="Username"></label>
-        <input asp-for="Username" class="form-control"/>
-        <span asp-validation-for="Username"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <input type="password" asp-for="Password" class="form-control"/>
-        <span asp-validation-for="Password"></span>
-    </div>
-    <button type="submit" class="btn btn-default">Login</button>
-</form>
+<div class="col-sm-6 offset-sm-3"> 
+    <h2>Login</h2>
+
+    <form asp-action="Login" method="post">
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label asp-for="Username"></label>
+            <input asp-for="Username" class="form-control" />
+            <span asp-validation-for="Username"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input type="password" asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password"></span>
+        </div>
+        <button type="submit" class="btn btn-default">Login</button>
+    </form>
+ 
+</div>

@@ -1,6 +1,9 @@
 ﻿@model string
 
-<div>
-    Welcome @Model! <a asp-controller="Account" asp-action="Signout">Signout</a>
-    <a asp-controller="profile" asp-action="index">Profile</a>
-</div>
+<ul class="d-flex flex-row ra-nav-profile">
+    <li>Welcome @Model!</li>
+    <li class="ml-3 btn-group">
+        <a class="btn btn-sm btn-info" asp-controller="Account" asp-action="Signout">Signout</a>
+        <a class="btn btn-sm btn-secondary" asp-controller="Profile" asp-action="index">Profile</a>
+    </li>
+</ul>
