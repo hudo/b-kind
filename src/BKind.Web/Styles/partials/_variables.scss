@@ -1,4 +1,5 @@
 ﻿@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;subset=latin-ext);
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 @import url('https://fonts.googleapis.com/css?family=Special+Elite');
 // COLORS
 
@@ -6,8 +7,27 @@ $gray-dark: #333;
 $gray-medium: #ccc;
 $gray-light: #f7f7f7;
 
-$brand-primary: #1976D2;
+$blue-dark: #001770;
+$blue-light: #0A7BE8;
+$blue-light-10: lighten($blue-light, 10%);
+$blue-light-20: lighten($blue-light, 20%);
 
-$font-base: "Roboto", serif;
+$green: #8ABF51;
+$green-dark-10: #70a23b;
+
+
+$orange: #FF6F15;
+$orange-dark-10: darken($orange, 10%);
+
+$yellow: #e6b800;
+
+$brand-primary: $blue-light;
+
+$font-base: "Montserrat", serif;
 $font-logo: "Special Elite", cursive;
 $font-color: $gray-dark;
+
+$link-color: $orange;
+$link-hover-color: $orange-dark-10;
+
+$box-shadow-default: 0 0 5px 0 rgba(0, 0, 0, 0.2);

@@ -11,33 +11,50 @@ html, body {
     font-size: 1rem;
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 
+a {
+    color: $link-color;
+
+    &:hover {
+        color: $link-hover-color;
+        text-decoration: none;
+    }
+}
 
 // Navigation
 //...................................
 .ra-bg-light {
-    background-color: $brand-primary;
-    opacity: 0.8;
+    background-color: white;
+    box-shadow: $box-shadow-default;
 }
 
-.navbar-brand {
+.navbar-light .navbar-brand {
+    color: $blue-light;
     font-family: $font-logo;
+    font-size: 1.75rem;
+    text-shadow: 1px 1px 2px rgba(150, 150, 150, 1);
+
+    &:hover {
+        color: $blue-light-10;
+    }
 }
 
 .navbar-light.ra-navbar .navbar-nav .active > .nav-link,
 .navbar-light.ra-navbar .navbar-nav .nav-link.active {
-    color: white;
+    color: $font-color;
 }
 
 .navbar-light.ra-navbar .navbar-nav .active > .nav-link,
 .navbar-light.ra-navbar .navbar-nav .nav-link.active,
 .navbar-light.ra-navbar .navbar-nav .nav-link {
-    color: white;
+    color: $font-color;
 }
 
-.navbar-light.ra-navbar .navbar-nav .active {
-    border-bottom: 2px solid white;
+.navbar-light.ra-navbar .navbar-nav li.active a,
+.navbar-light.ra-navbar .navbar-nav li:hover a {
+    border-bottom: 2px solid $font-color;
 }
 
 .nav-link {
@@ -46,7 +63,19 @@ html, body {
 
 .ra-navbar {
     cursor: pointer;
+
+    .ra-nav-profile {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+
+        li {
+            line-height: 30px;
+        }
+    }
 }
+
+
 
 // STORIES
 //...................................
@@ -57,10 +86,29 @@ html, body {
 
 //Widgets
 //...................................
-.tags-widget {
+.info-list,
+.tag-list {
     margin: 0;
     padding: 0;
     list-style: none;
+}
+
+.info-list {
+
+    li + li {
+        margin-top: 1rem;
+    }
+
+    a {
+        color: $font-color;
+
+        &:hover {
+            color: $blue-light;
+        }
+    }
+}
+
+.tag-list {
 
     li {
         float: left;
@@ -70,18 +118,112 @@ html, body {
             font-weight: 500;
             font-size: 13px;
             padding: 3px 7px;
-            border-radius:0;
+            border-radius: 0;
         }
     }
 }
 
 // Layout
 //...................................
-aside[role=main] {
-    h5 {
+body.secondary {
+    nav,
+    main,
+    footer {
+        display: flex;
+    }
+
+    main {
+        flex: 1;
+    }
+}
+
+main[role=main] {
+}
+
+aside[role=article] {
+    .side-widget h5 {
         text-transform: uppercase;
-        border-left: 3px solid red;
-        padding-left: 10px;
+        border-bottom-width: 2px;
+        border-bottom-style: solid;
+    }
+
+    .side-widget.news h5 {
+        border-bottom-color: $green;
+    }
+
+    .side-widget.tags h5 {
+        border-bottom-color: $blue-light-20;
+    }
+}
+
+footer[role=main] {
+    background-color: $blue-dark;
+    color: white;
+    padding: 3rem;
+}
+
+// HOMEPAGE
+//...................................
+.section-title {
+    align-items: center;
+    border-bottom: 3px solid gray;
+    display: flex;
+    justify-content: space-between;
+
+    span {
+        // border-bottom: 2px solid $blue-light-10;
+        display: flex;
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+
+    a {
+        font-size: 14px;
+        line-height: 22px;
+        padding: 0 10px;
+        color: white;
+        background-color: gray;
+        align-self: flex-end;
+
+        &:hover {
+            color: rgba(255,255,255,0.7);
+        }
+    }
+}
+
+.story-group {
+
+    &.orange {
+
+        .section-title {
+            border-bottom: 3px solid $link-color;
+
+            a {
+                background-color: $link-color;
+            }
+        }
+    }
+
+    &.blue {
+
+        .section-title {
+            border-bottom: 3px solid $blue-light-20;
+
+            a {
+                background-color: $blue-light-20;
+            }
+        }
+    }
+
+    &.green {
+
+        .section-title {
+            border-bottom: 3px solid $green;
+
+            a {
+                background-color: $green;
+            }
+        }
     }
 }
 
@@ -89,5 +231,54 @@ aside[role=main] {
 //...................................
 .card {
     border-radius: 0;
-    box-shadow: 0 0 5px 0 rgba(0,0,0,0.2);
+    box-shadow: $box-shadow-default;
+}
+
+.card.card-box {
+    border-radius: 0;
+    border: 0;
+    box-shadow: none;
+}
+
+.btn-outline-info {
+    color: $blue-light-20;
+    background-color: transparent;
+    border-color: $blue-light-20;
+
+    &:hover {
+        color: #fff;
+        background-color: $blue-light-20;
+        border-color: $blue-light-20;
+    }
+}
+
+.btn,
+.btn-sm {
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: $blue-light-20;
+    border-color: $blue-light-20;
+
+    &:hover {
+        color: #fff;
+        background-color: $blue-light-10;
+        border-color: $blue-light-10;
+    }
+}
+
+
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1340px;
+    }
+}
+
+@media (min-width: 1600px) {
+    .container {
+        max-width: 1440px;
+    }
 }
