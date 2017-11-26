@@ -1,0 +1,46 @@
+
+@{
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <section class="row mb-5 mt-5">
+        <main class="col-8">
+            @RenderBody()
+        </main>
+        <aside role="article" class="col-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <form class="form-inline">
+                        <div class="input-group w-100">
+                            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                            <button class="input-group-addon" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <section class="side-widget news mb-3">
+                        <h5 class="mb-3"><span>News</span></h5>
+                        <ul class="info-list">
+                            <li><a href="#">Soft kitty warm kitty little ball of furr!</a></li>
+                            <li><a href="#">Cat fur is the new black</a></li>
+                            <li><a href="#">Poop in a handbag look delicious</a></li>
+                        </ul>
+                    </section>
+                    <hr />
+                    <section class="side-widget tags mb-3 ">
+                        <h5 class="mb-3"><span>Tags</span></h5>
+                        <ul class="tag-list">
+                            <li><a class="btn btn-outline-info" href="#">One</a></li>
+                            <li><a class="btn btn-outline-info" href="#">Two</a></li>
+                            <li><a class="btn btn-outline-info" href="#">Three or Four</a></li>
+                            <li><a class="btn btn-outline-info" href="#">Ten</a></li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </aside>
+    </section>
+</div>
