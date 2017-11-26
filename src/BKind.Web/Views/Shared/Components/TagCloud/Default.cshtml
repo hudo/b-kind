@@ -1,8 +1,8 @@
 ﻿@model System.Collections.Generic.List<System.ValueTuple<string,int>>
 
-<ul>
-@foreach (var t in Model)
+<ul class="tag-list">
+@foreach (var tag in Model)
 {
-    <li>@t</li>
+    <li><a class="btn btn-outline-info" asp-controller="stories" asp-action="tag" asp-route-id="@tag.Item1">@tag.Item1 (@tag.Item2)</a></li>
 }
 </ul>

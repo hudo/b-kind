@@ -98,6 +98,11 @@ namespace BKind.Web.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> Tag(string id)
+        {
+            return View();
+        }
+
         [Authorize]
         public async Task<IActionResult> Publish(int id) => await ChangeStatus(id, Status.Published);
 

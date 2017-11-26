@@ -31,12 +31,7 @@
                     </section>
                     <section class="side-widget tags mt-5 mb-3 ">
                         <h5 class="mb-3"><span>Tags</span></h5>
-                        <ul class="tag-list">
-                            <li><a class="btn btn-outline-info" href="#">One</a></li>
-                            <li><a class="btn btn-outline-info" href="#">Two</a></li>
-                            <li><a class="btn btn-outline-info" href="#">Three or Four</a></li>
-                            <li><a class="btn btn-outline-info" href="#">Ten</a></li>
-                        </ul>
+                        @(await Component.InvokeAsync<TagCloudViewComponent>())
                     </section>
                 </div>
             </div>
