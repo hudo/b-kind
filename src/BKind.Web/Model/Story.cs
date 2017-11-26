@@ -28,6 +28,7 @@ namespace BKind.Web.Model
         public Status Status { get; set; }
         public int ThumbsUp { get; set; }
         public DateTime Deleted { get; set; }
+        public int Views { get; set; }
 
         public IList<StoryVotes> Votes { get; set; }
 

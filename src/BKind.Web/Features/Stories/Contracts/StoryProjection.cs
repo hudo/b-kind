@@ -20,5 +20,6 @@ namespace BKind.Web.Features.Stories.Contracts
         public DateTime Created { get; set; }
         public Status Status { get; set; }
         public List<string> Tags { get; set; }
+        public int Views { get; set; }
     }
 }

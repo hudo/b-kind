@@ -67,6 +67,7 @@ namespace BKind.Web.Infrastructure.Persistance.QueryHandlers
                     AuthorId = story.AuthorId,
                     AuthorName = story.Author.User.FirstName + " " + story.Author.User.LastName,
                     ThumbsUp = story.ThumbsUp,
+                    Views = story.Views,
                     Status = story.Status
                 }).ToListAsync();
 
