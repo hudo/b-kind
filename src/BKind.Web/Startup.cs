@@ -22,20 +22,6 @@ namespace BKind.Web
     {
         public Startup(IConfiguration configuration)
         {
-            //var builder = new ConfigurationBuilder()
-            //    .SetBasePath(env.ContentRootPath)
-            //    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-            //    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange:true);
-
-            //if (env.IsDevelopment())
-            //{
-            //    // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
-                
-            //}
-
-            //builder.AddEnvironmentVariables();
-            //Configuration = builder.Build();
-
             Configuration = configuration;
         }
 
@@ -55,6 +41,8 @@ namespace BKind.Web
 
             services.AddDistributedMemoryCache();
             services.AddSession();
+
+            services.AddLogging();
 
             services.AddAuthentication(Application.AuthScheme).AddCookie(options =>
             {
@@ -101,14 +89,14 @@ namespace BKind.Web
             loggerFactory.AddDebug(LogLevel.Debug);
             loggerFactory.AddProvider(new ConsoleLoggerProvider());
 
-            if (env.IsDevelopment())
-            {
+            //if (env.IsDevelopment())
+            //{
                 app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
+            //}
+            //else
+            //{
+            //    app.UseExceptionHandler("/Home/Error");
+            //}
 
             app.UseAuthentication();
 
@@ -123,15 +111,7 @@ namespace BKind.Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            ConfigureEFLogger();
-
-            Task.Run(() => 
-            { 
-                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-                {
-                    serviceScope.ServiceProvider.GetService<StoriesDbContext>().EnsureDataSeed();
-                }
-            });
+            // ConfigureEFLogger();
         }
 
         private void ConfigureEFLogger()
