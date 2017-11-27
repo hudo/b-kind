@@ -12,9 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using StructureMap;
 using System.IO;
-using System.Linq;
 using BKind.Web.Infrastructure;
-using BKind.Web.Model;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using System.Threading.Tasks;
 
@@ -22,27 +20,26 @@ namespace BKind.Web
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange:true);
+            //var builder = new ConfigurationBuilder()
+            //    .SetBasePath(env.ContentRootPath)
+            //    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+            //    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange:true);
 
-            if (env.IsDevelopment())
-            {
-                // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
+            //if (env.IsDevelopment())
+            //{
+            //    // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
                 
-            }
+            //}
 
-            builder.AddEnvironmentVariables();
-            Configuration = builder.Build();
+            //builder.AddEnvironmentVariables();
+            //Configuration = builder.Build();
 
-            HostingEnvironment = env;
+            Configuration = configuration;
         }
 
-        public IConfigurationRoot Configuration { get; }
-        private IHostingEnvironment HostingEnvironment;
+        public IConfiguration Configuration { get; }
         private IContainer Container;
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
@@ -58,6 +55,11 @@ namespace BKind.Web
 
             services.AddDistributedMemoryCache();
             services.AddSession();
+
+            services.AddAuthentication(Application.AuthScheme).AddCookie(options =>
+            {
+                
+            });
 
             var container = new Container(c =>
             {
@@ -108,20 +110,11 @@ namespace BKind.Web
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseAuthentication();
+
             app.UseStaticFiles();
 
             app.UseSession();
-
-            // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
-
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                AuthenticationScheme = Application.AuthScheme,
-                LoginPath = "/account/login",
-                AccessDeniedPath = "/account/login",
-                AutomaticAuthenticate = true,
-                AutomaticChallenge = true
-            });
 
             app.UseMvc(routes =>
             {
