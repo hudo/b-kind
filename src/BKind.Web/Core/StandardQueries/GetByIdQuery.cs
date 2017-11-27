@@ -5,7 +5,7 @@ using MediatR;
 
 namespace BKind.Web.Core.StandardQueries
 {
-    public class GetByIdQuery<T> : IRequest<T> where T:Entity 
+    public class GetByIdQuery<T> : IRequest<T> where T: Identity 
     {
         public GetByIdQuery(int id, Expression<Func<T, object>> include = null)
         {

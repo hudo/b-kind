@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using BKind.Web.Model;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace BKind.Web.Infrastructure.Persistance

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace BKind.Web.Model
 {
-    public class User : Entity
+    public class User : Identity
     {
         public string Username { get; set; }
         public string FirstName { get; set; }

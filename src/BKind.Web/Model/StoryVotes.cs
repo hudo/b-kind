@@ -2,7 +2,7 @@
 
 namespace BKind.Web.Model
 {
-    public class StoryVotes : Entity
+    public class StoryVotes : Identity
     {
         public int StoryId { get; set; }
         public Story Story { get; set; }

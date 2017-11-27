@@ -1,5 +1,25 @@
-﻿@using BKind.Web.Features.Stories.Contracts
-@using BKind.Web.Infrastructure.Helpers
+﻿@using BKind.Web.Infrastructure.Helpers
 @model BKind.Web.Features.Stories.Contracts.AddOrUpdateStoryInputModel
 
-@await Component.RenderStories(StoriesDisplayMode.WriteNew)
+<div class="col mb-5">
+    <h2>Share your story:</h2>
+    <form asp-controller="Stories" asp-action="Share" method="post">
+        @Html.AntiForgeryToken()
+        <div class="form-group row">
+            <label>Title:</label>
+            <input type="text" asp-for="StoryTitle" class="form-control" maxlength="70" />
+            <small class="form-text text-muted">Add your story title. Focus on keeping the title under 70 characters.</small>
+        </div>
+        <div class="form-group row">
+            <label>Content:</label>
+            <textarea type="text" asp-for="Content" class="form-control" rows="15"></textarea>
+            <small class="form-text text-muted">Add your story.</small>
+        </div>
+        <div class="form-group row">
+            <label>Tags:</label>
+            <input type="text" class="form-control" asp-for="Tags">
+            <small class="form-text text-muted">Story tags, separated by comma.</small>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Share" />
+    </form>
+</div>

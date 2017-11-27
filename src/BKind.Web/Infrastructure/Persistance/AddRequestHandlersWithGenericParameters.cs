@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using BKind.Web.Core.StandardQueries;
 using BKind.Web.Infrastructure.Persistance.StandardHandlers;
 using BKind.Web.Model;
@@ -8,7 +7,7 @@ using StructureMap;
 using StructureMap.Graph;
 using StructureMap.Graph.Scanning;
 
-namespace BKind.Web
+namespace BKind.Web.Infrastructure.Persistance
 {
     public class AddRequestHandlersWithGenericParameters : IRegistrationConvention
     {
@@ -16,9 +15,14 @@ namespace BKind.Web
         {
             foreach (var responseType in types.FindTypes(TypeClassification.Concretes))
             {
-                if (typeof(Entity).IsAssignableFrom(responseType))
+                if (typeof(Identity).IsAssignableFrom(responseType))
                 {
                     Register(registry, typeof(GetByIdQuery<>), typeof(GetByIdHandler<>), responseType, responseType);
+                    Register(registry, typeof(GetOneQuery<>), typeof(GetOneHandler<>), responseType, responseType);
+                    Register(registry, typeof(GetAllQuery<>), typeof(GetAllHandler<>), responseType, typeof(PagedList<>).MakeGenericType(responseType));
+                }
+                else if (typeof(Entity).IsAssignableFrom(responseType))
+                {
                     Register(registry, typeof(GetOneQuery<>), typeof(GetOneHandler<>), responseType, responseType);
                     Register(registry, typeof(GetAllQuery<>), typeof(GetAllHandler<>), responseType, typeof(PagedList<>).MakeGenericType(responseType));
                 }

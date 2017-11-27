@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BKind.Web.Infrastructure.Persistance.StandardHandlers
 {
-    public class GetByIdHandler<T> : IAsyncRequestHandler<GetByIdQuery<T>, T> where T:Entity 
+    public class GetByIdHandler<T> : IAsyncRequestHandler<GetByIdQuery<T>, T> where T:Identity 
     {
         private readonly DbContext _db;
 

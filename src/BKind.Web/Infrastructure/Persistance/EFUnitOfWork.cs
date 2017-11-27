@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using BKind.Web.Core;
-using BKind.Web.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -18,19 +17,19 @@ namespace BKind.Web.Infrastructure.Persistance
             _db = db;
         }
 
-        public void Add<T>(T entity) where T:Entity
+        public void Add<T>(T entity) where T : class
         {
             _db.Set<T>().Add(entity);
         }
 
-        public void Update<T>(T entity) where T : Entity
+        public void Update<T>(T entity) where T : class
         {
             AttachIfNeeded(entity);
 
             _db.Entry(entity).State = EntityState.Modified;
         }
 
-        public void Delete<T>(T entity) where T : Entity
+        public void Delete<T>(T entity) where T : class
         {
             AttachIfNeeded(entity);
 
@@ -57,7 +56,7 @@ namespace BKind.Web.Infrastructure.Persistance
             }
         }
 
-        private void AttachIfNeeded<T>(T entity) where T:Entity
+        private void AttachIfNeeded<T>(T entity) where T: class
         {
             if (_db.Entry(entity).State == EntityState.Detached)
                 _db.Set<T>().Attach(entity);

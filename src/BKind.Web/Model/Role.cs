@@ -2,7 +2,7 @@
 
 namespace BKind.Web.Model
 {
-    public abstract class Role : Entity
+    public abstract class Role : Identity
     {
         public abstract string Name { get; }
 

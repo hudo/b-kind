@@ -98,12 +98,6 @@ namespace BKind.Web
 
             app.UseAuthentication();
 
-            //var cookiePolicyOptions = new CookiePolicyOptions
-            //{
-            //    MinimumSameSitePolicy = SameSiteMode.Strict,
-            //};
-            //app.UseCookiePolicy(cookiePolicyOptions);
-
             app.UseStaticFiles();
 
             app.UseSession();

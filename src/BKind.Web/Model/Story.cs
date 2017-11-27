@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BKind.Web.Model
 {
-    public class Story : Entity
+    public class Story : Identity
     {
         public Story() { }
 

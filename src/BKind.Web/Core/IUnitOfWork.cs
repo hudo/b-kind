@@ -7,9 +7,9 @@ namespace BKind.Web.Core
 
     public interface IUnitOfWork
     {
-        void Add<T>(T entity) where T:Entity;
-        void Update<T>(T entity) where T : Entity;
-        void Delete<T>(T entity) where T:Entity;
+        void Add<T>(T entity) where T : class;
+        void Update<T>(T entity) where T : class;
+        void Delete<T>(T entity) where T : class;
 
         Task Commit();
     }

@@ -43,7 +43,11 @@ namespace BKind.Web.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var model = new EditStoryInputModel();
+
             model.Story = await _mediator.Send(new GetByIdQuery<Story>(id));
+
+            var tags = await _mediator.Send(new GetAllQuery<Tag>(tag => tag.StoryTags.Any(st => st.StoryId == model.Story.Id)));
+            model.Tags = string.Join(',', tags.Select(x => x.Title));
 
             var user = await GetLoggedUserAsync();
 
