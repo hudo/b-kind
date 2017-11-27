@@ -15,6 +15,7 @@ using System.IO;
 using BKind.Web.Infrastructure;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BKind.Web
 {
@@ -44,10 +45,7 @@ namespace BKind.Web
 
             services.AddLogging();
 
-            services.AddAuthentication(Application.AuthScheme).AddCookie(options =>
-            {
-                
-            });
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 
             var container = new Container(c =>
             {
@@ -99,6 +97,12 @@ namespace BKind.Web
             //}
 
             app.UseAuthentication();
+
+            //var cookiePolicyOptions = new CookiePolicyOptions
+            //{
+            //    MinimumSameSitePolicy = SameSiteMode.Strict,
+            //};
+            //app.UseCookiePolicy(cookiePolicyOptions);
 
             app.UseStaticFiles();
 

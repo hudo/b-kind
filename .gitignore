@@ -10,7 +10,7 @@
 
 src/bkind.web/wwwroot/lib/
 
-appsettings.release.json
+appsettings.Production.json
 
 
 # User-specific files (MonoDevelop/Xamarin Studio)

@@ -6,6 +6,8 @@ using BKind.Web.Core;
 using BKind.Web.Features.Account.Contracts;
 using BKind.Web.Infrastructure.Helpers;
 using MediatR;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 
 namespace BKind.Web.Features.Account.Domain
@@ -36,7 +38,7 @@ namespace BKind.Web.Features.Account.Domain
                 foreach (var role in user.Result.Roles)
                     claims.Add(new Claim(ClaimTypes.Role, role.Name));
 
-                await _httpContext.HttpContext.Authentication.SignInAsync(Application.AuthScheme,
+                await _httpContext.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                     new ClaimsPrincipal(new ClaimsIdentity(claims, "form")));
 
                 try

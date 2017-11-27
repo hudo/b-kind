@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
-using BKind.Web.Core;
 using BKind.Web.Features.Account.Contracts;
 using MediatR;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BKind.Web.Controllers.Account
@@ -50,7 +51,7 @@ namespace BKind.Web.Controllers.Account
 
         public async Task<IActionResult> Signout()
         {
-            await HttpContext.Authentication.SignOutAsync(Application.AuthScheme);
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return Redirect("/home/index");
         }
     }
