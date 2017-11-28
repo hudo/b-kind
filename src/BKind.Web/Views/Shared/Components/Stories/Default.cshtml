@@ -1,4 +1,5 @@
-﻿@model BKind.Web.Features.Stories.Contracts.StoryListViewModel
+﻿@using BKind.Web.Infrastructure.Helpers
+@model BKind.Web.Features.Stories.Contracts.StoryListViewModel
 
 @foreach (var story in Model.Stories)
 {
@@ -8,7 +9,7 @@
                 <h2 class="card-title">@story.Title</h2>
                 <h6 class="card-subtitle mb-2 text-muted">@story.Status.ToString()</h6>
                 <p class="card-text">
-                    @story.Content.Substring(0,300)...
+                    @story.Content.Shorten(500)
                 </p>
                 <div class="panel-footer">
                     Date: @story.Created.ToString("dd/MM/yyyy"), Author: John Snow<br />
