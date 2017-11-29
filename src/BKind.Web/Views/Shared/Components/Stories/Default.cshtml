@@ -3,16 +3,15 @@
 
 @foreach (var story in Model.Stories)
 {
-    <div class="col mb-5">
+    <div class="col mb-5 ra-story">
         <div class="card card-box">
             <div class="card-body">
-                <h2 class="card-title">@story.Title</h2>
-                <h6 class="card-subtitle mb-2 text-muted">@story.Status.ToString()</h6>
+                <h2 class="card-title"><a asp-controller="Stories" asp-action="Read" asp-route-id="@story.Id">@story.Title</a></h2>
+                <h6 class="card-subtitle mb-4 text-muted">by John Snow on @story.Created.ToString("dd/MM/yyyy") [@story.Status.ToString()]</h6>
                 <p class="card-text">
-                    @story.Content.Shorten(500)
+                    @story.Content.Shorten(300)
                 </p>
                 <div class="panel-footer">
-                    Date: @story.Created.ToString("dd/MM/yyyy"), Author: John Snow<br />
                     @await Component.InvokeAsync("StoryButtons", new { story = story, userWithRoles = Model.UserWithRoles })
                 </div>
             </div>

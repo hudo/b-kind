@@ -15,7 +15,7 @@ namespace BKind.Web.ViewModels
         public string Title
         {
             get => _title;
-            set => _title = $"{value} | B Kind";
+            set => _title = $"{value} | RippleAct";
         }
 
         public string BodyClass { get; set; }

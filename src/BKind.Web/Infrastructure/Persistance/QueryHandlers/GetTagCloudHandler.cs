@@ -22,7 +22,7 @@ namespace BKind.Web.Infrastructure.Persistance.QueryHandlers
             // ef does not support projections to DTO and GROUP BY, so lets just pull everything
             // into memory, there will not be many tags probably
 
-            var storyTags = await _db.Set<StoryTags>().Include(x => x.Tag).ToListAsync();
+            var storyTags = await _db.Set<StoryTags>().AsNoTracking().Include(x => x.Tag).ToListAsync();
 
             var tagCloud = storyTags
                 .GroupBy(x => x.TagId)

@@ -68,8 +68,8 @@ namespace BKind.Web
                 c.For<TextWriter>().Use(Console.Out);
                 c.For<IMediator>().Use<Mediator>();
 
-                c.For<IUnitOfWork>().Use<EfUnitOfWork>().ContainerScoped();
-                c.For<DbContext>().Use<StoriesDbContext>().ContainerScoped();
+                c.For<IUnitOfWork>().Use<EfUnitOfWork>();
+                c.For<DbContext>().Use<StoriesDbContext>();
 
                 c.For<IHttpContextAccessor>().Use<HttpContextAccessor>().Singleton();
             });

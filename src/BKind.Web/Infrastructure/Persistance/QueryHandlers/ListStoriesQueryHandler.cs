@@ -76,6 +76,7 @@ namespace BKind.Web.Infrastructure.Persistance.QueryHandlers
                 var storyIds = result.Select(x => x.Id).ToArray();
 
                 var tags = _db.Set<StoryTags>()
+                    .AsNoTracking()
                     .Where(x => storyIds.Contains(x.StoryId))
                     .Select(x => new { x.Tag.Title, x.StoryId })
                     .ToList();

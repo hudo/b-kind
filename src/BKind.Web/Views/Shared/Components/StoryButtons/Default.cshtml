@@ -1,21 +1,21 @@
 ﻿@using BKind.Web.Features.Stories.Contracts
 @model BKind.Web.Features.Stories.Contracts.StoryButtonsViewModel
 
-<div>
+<div class="ra-actions">
    @if(Model.CanVote)
    {
-       <a asp-controller="Stories" asp-action="ThumbsUp" asp-route-id="@Model.StoryId">Vote</a>
+       <a class="btn btn-sm btn-green" asp-controller="Stories" asp-action="ThumbsUp" asp-route-id="@Model.StoryId">Vote</a>
    }
    @if(Model.CanUnpublish)
    {
-       <a asp-controller="Stories" asp-action="Unpublish" asp-route-id="@Model.StoryId">Unpublish</a>
+       <a class="btn btn-sm btn-tomato" asp-controller="Stories" asp-action="Unpublish" asp-route-id="@Model.StoryId">Unpublish</a>
    }
    @if(Model.CanEdit)
    {
-       <a asp-controller="Stories" asp-action="Edit" asp-route-id="@Model.StoryId">Edit</a>
+       <a class="btn btn-sm btn-gray" asp-controller="Stories" asp-action="Edit" asp-route-id="@Model.StoryId">Edit</a>
    }
    @if (Model.CanPublish)
    {
-       <a asp-controller="Stories" asp-action="Publish" asp-route-id="@Model.StoryId">Publish</a>
+       <a  class="btn btn-sm btn-blue"asp-controller="Stories" asp-action="Publish" asp-route-id="@Model.StoryId">Publish</a>
    }
 </div>

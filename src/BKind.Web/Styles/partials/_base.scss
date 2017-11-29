@@ -18,6 +18,9 @@ h2 {
     font-size: 1.75rem;
 }
 
+h6 {
+    font-size: 14px;
+}
 
 a {
     color: $link-color;
@@ -25,6 +28,16 @@ a {
     &:hover {
         color: $link-hover-color;
         text-decoration: none;
+    }
+}
+
+.card-text a {
+    color: $font-color;
+    border-bottom: 1px solid $link-color;
+
+    &:hover {
+        border-bottom: 0;
+        color: $link-color;
     }
 }
 
@@ -128,12 +141,62 @@ a {
     }
 }
 
+
+.ra-actions {
+
+
+
+    a {
+        font-size: 24px;
+        display: inline-block;
+
+        + a {
+            margin-left: 0.5rem;
+        }
+
+        &.btn-sm {
+            color: white;
+            font-size: 12px;
+        }
+
+        &.btn-green {
+            background-color: $green;
+
+            &:hover {
+                background-color: darken($green, 10%);
+            }
+        }
+
+        &.btn-tomato {
+            background-color: tomato;
+
+            &:hover {
+                background-color: darken(tomato, 10%);
+            }
+        }
+
+        &.btn-gray {
+            background-color: $gray-medium;
+
+            &:hover {
+                background-color: darken($gray-medium, 10%);
+            }
+        }
+
+        &.btn-blue {
+            background-color: $blue-light-20;
+
+            &:hover {
+                background-color: darken($blue-light-20, 10%);
+            }
+        }
+    }
+}
 // Layout
 //...................................
-
 body.secondary {
-    display:flex;
-    flex-direction:column;
+    display: flex;
+    flex-direction: column;
     background-image: url('../images/free-happy-wallpapers.jpg');
     background-repeat: no-repeat;
     background-position: center 85%;
@@ -148,7 +211,6 @@ body.secondary {
     main {
         flex: 1;
     }
-
 }
 
 /*.ra-banner {
@@ -227,6 +289,16 @@ footer[role=main] {
                 background-color: $link-color;
             }
         }
+
+        .ra-story {
+            h2 a {
+                color: $link-hover-color;
+
+                &:hover {
+                    border-bottom: 1px solid $link-hover-color;
+                }
+            }
+        }
     }
 
     &.blue {
@@ -238,6 +310,17 @@ footer[role=main] {
                 background-color: $blue-light-20;
             }
         }
+
+
+        .ra-story {
+            h2 a {
+                color: $blue-light-20;
+
+                &:hover {
+                    border-bottom: 1px solid $blue-light-20;
+                }
+            }
+        }
     }
 
     &.green {
@@ -247,6 +330,16 @@ footer[role=main] {
 
             a {
                 background-color: $green;
+            }
+        }
+
+        .ra-story {
+            h2 a {
+                color: $green;
+
+                &:hover {
+                    border-bottom: 1px solid $green;
+                }
             }
         }
     }
@@ -305,5 +398,37 @@ footer[role=main] {
 @media (min-width: 1600px) {
     .container {
         max-width: 1440px;
+    }
+}
+
+
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-box-shadow: 0 0 0 0 rgba(0,0,0, 0.4);
+    }
+
+    70% {
+        -webkit-box-shadow: 0 0 0 10px rgba(0,0,0, 0);
+    }
+
+    100% {
+        -webkit-box-shadow: 0 0 0 0 rgba(0,0,0, 0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        -moz-box-shadow: 0 0 0 0 rgba(0,0,0, 0.4);
+        box-shadow: 0 0 0 0 rgba(0,0,0, 0.4);
+    }
+
+    70% {
+        -moz-box-shadow: 0 0 0 10px rgba(0,0,0, 0);
+        box-shadow: 0 0 0 10px rgba(0,0,0, 0);
+    }
+
+    100% {
+        -moz-box-shadow: 0 0 0 0 rgba(0,0,0, 0);
+        box-shadow: 0 0 0 0 rgba(0,0,0, 0);
     }
 }
