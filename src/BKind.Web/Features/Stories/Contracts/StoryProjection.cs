@@ -21,5 +21,10 @@ namespace BKind.Web.Features.Stories.Contracts
         public Status Status { get; set; }
         public List<string> Tags { get; set; }
         public int Views { get; set; }
+
+        public string FormattedStatus
+        {
+            get { return Status != Status.Published ? $"[{Status.ToString()}]" : ""; }
+        }
     }
 }

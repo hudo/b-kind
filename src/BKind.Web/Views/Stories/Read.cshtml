@@ -4,6 +4,15 @@
 <div>
     @Model.Story.Content
 </div>
+<div>
+    Tags: @string.Join(", ", Model.Story.Tags)
+</div>
+<div>
+    Author: @Model.Story.AuthorName
+</div>
+<div>
+    Votes: @Model.Story.ThumbsUp
+</div>
 `<div>
     @await Component.InvokeAsync("StoryButtons", new { story = Model.Story, userWithRoles = Model.LoggedUser })
 </div>

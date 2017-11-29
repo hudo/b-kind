@@ -39,5 +39,13 @@ namespace BKind.Web.Infrastructure.Helpers
 
             return source.Substring(0, wordBreak) + (wasCut ? "..." : "");
         }
+
+        public static int ReadTime(this string story)
+        {
+            if (string.IsNullOrEmpty(story)) return 0;
+
+            return story.Split(' ').Length / 250 + 1;
+
+        }
     }
 }

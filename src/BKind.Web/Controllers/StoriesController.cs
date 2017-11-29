@@ -94,7 +94,7 @@ namespace BKind.Web.Controllers
 
             var model = new ReadStoryViewModel(stories[0], user);
 
-            _mediator.Send(new IncreaseStoryViewCountCommand(stories[0].Id));
+            await _mediator.Send(new IncreaseStoryViewCountCommand(stories[0].Id));
 
             if (TempData.ContainsKey(_ErrorKey))
                 model.Errors.Add((string)TempData[_ErrorKey]);

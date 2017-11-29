@@ -7,7 +7,7 @@
         <div class="card card-box">
             <div class="card-body">
                 <h2 class="card-title"><a asp-controller="Stories" asp-action="Read" asp-route-id="@story.Id">@story.Title</a></h2>
-                <h6 class="card-subtitle mb-4 text-muted">by John Snow on @story.Created.ToString("dd/MM/yyyy") [@story.Status.ToString()]</h6>
+                <h6 class="card-subtitle mb-4 text-muted">by John Snow on @story.Created.ToString("dd/MM/yyyy"), @story.FormattedStatus Read time: @story.Content.ReadTime() min</h6>
                 <p class="card-text">
                     @story.Content.Shorten(300)
                 </p>
