@@ -65,7 +65,7 @@ namespace BKind.Web.Infrastructure.Persistance.QueryHandlers
                     Content = story.Content,
                     Created = story.Created,
                     AuthorId = story.AuthorId,
-                    AuthorName = story.Author.User.FirstName + " " + story.Author.User.LastName,
+                    AuthorName = story.Author.User.Nickname,
                     ThumbsUp = story.ThumbsUp,
                     Views = story.Views,
                     Status = story.Status

@@ -102,7 +102,10 @@ namespace BKind.Web.Infrastructure.Persistance
 
             modelBuilder.Entity<StoryTags>()
                 .HasKey(x => new { x.StoryId, x.TagId });
-                
+
+            modelBuilder.Entity<User>()
+                .Property(x => x.Nickname).IsRequired().HasDefaultValue(string.Empty);
+
         }
     }
 }

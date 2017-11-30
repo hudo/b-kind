@@ -16,6 +16,7 @@ namespace BKind.Web.Controllers
 
         public StoriesController(IMediator mediator) : base(mediator) {}
 
+        [Authorize]
         public ActionResult Share() => View(new AddOrUpdateStoryInputModel());
 
         [Authorize]

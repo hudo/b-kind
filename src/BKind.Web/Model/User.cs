@@ -9,6 +9,7 @@ namespace BKind.Web.Model
         public string Username { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Nickname { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
         public DateTime Registered { get; set; }
         public DateTime? LastLogin { get; set; }

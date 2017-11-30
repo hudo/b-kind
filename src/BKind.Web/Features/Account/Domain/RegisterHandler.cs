@@ -37,6 +37,7 @@ namespace BKind.Web.Features.Account.Domain
                 var user = new User
                 {
                     Username = message.Username,
+                    Nickname = message.Nick,
                     FirstName = message.Firstname,
                     LastName = message.Lastname,
                     PasswordHash = StringHelpers.ComputeHash(message.Password, salt),

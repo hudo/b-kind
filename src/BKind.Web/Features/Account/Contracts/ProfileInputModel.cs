@@ -24,6 +24,9 @@ namespace BKind.Web.Features.Account.Contracts
         [Display(Name = "E-mail")]
         public string Username { get; set; }
 
+        [Display(Name = "Nick name")]
+        public string Nick { get; set; }
+
         [Display(Name = "First name")]
         public string Firstname { get; set; }
 
