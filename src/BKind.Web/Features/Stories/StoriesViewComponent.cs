@@ -18,11 +18,8 @@ namespace BKind.Web.Features.Stories
             _mediator = mediator;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(StoriesDisplayMode mode)
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            if (mode == StoriesDisplayMode.WriteNew)
-                return View("Write");
-
             var model = new StoryListViewModel();
 
             if (User.Identity.IsAuthenticated)

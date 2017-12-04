@@ -13,6 +13,10 @@ namespace BKind.Web.Controllers
 
         private User _loggedUser;
 
+        protected const string _ErrorKey = "__errors";
+        protected const string _InfoKey = "__info";
+
+
         protected BkindControllerBase(IMediator mediator)
         {
             _mediator = mediator;

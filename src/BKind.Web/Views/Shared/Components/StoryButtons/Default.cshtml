@@ -8,14 +8,14 @@
    }
    @if(Model.CanUnpublish)
    {
-       <a class="btn btn-sm btn-tomato" asp-controller="Stories" asp-action="Unpublish" asp-route-id="@Model.StoryId">Unpublish</a>
+       <a class="btn btn-sm btn-tomato" asp-area="Editor" asp-controller="Story" asp-action="Unpublish" asp-route-id="@Model.StoryId">Unpublish</a>
    }
    @if(Model.CanEdit)
    {
-       <a class="btn btn-sm btn-gray" asp-controller="Stories" asp-action="Edit" asp-route-id="@Model.StoryId">Edit</a>
+       <a class="btn btn-sm btn-gray" asp-area="Editor" asp-controller="Story" asp-action="Edit" asp-route-id="@Model.StoryId">Edit</a>
    }
    @if (Model.CanPublish)
    {
-       <a  class="btn btn-sm btn-blue"asp-controller="Stories" asp-action="Publish" asp-route-id="@Model.StoryId">Publish</a>
+       <a  class="btn btn-sm btn-blue" asp-area="Editor" asp-controller="Story" asp-action="Publish" asp-route-id="@Model.StoryId">Publish</a>
    }
 </div>

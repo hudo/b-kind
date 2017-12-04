@@ -20,7 +20,6 @@ namespace BKind.Web.Controllers
             var model = new HomePageViewModel
             {
                 Title = "Welcome to Be Kind",
-                DisplayMode = StoriesDisplayMode.FeaturedList,
                 CanWriteStory = User.Identity.IsAuthenticated
             };
 

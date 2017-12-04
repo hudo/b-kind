@@ -105,11 +105,14 @@ namespace BKind.Web
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+                    name: "areas",
+                    template: "{area:exists}/{controller=home}/{action=index}/{id?}"
+                );
 
-            // ConfigureEFLogger();
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=home}/{action=index}/{id?}");
+            });
         }
 
         private void ConfigureEFLogger()
