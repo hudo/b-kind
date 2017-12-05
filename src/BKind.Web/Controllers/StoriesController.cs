@@ -1,8 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
-using BKind.Web.Core.StandardQueries;
 using BKind.Web.Features.Stories.Contracts;
-using BKind.Web.Model;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

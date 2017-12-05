@@ -2,8 +2,10 @@
 using BKind.Web.Core;
 using BKind.Web.Core.StandardQueries;
 using BKind.Web.Model;
+using BKind.Web.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace BKind.Web.Controllers
 {
@@ -42,6 +44,17 @@ namespace BKind.Web.Controllers
             _loggedUser = user;
 
             return user;
+        }
+
+        public override void OnActionExecuted(ActionExecutedContext context)
+        {
+            var model = (context.Result as ViewResult)?.Model as ViewModelBase;
+
+            if (model != null)
+            {
+                model.Title = "Welcome to B-Kind!";
+                model.Description = "SEO stuff";
+            }
         }
     }
 }

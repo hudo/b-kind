@@ -55,9 +55,12 @@ namespace BKind.Web.Infrastructure.Persistance.QueryHandlers
             if (message.StoryId > 0)
                 query = query.Where(x => x.Id == message.StoryId);
 
+            query = message.Paging.Ascending 
+                ? query.OrderBy(message.Paging.OrderBy) 
+                : query.OrderByDescending(message.Paging.OrderBy);
 
-            var result = await query.OrderByDescending(story => story.Created)
-                .Skip(0).Take(message.MaxStories)
+            var result = await query.Skip((message.Paging.Page - 1) * message.Paging.PageSize)
+                .Take(message.Paging.PageSize)
                 .Select(story => new StoryProjection
                 {
                     Id = story.Id,
@@ -67,6 +70,7 @@ namespace BKind.Web.Infrastructure.Persistance.QueryHandlers
                     AuthorId = story.AuthorId,
                     AuthorName = story.Author.User.Nickname,
                     ThumbsUp = story.ThumbsUp,
+                    Slug = story.Slug,
                     Views = story.Views,
                     Status = story.Status
                 }).ToListAsync();

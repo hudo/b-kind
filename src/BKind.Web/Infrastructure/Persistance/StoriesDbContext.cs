@@ -106,6 +106,8 @@ namespace BKind.Web.Infrastructure.Persistance
             modelBuilder.Entity<User>()
                 .Property(x => x.Nickname).IsRequired().HasDefaultValue(string.Empty);
 
+            modelBuilder.Entity<Story>()
+                .HasIndex(x => x.Slug).IsUnique();
         }
     }
 }

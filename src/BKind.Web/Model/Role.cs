@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using BKind.Web.Infrastructure.Helpers;
 
 namespace BKind.Web.Model
 {
@@ -31,7 +33,10 @@ namespace BKind.Web.Model
 
         public Story CreateNewStory(string title, string content)
         {
-            return new Story(title, content, this.Id, Status.Draft);
+            var origin = new DateTime(1970, 1, 1, 1, 1, 1, DateTimeKind.Utc);
+            var diff = (DateTime.Now - origin).TotalSeconds;
+            var slug = StringHelpers.GenerateUniqueRandomToken(diff);
+            return new Story(title, content, slug, this.Id, Status.Draft);
         }
     }
 

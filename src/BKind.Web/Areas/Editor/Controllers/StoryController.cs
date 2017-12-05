@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using BKind.Web.Controllers;
 using BKind.Web.Core.StandardQueries;
@@ -13,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BKind.Web.Areas.Editor.Controllers
 {
     [Authorize]
+    [Area("Editor")]
     public class StoryController : BkindControllerBase
     {
         public StoryController(IMediator mediator) : base(mediator)

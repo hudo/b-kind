@@ -1,18 +1,12 @@
-﻿@using BKind.Web.Infrastructure.Helpers
-@using Microsoft.AspNetCore.Mvc.Rendering
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
 @model HomePageViewModel
 
 @{
 
     Layout = "_TwoColumnLayout";
-
     Model.BodyClass = "home";
 }
 
-@*@if (Model.CanWriteStory)
-    {
-        @await Component.RenderStories(StoriesDisplayMode.WriteNew)
-    }*@
 <div class="card mb-4">
     <div class="card-body">
         <section role="group" class="story-group orange">
@@ -21,7 +15,7 @@
                 <a href="#">more <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
             </div>
             <div class="row flex-column ra-stories">
-                
+                @Html.Partial("StoryFeed", Model.Latest)
             </div>
         </section>
         <section role="group" class="story-group blue">
@@ -30,7 +24,7 @@
                 <a href="#">more <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
             </div>
             <div class="row flex-column ra-stories">
-                
+                @Html.Partial("StoryFeed", Model.Best)
             </div>
         </section>
     </div>

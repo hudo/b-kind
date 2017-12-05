@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
@@ -18,6 +20,19 @@ namespace BKind.Web.Infrastructure.Helpers
                 numBytesRequested: 256 / 8));
 
             return hashed;
+        }
+
+        public static string GenerateUniqueRandomToken(double uniqueId)
+        {
+            const string availableChars = "0123456789abcdefghijklmnopqrstuvwxyz";
+            using (var generator = new RNGCryptoServiceProvider())
+            {
+                var bytes = new byte[8];
+                generator.GetBytes(bytes);
+                var chars = bytes.Select(b => availableChars[b % availableChars.Length]);
+                var token = new string(chars.ToArray());
+                return uniqueId + token;
+            }
         }
 
         public static string Shorten(this string source, int length)
@@ -40,12 +55,13 @@ namespace BKind.Web.Infrastructure.Helpers
             return source.Substring(0, wordBreak) + (wasCut ? "..." : "");
         }
 
-        public static int ReadTime(this string story)
+        public static string ReadTime(this string story)
         {
-            if (string.IsNullOrEmpty(story)) return 0;
+            if (string.IsNullOrEmpty(story)) return "0";
 
-            return story.Split(' ').Length / 250 + 1;
+            var wordCount = story.Split(' ').Length;
 
+            return wordCount < 50 ? " < 1" : (wordCount / 250 + 1).ToString();
         }
     }
 }
