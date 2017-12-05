@@ -20,16 +20,18 @@ namespace BKind.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var user = await GetLoggedUserAsync();
+
             var model = new HomePageViewModel
             {
                 Title = "Welcome to Be Kind",
                 CanWriteStory = User.Identity.IsAuthenticated,
                 Latest = new StoryListModel(
-                    await _mediator.Send(new ListStoriesQuery { Paging = new PagedOptions<Story>(orderBy: s => s.Modified, ascending: false)}),
-                    await GetLoggedUserAsync()),
+                    await _mediator.Send(new ListStoriesQuery { UserWithRoles = user, Paging = new PagedOptions<Story>(orderBy: s => s.Modified, ascending: false)}),
+                    user),
                 Best = new StoryListModel(
-                    await _mediator.Send(new ListStoriesQuery { Paging = new PagedOptions<Story>(orderBy: s => s.Views, ascending: false)}),
-                    await GetLoggedUserAsync())
+                    await _mediator.Send(new ListStoriesQuery { UserWithRoles = user, Paging = new PagedOptions<Story>(orderBy: s => s.Views, ascending: false)}),
+                    user)
             };
 
             return View(model);

@@ -84,11 +84,11 @@ namespace BKind.Web.Areas.Editor.Controllers
             return RedirectToAction("Edit", new { id = response.Result.Id });
         }
 
-        public async Task<IActionResult> Publish(int id) => await ChangeStatus(id, Status.Published);
+        public async Task<IActionResult> Publish(string id) => await ChangeStatus(id, Status.Published);
 
-        public async Task<IActionResult> Unpublish(int id) => await ChangeStatus(id, Status.Draft);
+        public async Task<IActionResult> Unpublish(string id) => await ChangeStatus(id, Status.Draft);
 
-        private async Task<IActionResult> ChangeStatus(int id, Status newStatus)
+        private async Task<IActionResult> ChangeStatus(string id, Status newStatus)
         {
             var user = await GetLoggedUserAsync();
             var response = await _mediator.Send(new ChangeStatusCommand(id, user, newStatus));
@@ -97,8 +97,8 @@ namespace BKind.Web.Areas.Editor.Controllers
             {
                 TempData[_ErrorKey] = string.Join(", ", response.Errors.Select(x => x.Message));
             }
-
-            return RedirectToAction("Read", new { id });
+            
+            return RedirectToAction("Read", "Stories", new { id, area = "" });
         }
     }
 }

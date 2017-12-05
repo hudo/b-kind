@@ -17,7 +17,7 @@ namespace BKind.Web.Features.Stories.Contracts
         public User UserWithRoles { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
-        public int StoryId { get; set; }
+        public string StorySlug { get; set; }
         public bool IncludeTags { get; set; }
         public PagedOptions<Story> Paging { get; set; }
     }

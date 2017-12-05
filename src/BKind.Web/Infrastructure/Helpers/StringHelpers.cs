@@ -22,7 +22,7 @@ namespace BKind.Web.Infrastructure.Helpers
             return hashed;
         }
 
-        public static string GenerateUniqueRandomToken(double uniqueId)
+        public static string GenerateUniqueRandomToken()
         {
             const string availableChars = "0123456789abcdefghijklmnopqrstuvwxyz";
             using (var generator = new RNGCryptoServiceProvider())
@@ -31,7 +31,7 @@ namespace BKind.Web.Infrastructure.Helpers
                 generator.GetBytes(bytes);
                 var chars = bytes.Select(b => availableChars[b % availableChars.Length]);
                 var token = new string(chars.ToArray());
-                return uniqueId + token;
+                return token;
             }
         }
 

@@ -8,9 +8,8 @@
         <div class="card-body">
                 @if (!string.IsNullOrEmpty(story.Title))
                 {
-                    <h2 class="card-title"><a asp-controller="Stories" asp-action="Read" asp-route-id="@story.Slug">@story.Title</a></h2>
+                    <h2 class="card-title"><a asp-controller="stories" asp-action="read" asp-route-id="@story.Slug">@story.Title</a></h2>
                 }
-                @StringHelpers.GenerateUniqueRandomToken(story.Id)
                 <h6 class="card-subtitle mb-4 text-muted">
                     by @story.AuthorName
                     on @story.Created.ToString("dd/MM/yyyy"), @story.FormattedStatus

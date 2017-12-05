@@ -2,7 +2,7 @@ namespace BKind.Web.Features.Stories.Contracts
 {
     public class StoryButtonsViewModel
     {
-        public int StoryId { get; set; }
+        public string Slug { get; set; }
 
         public bool CanVote { get; set; }
 

@@ -52,8 +52,8 @@ namespace BKind.Web.Infrastructure.Persistance.QueryHandlers
             if (message.ToDate.HasValue)
                 query = query.Where(story => story.Created < message.ToDate.Value);
 
-            if (message.StoryId > 0)
-                query = query.Where(x => x.Id == message.StoryId);
+            if (!string.IsNullOrEmpty(message.StorySlug))
+                query = query.Where(x => x.Slug == message.StorySlug.ToLower());
 
             query = message.Paging.Ascending 
                 ? query.OrderBy(message.Paging.OrderBy) 

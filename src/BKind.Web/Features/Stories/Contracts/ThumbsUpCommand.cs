@@ -6,13 +6,13 @@ namespace BKind.Web.Features.Stories.Contracts
 {
     public class ThumbsUpCommand : IRequest<Response>
     {
-        public ThumbsUpCommand(User loggedUser, int storyId)
+        public ThumbsUpCommand(User loggedUser, string slug)
         {
             LoggedUser = loggedUser;
-            StoryId = storyId;
+            Slug = slug;
         }
 
-        public User LoggedUser { get; set; }
-        public int StoryId { get; set; }
+        public User LoggedUser { get; }
+        public string Slug { get; }
     }
 }

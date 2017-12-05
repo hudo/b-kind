@@ -18,7 +18,7 @@ namespace BKind.Web.Features.Stories
             model.CanVote = !model.CanEdit;
             model.CanPublish = (userWithRoles.Is<Reviewer>() || userWithRoles.Is<Administrator>()) && story.Status == Status.Draft;
 
-            model.StoryId = story.Id;
+            model.Slug = story.Slug;
 
             return View(model);
         }

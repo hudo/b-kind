@@ -11,10 +11,10 @@ namespace BKind.Web.Controllers
     {
         public StoriesController(IMediator mediator) : base(mediator) {}
 
-        public async Task<IActionResult> Read(int id)
+        public async Task<IActionResult> Read(string id)
         {
             var user = await GetLoggedUserAsync();
-            var stories = await _mediator.Send(new ListStoriesQuery { StoryId = id, UserWithRoles = user, IncludeTags = true});
+            var stories = await _mediator.Send(new ListStoriesQuery { StorySlug = id, UserWithRoles = user, IncludeTags = true});
 
             if (stories == null || !stories.Any()) return NotFound();
 
@@ -28,13 +28,8 @@ namespace BKind.Web.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Tag(string id)
-        {
-            return View();
-        }
-
         [Authorize]
-        public async Task<IActionResult> ThumbsUp(int id)
+        public async Task<IActionResult> ThumbsUp(string id)
         {
             var user = await GetLoggedUserAsync();
 

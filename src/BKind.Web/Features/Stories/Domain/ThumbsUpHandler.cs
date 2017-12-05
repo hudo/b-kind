@@ -24,19 +24,19 @@ namespace BKind.Web.Features.Stories.Domain
         {
             var response = new Response();
 
-            var story = await _mediator.Send(new GetByIdQuery<Story>(message.StoryId));
+            var story = await _mediator.Send(new GetStoryQuery(message.Slug));
 
             if (story == null)
                 return response.AddError("", "Story not found");
 
-            var storyVote = await _mediator.Send(new GetOneQuery<StoryVotes>(x => x.StoryId == message.StoryId && x.UserId == message.LoggedUser.Id));
+            var storyVote = await _mediator.Send(new GetOneQuery<StoryVotes>(x => x.StoryId == story.Id && x.UserId == message.LoggedUser.Id));
 
             if (storyVote != null)
                 return response.AddError("", "Can't vote twice");
 
             story.ThumbsUp++;
 
-            var vote = new StoryVotes { StoryId = message.StoryId, UserId = message.LoggedUser.Id, Voted = DateTime.Now };
+            var vote = new StoryVotes { StoryId = story.Id, UserId = message.LoggedUser.Id, Voted = DateTime.Now };
 
             _unitOfWork.Update(story);
             _unitOfWork.Add(vote);

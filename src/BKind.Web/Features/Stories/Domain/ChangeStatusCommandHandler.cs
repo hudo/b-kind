@@ -24,7 +24,7 @@ namespace BKind.Web.Features.Stories.Domain
         {
             var response = new Response();
 
-            var story = await _mediator.Send(new GetByIdQuery<Story>(message.StoryId));
+            var story = await _mediator.Send(new GetStoryQuery(message.Slug));
 
             if (story == null) return response.AddError("", "Story not found");
 

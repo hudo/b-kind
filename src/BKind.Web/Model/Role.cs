@@ -33,9 +33,8 @@ namespace BKind.Web.Model
 
         public Story CreateNewStory(string title, string content)
         {
-            var origin = new DateTime(1970, 1, 1, 1, 1, 1, DateTimeKind.Utc);
-            var diff = (DateTime.Now - origin).TotalSeconds;
-            var slug = StringHelpers.GenerateUniqueRandomToken(diff);
+            var slug = StringHelpers.GenerateUniqueRandomToken();
+            
             return new Story(title, content, slug, this.Id, Status.Draft);
         }
     }

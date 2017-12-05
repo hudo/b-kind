@@ -15,6 +15,7 @@ namespace BKind.Web.Infrastructure.Persistance
                 var user = new User()
                 {
                     FirstName = "Admin",
+                    Nickname = "Admin",
                     Username = "admin",
                     PasswordHash = StringHelpers.ComputeHash("12345", "12345"),
                     Roles = new List<Role> { new Administrator() },

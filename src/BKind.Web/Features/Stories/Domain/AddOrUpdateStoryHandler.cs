@@ -60,7 +60,7 @@ namespace BKind.Web.Features.Stories.Domain
             try
             {
                 await _unitOfWork.Commit();
-
+                
                 await UpdateTags(message, story);
 
                 response.Result = story;
@@ -83,6 +83,8 @@ namespace BKind.Web.Features.Stories.Domain
             }
 
             await _unitOfWork.Commit();
+            
+            if(string.IsNullOrEmpty(message.Tags)) return;
 
             var uiTags = message.Tags
                 .Split(',')
