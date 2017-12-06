@@ -59,6 +59,9 @@ namespace BKind.Web.Infrastructure.Persistance.QueryHandlers
                 ? query.OrderBy(message.Paging.OrderBy) 
                 : query.OrderByDescending(message.Paging.OrderBy);
 
+            if (message.Pinned.HasValue)
+                query = query.Where(x => x.Pinned == message.Pinned.Value);
+
             var result = await query.Skip((message.Paging.Page - 1) * message.Paging.PageSize)
                 .Take(message.Paging.PageSize)
                 .Select(story => new StoryProjection
@@ -68,6 +71,7 @@ namespace BKind.Web.Infrastructure.Persistance.QueryHandlers
                     Content = story.Content,
                     Created = story.Created,
                     AuthorId = story.AuthorId,
+                    Pinned = story.Pinned,
                     AuthorName = story.Author.User.Nickname,
                     ThumbsUp = story.ThumbsUp,
                     Slug = story.Slug,

@@ -16,6 +16,7 @@ namespace BKind.Web.Features.Stories.Contracts
         public string Content { get; set; }
         public string Slug { get; set; }
         public int ThumbsUp { get; set; }
+        public bool Pinned { get; set; }
         public string AuthorName { get; set; }
         public int AuthorId { get; set; }
         public DateTime Created { get; set; }

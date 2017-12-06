@@ -18,14 +18,17 @@
                 @Html.Partial("StoryFeed", Model.Latest)
             </div>
         </section>
-        <section role="group" class="story-group blue">
-            <div class="section-title">
-                <span>Most Popular Stories</span>
-                <a href="#">more <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-            </div>
-            <div class="row flex-column ra-stories">
-                @Html.Partial("StoryFeed", Model.Best)
-            </div>
-        </section>
+        @if (Model.Recommended.Stories.Any())
+        {
+            <section role="group" class="story-group blue">
+                <div class="section-title">
+                    <span>Recommended Stories</span>
+                    <a href="#">more <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                </div>
+                <div class="row flex-column ra-stories">
+                    @Html.Partial("StoryFeed", Model.Recommended)
+                </div>
+            </section>
+        }
     </div>
 </div>

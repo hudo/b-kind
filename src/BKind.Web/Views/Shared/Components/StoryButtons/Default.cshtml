@@ -4,18 +4,26 @@
 <div class="ra-actions">
    @if(Model.CanVote)
    {
-       <a class="btn btn-sm btn-green" asp-controller="Stories" asp-action="ThumbsUp" asp-route-id="@Model.Slug">Vote</a>
+      <a class="btn btn-sm btn-green" asp-controller="Stories" asp-action="ThumbsUp" asp-route-id="@Model.Slug">Vote</a>
    }
    @if(Model.CanUnpublish)
    {
-       <a class="btn btn-sm btn-tomato" asp-area="Editor" asp-controller="Story" asp-action="Unpublish" asp-route-id="@Model.Slug">Unpublish</a>
+      <a class="btn btn-sm btn-tomato" asp-area="editor" asp-controller="story" asp-action="unpublish" asp-route-id="@Model.Slug">Unpublish</a>
    }
    @if(Model.CanEdit)
    {
-       <a class="btn btn-sm btn-gray" asp-area="Editor" asp-controller="Story" asp-action="Edit" asp-route-id="@Model.Slug">Edit</a>
+      <a class="btn btn-sm btn-gray" asp-area="editor" asp-controller="story" asp-action="edit" asp-route-id="@Model.Slug">Edit</a>
    }
    @if (Model.CanPublish)
    {
-       <a  class="btn btn-sm btn-blue" asp-area="Editor" asp-controller="Story" asp-action="Publish" asp-route-id="@Model.Slug">Publish</a>
+      <a  class="btn btn-sm btn-blue" asp-area="editor" asp-controller="story" asp-action="publish" asp-route-id="@Model.Slug">Publish</a>
    }
-</div>
+   @if (Model.CanPin)
+   {
+      <a class="btn btn-sm btn-blue" asp-area="editor" asp-controller="story" asp-action="pin" asp-route-id="@Model.Slug">Pin</a>
+   }
+   @if (Model.CanUnpin)
+   {
+      <a class="btn btn-sm btn-blue" asp-area="editor" asp-controller="story" asp-action="pin" asp-route-id="@Model.Slug">Unpin</a>
+   }
+ </div>

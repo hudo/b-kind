@@ -11,6 +11,6 @@ namespace BKind.Web.ViewModels
 
         public bool CanWriteStory { get;set; }
         public StoryListModel Latest { get; set; }
-        public StoryListModel Best { get; set; }
+        public StoryListModel Recommended { get; set; }
     }
 }

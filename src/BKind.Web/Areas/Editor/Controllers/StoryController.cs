@@ -100,5 +100,13 @@ namespace BKind.Web.Areas.Editor.Controllers
             
             return RedirectToAction("Read", "Stories", new { id, area = "" });
         }
+
+        [Authorize]
+        public async Task<IActionResult> Pin(string id)
+        {
+            var user = await GetLoggedUserAsync();
+            await _mediator.Send(new PinStoryCommand(id, user));
+            return Redirect("/");
+        }
     }
 }

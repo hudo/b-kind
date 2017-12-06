@@ -27,10 +27,20 @@ namespace BKind.Web.Controllers
                 Title = "Welcome to Be Kind",
                 CanWriteStory = User.Identity.IsAuthenticated,
                 Latest = new StoryListModel(
-                    await _mediator.Send(new ListStoriesQuery { UserWithRoles = user, Paging = new PagedOptions<Story>(orderBy: s => s.Modified, ascending: false)}),
+                    await _mediator.Send(new ListStoriesQuery
+                    {
+                        UserWithRoles = user, 
+                        Paging = new PagedOptions<Story>(orderBy: s => s.Modified, ascending: false),
+                        Pinned = false
+                    }),
                     user),
-                Best = new StoryListModel(
-                    await _mediator.Send(new ListStoriesQuery { UserWithRoles = user, Paging = new PagedOptions<Story>(orderBy: s => s.Views, ascending: false)}),
+                Recommended = new StoryListModel(
+                    await _mediator.Send(new ListStoriesQuery
+                    {
+                        UserWithRoles = user, 
+                        Paging = new PagedOptions<Story>(orderBy: s => s.Views, ascending: false),
+                        Pinned = true
+                    }),
                     user)
             };
 

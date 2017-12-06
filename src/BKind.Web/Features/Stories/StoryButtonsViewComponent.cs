@@ -18,6 +18,9 @@ namespace BKind.Web.Features.Stories
             model.CanUnpublish = story.Status == Status.Published && (model.CanEdit || userWithRoles.Is<Administrator>() || userWithRoles.Is<Reviewer>());
             model.CanVote = !model.CanEdit;
             model.CanPublish = (userWithRoles.Is<Reviewer>() || userWithRoles.Is<Administrator>()) && story.Status == Status.Draft;
+            
+            model.CanPin = userWithRoles.Is<Administrator>() && !story.Pinned;
+            model.CanUnpin = userWithRoles.Is<Administrator>() && story.Pinned;
 
             model.Slug = story.Slug;
 

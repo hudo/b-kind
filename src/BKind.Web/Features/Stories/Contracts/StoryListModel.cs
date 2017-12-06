@@ -5,13 +5,13 @@ namespace BKind.Web.Features.Stories.Contracts
 {
     public class StoryListModel
     {
-        public StoryListModel(IEnumerable<StoryProjection> stories, User userWithRoles)
+        public StoryListModel(IList<StoryProjection> stories, User userWithRoles)
         {
             Stories = stories;
             UserWithRoles = userWithRoles;
         }
 
-        public IEnumerable<StoryProjection> Stories { get; set; }
-        public User UserWithRoles { get; set; }
+        public IList<StoryProjection> Stories { get; }
+        public User UserWithRoles { get; }
     }
 }

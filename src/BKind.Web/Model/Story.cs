@@ -33,6 +33,8 @@ namespace BKind.Web.Model
         public DateTime Deleted { get; set; }
         public int Views { get; set; }
 
+        public bool Pinned { get; set; }
+
         public IList<StoryVotes> Votes { get; set; }
 
         public IList<StoryTags> StoryTags { get; set; }
