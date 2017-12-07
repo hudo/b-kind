@@ -2,7 +2,9 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using BKind.Web.Core.StandardQueries;
+using BKind.Web.Features.Stories.Commands;
 using BKind.Web.Features.Stories.Contracts;
+using BKind.Web.Features.Stories.Queries;
 using BKind.Web.Model;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -42,7 +44,13 @@ namespace BKind.Web.Controllers
                 Tag = tag
             });
 
-            return View(model);
+            var title = recommended.HasValue
+                ? "recommended"
+                : !string.IsNullOrEmpty(tag)
+                    ? $"by tag '{tag}'"
+                    : "all";
+
+            return View(new StoryListModel(stories, user, $"Browse {title}"));
         }
 
         [Authorize]

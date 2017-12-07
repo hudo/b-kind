@@ -26,4 +26,8 @@
    {
       <a class="btn btn-sm btn-blue" asp-area="editor" asp-controller="story" asp-action="pin" asp-route-id="@Model.Slug">Unpin</a>
    }
+   @if (Model.CanDelete)
+   {
+       <a class="btn btn-sm btn-danger" asp-area="editor" asp-controller="story" asp-action="delete" asp-route-id="@Model.Slug" onclick="return confirm('Are you sure?')">Delete</a> 
+   }
  </div>

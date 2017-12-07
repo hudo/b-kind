@@ -22,6 +22,8 @@ namespace BKind.Web.Features.Stories
             model.CanPin = userWithRoles.Is<Administrator>() && !story.Pinned;
             model.CanUnpin = userWithRoles.Is<Administrator>() && story.Pinned;
 
+            model.CanDelete = userWithRoles.Is<Administrator>();
+
             model.Slug = story.Slug;
 
             return View(model);

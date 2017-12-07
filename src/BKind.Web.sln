@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BKind.Web", "BKind.Web\BKind.Web.csproj", "{1284E157-001E-4D7A-A11B-86BF4BE6FCA4}"
 EndProject
@@ -22,6 +22,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1284E157-001E-4D7A-A11B-86BF4BE6FCA4} = {B0E32E34-D395-4E80-A7BE-DE9683993F38}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9285338B-CBFA-4320-9298-A78B402F7F40}

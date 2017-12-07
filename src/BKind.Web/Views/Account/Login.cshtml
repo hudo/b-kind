@@ -5,22 +5,29 @@
     Model.BodyClass = "secondary";
 }
 
-<div class="col-sm-6 offset-sm-3"> 
+<div class="col-sm-6 offset-sm-3">
     <h2>Login</h2>
 
     <form asp-action="Login" method="post">
-        @Html.AntiForgeryToken()
-        <div class="form-group">
-            <label asp-for="Username"></label>
-            <input asp-for="Username" class="form-control" />
-            <span asp-validation-for="Username"></span>
+        @*@Html.AntiForgeryToken()*@
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label asp-for="Username"></label>
+                    <input asp-for="Username" class="form-control" />
+                    <span asp-validation-for="Username"></span>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label asp-for="Password"></label>
+                    <input type="password" asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password"></span>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-secondary">Login</button>
+            </div>
         </div>
-        <div class="form-group">
-            <label asp-for="Password"></label>
-            <input type="password" asp-for="Password" class="form-control" />
-            <span asp-validation-for="Password"></span>
-        </div>
-        <button type="submit" class="btn btn-default">Login</button>
     </form>
- 
 </div>

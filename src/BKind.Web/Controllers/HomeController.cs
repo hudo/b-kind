@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using BKind.Web.Core.StandardQueries;
 using BKind.Web.Features.Stories.Contracts;
+using BKind.Web.Features.Stories.Queries;
 using BKind.Web.Model;
 using BKind.Web.ViewModels;
 using MediatR;
@@ -30,7 +31,7 @@ namespace BKind.Web.Controllers
                     await _mediator.Send(new ListStoriesQuery
                     {
                         UserWithRoles = user, 
-                        Paging = new PagedOptions<Story>(orderBy: s => s.Modified, ascending: false),
+                        Paging = new PagedOptions<Story>(orderBy: s => s.Modified),
                         Pinned = false
                     }),
                     user),
@@ -38,7 +39,7 @@ namespace BKind.Web.Controllers
                     await _mediator.Send(new ListStoriesQuery
                     {
                         UserWithRoles = user, 
-                        Paging = new PagedOptions<Story>(orderBy: s => s.Views, ascending: false),
+                        Paging = new PagedOptions<Story>(orderBy: s => s.Views),
                         Pinned = true
                     }),
                     user)

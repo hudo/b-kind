@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using BKind.Web.Features.Stories.Contracts;
+using BKind.Web.Features.Stories.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

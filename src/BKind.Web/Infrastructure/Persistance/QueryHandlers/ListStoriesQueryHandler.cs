@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BKind.Web.Features.Stories;
 using BKind.Web.Features.Stories.Contracts;
+using BKind.Web.Features.Stories.Queries;
 using BKind.Web.Model;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -61,6 +61,9 @@ namespace BKind.Web.Infrastructure.Persistance.QueryHandlers
 
             if (message.Pinned.HasValue)
                 query = query.Where(x => x.Pinned == message.Pinned.Value);
+
+            if (!string.IsNullOrEmpty(message.Tag))
+                query = query.Where(x => x.StoryTags.Any(t => t.Tag.Title == message.Tag.ToLower()));
 
             var result = await query.Skip((message.Paging.Page - 1) * message.Paging.PageSize)
                 .Take(message.Paging.PageSize)

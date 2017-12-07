@@ -12,7 +12,7 @@
         <section role="group" class="story-group orange">
             <div class="section-title">
                 <span>Latest Stories</span>
-                <a href="#">more <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                <a asp-controller="stories" asp-action="list">more <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
             </div>
             <div class="row flex-column ra-stories">
                 @Html.Partial("StoryFeed", Model.Latest)
@@ -23,7 +23,7 @@
             <section role="group" class="story-group blue">
                 <div class="section-title">
                     <span>Recommended Stories</span>
-                    <a href="#">more <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                    <a asp-controller="stories" asp-action="list" asp-route-recommended="True">more <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                 </div>
                 <div class="row flex-column ra-stories">
                     @Html.Partial("StoryFeed", Model.Recommended)

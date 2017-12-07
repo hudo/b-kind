@@ -1,7 +1,7 @@
 ﻿using BKind.Web.Model;
 using MediatR;
 
-namespace BKind.Web.Features.Stories.Contracts
+namespace BKind.Web.Features.Stories.Queries
 {
     public class GetStoryQuery : IRequest<Story>
     {

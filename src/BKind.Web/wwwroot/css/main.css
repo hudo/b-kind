@@ -5991,7 +5991,7 @@ body.secondary {
   background-image: url("../images/free-happy-wallpapers.jpg");
   background-repeat: no-repeat;
   background-position: center 85%;
-  background-size: 100%; }
+  background-size: cover; }
   body.secondary nav,
   body.secondary main,
   body.secondary footer {
@@ -6107,6 +6107,22 @@ footer[role=main] {
     color: #fff;
     background-color: #2f94f6;
     border-color: #2f94f6; }
+
+label {
+  font-weight: bold; }
+
+.field-validation-error {
+  background-color: rgba(255, 0, 0, 0.4);
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  color: white;
+  font-size: 12px;
+  display: block;
+  padding: 3px 5px; }
+
+.input-validation-error {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0; }
 
 @media (min-width: 1400px) {
   .container {

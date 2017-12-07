@@ -3,6 +3,6 @@
 <ul class="tag-list">
 @foreach (var tag in Model)
 {
-    <li><a class="btn btn-outline-info" href="#">@tag.Item1 (@tag.Item2)</a></li>
+    <li><a class="btn btn-outline-info" asp-controller="Stories" asp-action="List" asp-route-tag="@tag.Item1">@tag.Item1 (@tag.Item2)</a></li>
 }
 </ul>

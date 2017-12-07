@@ -2,7 +2,7 @@
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using BKind.Web.Features.Stories.Contracts;
+using BKind.Web.Features.Stories.Queries;
 using BKind.Web.Model;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

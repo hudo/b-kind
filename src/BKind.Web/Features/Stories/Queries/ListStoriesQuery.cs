@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using BKind.Web.Core.StandardQueries;
+using BKind.Web.Features.Stories.Contracts;
 using BKind.Web.Model;
 using MediatR;
 
-namespace BKind.Web.Features.Stories.Contracts
+namespace BKind.Web.Features.Stories.Queries
 {
     public class ListStoriesQuery : IRequest<List<StoryProjection>>
     {

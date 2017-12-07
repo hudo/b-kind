@@ -15,5 +15,7 @@ namespace BKind.Web.Features.Stories.Contracts
         public bool CanPin { get; set; }
         
         public bool CanUnpin { get; set; }
+
+        public bool CanDelete { get; set; }
     }
 }

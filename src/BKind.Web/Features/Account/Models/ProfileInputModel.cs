@@ -21,10 +21,10 @@ namespace BKind.Web.Features.Account.Contracts
         }
 
 
-        [Display(Name = "E-mail")]
+        [Display(Name = "E-mail*")]
         public string Username { get; set; }
 
-        [Display(Name = "Nick name")]
+        [Display(Name = "Nick name*")]
         public string Nick { get; set; }
 
         [Display(Name = "First name")]
@@ -33,6 +33,7 @@ namespace BKind.Web.Features.Account.Contracts
         [Display(Name = "Last name")]
         public string Lastname { get; set; }
 
+        [Display(Name = "Password*")]
         public string Password { get; set; }
 
         [Display(Name = "Confirm password")]

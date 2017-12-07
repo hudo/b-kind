@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using BKind.Web.Controllers;
 using BKind.Web.Core.StandardQueries;
+using BKind.Web.Features.Stories.Commands;
 using BKind.Web.Features.Stories.Contracts;
 using BKind.Web.Model;
 using MediatR;
@@ -106,6 +107,15 @@ namespace BKind.Web.Areas.Editor.Controllers
         {
             var user = await GetLoggedUserAsync();
             await _mediator.Send(new PinStoryCommand(id, user));
+            return Redirect("/");
+        }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            var user = await GetLoggedUserAsync();
+
+            var response = await _mediator.Send(new DeleteStoryCommand(id, user));
+
             return Redirect("/");
         }
     }

@@ -1,2 +1,20 @@
-﻿@model List<BKind.Web.Features.Stories.Contracts.StoryProjection>
+﻿@model BKind.Web.Features.Stories.Contracts.StoryListModel
 
+@{
+
+    Layout = "_TwoColumnLayout";
+}
+
+<div class="card mb-4">
+    <div class="card-body">
+        <section role="group" class="story-group orange">
+            <div class="section-title">
+                <span>@Model.Title</span>
+                <a href="#">more <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+            </div>
+            <div class="row flex-column ra-stories">
+                @Html.Partial("StoryFeed", Model)
+            </div>
+        </section>
+    </div>
+</div>

@@ -10,7 +10,7 @@ namespace BKind.Web.Features.Account
             RuleFor(x => x.Nick).NotEmpty().MinimumLength(4);
             RuleFor(x => x.Username).NotEmpty().EmailAddress();
             RuleFor(x => x.Password).NotEmpty().Length(5, 50).WithMessage("Password length must be at least 5 characters");
-            RuleFor(x => x.PasswordConfirm).NotEmpty().Equal(x => x.Password).WithMessage("Password confirmation wrong");
+            RuleFor(x => x.PasswordConfirm).NotEmpty().Equal(x => x.Password).WithMessage("Password does not match the confirm password");
         }
     }
 }
