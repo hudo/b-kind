@@ -25,10 +25,15 @@ namespace BKind.Web.Features.Account.Domain
         {
             var response = new Response();
 
-            var existing = await _mediator.Send(new GetOneQuery<User>(x => x.Username == message.Username));
+            var existing = await _mediator.Send(new GetOneQuery<User>(x => x.Username.ToLower() == message.Username.ToLower()));
 
             if(existing != null)
-                response.AddError("username", $"Username {message.Username} already in use");
+                response.AddError("username", $"Username '{message.Username}' already in use");
+
+            var existingNick = await _mediator.Send(new GetOneQuery<User>(x => x.Nickname.ToLower() == message.Nick.ToLower()));
+
+            if (existingNick != null)
+                response.AddError("nick", $"Nickname '{message.Nick}' already in use");
 
             if(!response.HasErrors)
             {
