@@ -5,6 +5,7 @@
     <h2>Share your story:</h2>
     <form method="post">
         @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => x.StoryId)
         <div class="form-group row">
             <label>Title:</label>
             <input type="text" asp-for="StoryTitle" class="form-control" maxlength="70" />

@@ -4,6 +4,7 @@ using BKind.Web.Controllers;
 using BKind.Web.Core.StandardQueries;
 using BKind.Web.Features.Stories.Commands;
 using BKind.Web.Features.Stories.Contracts;
+using BKind.Web.Features.Stories.Queries;
 using BKind.Web.Model;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -41,48 +42,50 @@ namespace BKind.Web.Areas.Editor.Controllers
             return Redirect("/");
         }
 
-        public async Task<IActionResult> Edit(int id)
+        [Authorize]
+        public async Task<IActionResult> Edit(string id)
         {
-            var model = new EditStoryInputModel();
+            var model = new AddOrUpdateStoryInputModel();
 
-            model.Story = await _mediator.Send(new GetByIdQuery<Story>(id));
-
-            var tags = await _mediator.Send(new GetAllQuery<Tag>(tag => tag.StoryTags.Any(st => st.StoryId == model.Story.Id)));
-            model.Tags = string.Join(',', tags.Select(x => x.Title));
-
+            var story = await _mediator.Send(new GetStoryQuery(id));
             var user = await GetLoggedUserAsync();
 
-            if (model.Story.AuthorId != user.GetRole<Author>()?.Id || model.Story == null) return NotFound();
+            if (story == null || story.AuthorId != user.GetRole<Author>()?.Id) return NotFound();
 
-            model.Title = $"Edit {model.Story.Title}";
+            var tags = await _mediator.Send(new GetAllQuery<Tag>(tag => tag.StoryTags.Any(st => st.StoryId == story.Id)));
+
+            model.StoryId = story.Id;
+            model.StoryTitle = story.Title;
+            model.Content = story.Content;
+            model.Tags = string.Join(',', tags.Select(x => x.Title));
+            model.Title = $"Edit {story.Title}";
 
             if (TempData.ContainsKey(_ErrorKey))
                 model.Informations.Add((string)TempData[_ErrorKey]);
 
-            return View(model);
+            return View("Share", model);
         }
 
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public async Task<IActionResult> Edit(EditStoryInputModel model)
+        public async Task<IActionResult> Edit(AddOrUpdateStoryInputModel model)
         {
-            var updateMessage = AddOrUpdateStoryInputModel.From(model.Story);
             var user = await GetLoggedUserAsync();
-            updateMessage.UserId = user.Id;
+            model.UserId = user.Id;
 
-            var response = await _mediator.Send(updateMessage);
+            var response = await _mediator.Send(model);
 
             if (response.HasErrors)
             {
                 foreach (var responseError in response.Errors)
                     ModelState.AddModelError(responseError.Key, responseError.Message);
 
-                return View(model);
+                return View("Share", model);
             }
 
             TempData[_ErrorKey] = "Story succesfully saved!";
 
-            return RedirectToAction("Edit", new { id = response.Result.Id });
+            return RedirectToAction("Edit", new { id = response.Result.Slug });
         }
 
         public async Task<IActionResult> Publish(string id) => await ChangeStatus(id, Status.Published);

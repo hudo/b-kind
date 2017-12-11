@@ -46,9 +46,18 @@ namespace BKind.Web.Features.Stories.Domain
             }
             else author = user.GetRole<Author>();
 
-            var story = message.StoryId.HasValue
-                ? await GetAndUpdateAsync(message)
-                : author.CreateNewStory(message.StoryTitle, message.Content);
+            Story story;
+            if (message.StoryId.HasValue)
+            {
+                story = await GetAndUpdateAsync(message);
+
+                if (!user.Is<Administrator>())
+                    story.Status = Status.Draft;
+            }
+            else
+            {
+                story = author.CreateNewStory(message.StoryTitle, message.Content);
+            }
 
             story.Modified = DateTime.UtcNow;
 
