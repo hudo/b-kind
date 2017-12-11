@@ -32,7 +32,7 @@ namespace BKind.Web.Controllers
                     await _mediator.Send(new ListStoriesQuery
                     {
                         UserWithRoles = user, 
-                        Paging = new PagedOptions<Story>(orderBy: s => s.Modified, ascending: false),
+                        Paging = new PagedOptions<Story>(pageSize: 5, orderBy: s => s.Modified, ascending: false),
                         Pinned = false
                     }),
                     user),
@@ -40,7 +40,7 @@ namespace BKind.Web.Controllers
                     await _mediator.Send(new ListStoriesQuery
                     {
                         UserWithRoles = user, 
-                        Paging = new PagedOptions<Story>(orderBy: s => s.Views, ascending: false),
+                        Paging = new PagedOptions<Story>(pageSize: 5, orderBy: s => s.Views, ascending: false),
                         Pinned = true
                     }),
                     user)
