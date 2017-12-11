@@ -1,28 +1,35 @@
 ﻿@using BKind.Web.Infrastructure.Helpers
 @model BKind.Web.Features.Stories.Contracts.StoryListModel
+@{
+    var last = Model.Stories.Last();
+}
 
 @foreach (var story in Model.Stories)
 {
-    <div class="col mb-5 ra-story">
-        <div class="card card-box">
+<div class="col mb-1 ra-story">
+    <div class="card card-box">
         <div class="card-body">
-                @if (!string.IsNullOrEmpty(story.Title))
-                {
-                    <h2 class="card-title"><a asp-controller="stories" asp-action="read" asp-route-id="@story.Slug">@story.Title</a></h2>
-                }
-                <h6 class="card-subtitle mb-4 text-muted">
-                    by @story.AuthorName
-                    on @story.Created.ToString("dd/MM/yyyy"), @story.FormattedStatus
-                    Read time: @story.Content.ReadTime() min,
-                    Likes: @story.ThumbsUp
-                </h6>
-                <p class="card-text">
-                    @story.Content.Shorten(300)
-                </p>
-                <div class="panel-footer">
-                    @await Component.InvokeAsync("StoryButtons", new {story = story, userWithRoles = Model.UserWithRoles})
-                </div>
+            @if (!string.IsNullOrEmpty(story.Title))
+            {
+                <h2 class="card-title"><a asp-controller="stories" asp-action="read" asp-route-id="@story.Slug">@story.Title</a></h2>
+            }
+            <p class="card-text">
+                @story.Content.Shorten(300)
+            </p>
+            <h6 class="card-subtitle mb-2 text-muted">
+                by <a asp-controller="stories" asp-action="list" asp-route-author="@story.AuthorName">@story.AuthorName</a>
+                on @story.Created.ToString("dd/MM/yyyy"), @story.FormattedStatus
+                Read time: @story.Content.ReadTime() min,
+                Thanks: @story.ThumbsUp
+            </h6>
+            <div class="panel-footer">
+                @await Component.InvokeAsync("StoryButtons", new { story = story, userWithRoles = Model.UserWithRoles })
             </div>
         </div>
     </div>
+    @if (story != last)
+    {
+        <hr/>
+    }
+</div>
 }

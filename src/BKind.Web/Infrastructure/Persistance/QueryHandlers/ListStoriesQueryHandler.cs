@@ -62,6 +62,9 @@ namespace BKind.Web.Infrastructure.Persistance.QueryHandlers
             if (message.Pinned.HasValue)
                 query = query.Where(x => x.Pinned == message.Pinned.Value);
 
+            if (!string.IsNullOrEmpty(message.AuthorNick))
+                query = query.Where(x => x.Author.User.Nickname == message.AuthorNick);
+
             if (!string.IsNullOrEmpty(message.Tag))
                 query = query.Where(x => x.StoryTags.Any(t => t.Tag.Title == message.Tag.ToLower()));
 

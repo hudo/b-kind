@@ -9,7 +9,7 @@ namespace BKind.Web.Features.Stories
         public IViewComponentResult Invoke(StoryProjection story, User userWithRoles)
         {
             if (userWithRoles == null)
-                return View("Anonymous");
+                return View("Anonymous", story.Slug);
 
             var model = new StoryButtonsViewModel();
 

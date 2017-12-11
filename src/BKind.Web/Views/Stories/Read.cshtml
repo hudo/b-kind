@@ -1,19 +1,20 @@
 @model BKind.Web.Features.Stories.Contracts.ReadStoryViewModel
-    
-<h2>@Model.Story.Title</h2>
-<div>
-    @Model.Story.Content
-</div>
-<div>
-    Tags: @string.Join(", ", Model.Story.Tags)
-</div>
-<div>
-    Author: @Model.Story.AuthorName
-</div>
-<div>
-    Votes: @Model.Story.ThumbsUp
-</div>
-`<div>
-    @await Component.InvokeAsync("StoryButtons", new { story = Model.Story, userWithRoles = Model.LoggedUser })
-</div>
+   
+<div class="card">
+    <div class="card-body">
+        <h2>@Model.Story.Title</h2>        
+        <p class="card-text">
+            @Model.Story.Content        
+        </p>
+        <p class="card-text">
+            written by <a asp-controller="stories" asp-action="list" asp-route-author="@Model.Story.AuthorName">@Model.Story.AuthorName</a> 
+            on @Model.Story.Created.ToShortDateString()
+        </p>
+        <p class="card-text text-muted">
+            Tags: @string.Join(", ", Model.Story.Tags)<br />
+            Thanks: @Model.Story.ThumbsUp
+            @await Component.InvokeAsync("StoryButtons", new { story = Model.Story, userWithRoles = Model.LoggedUser })
+        </p>
 
+    </div>
+</div>

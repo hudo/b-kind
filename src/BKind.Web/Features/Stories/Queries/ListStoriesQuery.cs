@@ -21,6 +21,7 @@ namespace BKind.Web.Features.Stories.Queries
         
         public string StorySlug { get; set; }
         public string Tag { get; set; }
+        public string AuthorNick { get; set; }
         
         public bool? Pinned { get; set; }
         public bool IncludeTags { get; set; }

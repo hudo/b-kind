@@ -33,7 +33,7 @@ namespace BKind.Web.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> List(bool? recommended, string tag, int? page)
+        public async Task<IActionResult> List(bool? recommended, string tag, string author, int? page)
         {
             var user = await GetLoggedUserAsync();
             var stories = await _mediator.Send(new ListStoriesQuery
@@ -41,7 +41,8 @@ namespace BKind.Web.Controllers
                 UserWithRoles = user,
                 Paging = new PagedOptions<Story>(page, orderBy: x => x.Modified, ascending: false),
                 Pinned = recommended,
-                Tag = tag
+                Tag = tag,
+                AuthorNick = author,
             });
 
             var title = recommended.HasValue

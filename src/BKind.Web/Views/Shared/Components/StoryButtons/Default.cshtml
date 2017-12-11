@@ -1,10 +1,11 @@
-﻿@using BKind.Web.Features.Stories.Contracts
-@model BKind.Web.Features.Stories.Contracts.StoryButtonsViewModel
+﻿@model BKind.Web.Features.Stories.Contracts.StoryButtonsViewModel
 
 <div class="ra-actions">
    @if(Model.CanVote)
    {
-      <a class="btn btn-sm btn-green" asp-controller="Stories" asp-action="ThumbsUp" asp-route-id="@Model.Slug">Vote</a>
+       <a class="btn-sm" asp-controller="Stories" asp-action="ThumbsUp" asp-route-id="@Model.Slug">
+           <i class="material-icons md-18 align-middle">favorite</i> Thanks
+       </a>
    }
    @if(Model.CanUnpublish)
    {

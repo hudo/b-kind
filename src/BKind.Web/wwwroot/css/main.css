@@ -5896,6 +5896,9 @@ a {
     border-bottom: 0;
     color: #FF6F15; }
 
+hr {
+  margin: 0; }
+
 .ra-bg-light {
   background-color: white;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2); }
@@ -5966,7 +5969,6 @@ a {
   .ra-actions a + a {
     margin-left: 0.5rem; }
   .ra-actions a.btn-sm, .ra-actions .btn-group-sm > a.btn {
-    color: white;
     font-size: 12px; }
   .ra-actions a.btn-green {
     background-color: #8ABF51; }
@@ -6083,6 +6085,10 @@ footer[role=main] {
   border-radius: 0;
   border: 0;
   box-shadow: none; }
+  .card.card-box .card-body {
+    padding: 1rem 0; }
+  .card.card-box .card-subtitle {
+    font-size: 0.8rem; }
 
 .btn-outline-info {
   color: #60adf8;
@@ -6150,3 +6156,15 @@ label {
   100% {
     -moz-box-shadow: 0 0 0 0 transparent;
     box-shadow: 0 0 0 0 transparent; } }
+
+.material-icons.md-18 {
+  font-size: 18px; }
+
+.material-icons.md-24 {
+  font-size: 24px; }
+
+.material-icons.md-36 {
+  font-size: 36px; }
+
+.material-icons.md-48 {
+  font-size: 48px; }
