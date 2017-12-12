@@ -42,7 +42,7 @@ a {
 }
 
 hr {
-    margin:0;
+    margin: 0;
 }
 
 // Navigation
@@ -147,54 +147,41 @@ hr {
 
 
 .ra-actions {
-
-
-
     a {
-        font-size: 24px;
+        font-size: 14px;
         display: inline-block;
+        color: #bbb;
+        transition: color 0.3s ease;
 
         + a {
-            margin-left: 0.5rem;
+            margin-left: 1rem;
         }
 
-        &.btn-sm {
-            font-size: 12px;
-        }
+        &.btn-action {
 
-        &.btn-green {
-            background-color: $green;
-
-            &:hover {
-                background-color: darken($green, 10%);
+            &.btn-orange:hover {
+                color: $orange;
             }
-        }
 
-        &.btn-tomato {
-            background-color: tomato;
-
-            &:hover {
-                background-color: darken(tomato, 10%);
+            &.btn-green:hover {
+                color: $green;
             }
-        }
 
-        &.btn-gray {
-            background-color: $gray-medium;
-
-            &:hover {
-                background-color: darken($gray-medium, 10%);
+            &.btn-tomato:hover {
+                color: tomato;
             }
-        }
 
-        &.btn-blue {
-            background-color: $blue-light-20;
+            &.btn-gray:hover {
+                color: $gray-dark;
+            }
 
-            &:hover {
-                background-color: darken($blue-light-20, 10%);
+            &.btn-blue:hover {
+                color: $blue-light;
             }
         }
     }
 }
+
 // Layout
 //...................................
 body.secondary {
@@ -353,6 +340,12 @@ footer[role=main] {
 .card {
     border-radius: 0;
     box-shadow: $box-shadow-default;
+}
+
+.card-footer {
+    padding: 0;
+    border-top: 0;
+    background-color: transparent;
 }
 
 .card.card-box {

@@ -1,34 +1,46 @@
 ﻿@model BKind.Web.Features.Stories.Contracts.StoryButtonsViewModel
 
 <div class="ra-actions">
-   @if(Model.CanVote)
-   {
-       <a class="btn-sm" asp-controller="Stories" asp-action="ThumbsUp" asp-route-id="@Model.Slug">
-           <i class="material-icons md-18 align-middle">favorite</i> Thanks
-       </a>
-   }
-   @if(Model.CanUnpublish)
-   {
-      <a class="btn btn-sm btn-tomato" asp-area="editor" asp-controller="story" asp-action="unpublish" asp-route-id="@Model.Slug">Unpublish</a>
-   }
-   @if(Model.CanEdit)
-   {
-      <a class="btn btn-sm btn-gray" asp-area="editor" asp-controller="story" asp-action="edit" asp-route-id="@Model.Slug">Edit</a>
-   }
-   @if (Model.CanPublish)
-   {
-      <a  class="btn btn-sm btn-blue" asp-area="editor" asp-controller="story" asp-action="publish" asp-route-id="@Model.Slug">Publish</a>
-   }
-   @if (Model.CanPin)
-   {
-      <a class="btn btn-sm btn-blue" asp-area="editor" asp-controller="story" asp-action="pin" asp-route-id="@Model.Slug">Pin</a>
-   }
-   @if (Model.CanUnpin)
-   {
-      <a class="btn btn-sm btn-blue" asp-area="editor" asp-controller="story" asp-action="pin" asp-route-id="@Model.Slug">Unpin</a>
-   }
-   @if (Model.CanDelete)
-   {
-       <a class="btn btn-sm btn-danger" asp-area="editor" asp-controller="story" asp-action="delete" asp-route-id="@Model.Slug" onclick="return confirm('Are you sure?')">Delete</a> 
-   }
- </div>
+    @if (Model.CanVote)
+    {
+        <a class="btn-action btn-orange" asp-controller="Stories" asp-action="ThumbsUp" asp-route-id="@Model.Slug">
+            <i class="fa fa-thumbs-up mr-1" aria-hidden="true"></i>Like
+        </a>
+    }
+    @if (Model.CanUnpublish)
+    {
+        <a class="btn-action btn-tomato" asp-area="editor" asp-controller="story" asp-action="unpublish" asp-route-id="@Model.Slug">
+            <i class="fa fa-upload mr-1" aria-hidden="true"></i>Unpublish
+        </a>
+    }
+    @if (Model.CanEdit)
+    {
+        <a class="btn-action btn-gray" asp-area="editor" asp-controller="story" asp-action="edit" asp-route-id="@Model.Slug">
+            <i class="fa fa-pencil mr-1" aria-hidden="true"></i>Edit
+        </a>
+    }
+    @if (Model.CanPublish)
+    {
+        <a class="btn-action btn-green" asp-area="editor" asp-controller="story" asp-action="publish" asp-route-id="@Model.Slug">
+            <i class="fa fa-upload mr-1" aria-hidden="true"></i>Publish
+        </a>
+    }
+    @if (Model.CanPin)
+    {
+        <a class="btn-action btn-blue" asp-area="editor" asp-controller="story" asp-action="pin" asp-route-id="@Model.Slug">
+            <i class="fa fa-thumb-tack mr-1" aria-hidden="true"></i>Pin
+        </a>
+    }
+    @if (Model.CanUnpin)
+    {
+        <a class="btn-action btn-tomato" asp-area="editor" asp-controller="story" asp-action="pin" asp-route-id="@Model.Slug">
+            <i class="fa fa-thumb-tack mr-1" aria-hidden="true"></i>Unpin
+        </a>
+    }
+    @if (Model.CanDelete)
+    {
+        <a class="btn-action btn-tomato" asp-area="editor" asp-controller="story" asp-action="delete" asp-route-id="@Model.Slug" onclick="return confirm('Are you sure?')">
+            <i class="fa fa-trash mr-1" aria-hidden="true"></i>Delete
+        </a>
+    }
+</div>

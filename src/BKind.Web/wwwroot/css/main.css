@@ -5964,28 +5964,22 @@ hr {
     border-radius: 0; }
 
 .ra-actions a {
-  font-size: 24px;
-  display: inline-block; }
+  font-size: 14px;
+  display: inline-block;
+  color: #bbb;
+  transition: color 0.3s ease; }
   .ra-actions a + a {
-    margin-left: 0.5rem; }
-  .ra-actions a.btn-sm, .ra-actions .btn-group-sm > a.btn {
-    font-size: 12px; }
-  .ra-actions a.btn-green {
-    background-color: #8ABF51; }
-    .ra-actions a.btn-green:hover {
-      background-color: #70a23b; }
-  .ra-actions a.btn-tomato {
-    background-color: tomato; }
-    .ra-actions a.btn-tomato:hover {
-      background-color: #ff3814; }
-  .ra-actions a.btn-gray {
-    background-color: #ccc; }
-    .ra-actions a.btn-gray:hover {
-      background-color: #b3b3b3; }
-  .ra-actions a.btn-blue {
-    background-color: #60adf8; }
-    .ra-actions a.btn-blue:hover {
-      background-color: #2f94f6; }
+    margin-left: 1rem; }
+  .ra-actions a.btn-action.btn-orange:hover {
+    color: #FF6F15; }
+  .ra-actions a.btn-action.btn-green:hover {
+    color: #8ABF51; }
+  .ra-actions a.btn-action.btn-tomato:hover {
+    color: tomato; }
+  .ra-actions a.btn-action.btn-gray:hover {
+    color: #333; }
+  .ra-actions a.btn-action.btn-blue:hover {
+    color: #0A7BE8; }
 
 body.secondary {
   display: flex;
@@ -6080,6 +6074,11 @@ footer[role=main] {
 .card {
   border-radius: 0;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2); }
+
+.card-footer {
+  padding: 0;
+  border-top: 0;
+  background-color: transparent; }
 
 .card.card-box {
   border-radius: 0;
