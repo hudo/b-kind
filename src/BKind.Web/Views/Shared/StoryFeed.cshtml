@@ -22,7 +22,7 @@
                 by <a asp-controller="stories" asp-action="list" asp-route-author="@story.AuthorName">@story.AuthorName</a>
                 on @story.Created.ToString("dd/MM/yyyy"), @story.FormattedStatus
                 Read time: @story.Content.ReadTime() min,
-                Thanks: @story.ThumbsUp
+                Likes: @story.ThumbsUp
             </h6>  
         </div>
         <div class="card-footer">

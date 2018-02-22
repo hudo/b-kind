@@ -12,7 +12,7 @@
         </p>
         <p class="card-text text-muted">
             Tags: @string.Join(", ", Model.Story.Tags)<br />
-            Thanks: @Model.Story.ThumbsUp
+            Likes: @Model.Story.ThumbsUp
             @await Component.InvokeAsync("StoryButtons", new { story = Model.Story, userWithRoles = Model.LoggedUser })
         </p>
 
