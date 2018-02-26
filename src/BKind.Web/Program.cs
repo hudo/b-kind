@@ -47,6 +47,7 @@ namespace BKind.Web
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .UseUrls("http://0.0.0.0:8080")
                 .Build();
     }
 }
