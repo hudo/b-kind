@@ -2,7 +2,15 @@ version: '3'
 
 services:
   bkind.web:
-    image: bkindweb
+    image: bkind.web
     build:
       context: .
       dockerfile: BKind.Web/Dockerfile
+    depends_on:
+      - db
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRESS_USER: postgres
+      POSTGRES_PASSWORD: Bkind123!
