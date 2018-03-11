@@ -5,7 +5,7 @@ services:
     image: bkind.web
     build:
       context: .
-      dockerfile: BKind.Web/Dockerfile
+      dockerfile: ../BKind.Web/Dockerfile
     depends_on:
       - db
   db:
