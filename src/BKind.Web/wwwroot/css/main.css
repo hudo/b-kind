@@ -5908,7 +5908,8 @@ hr {
   color: #0A7BE8;
   font-family: "Special Elite", cursive;
   font-size: 1.75rem;
-  text-shadow: 1px 1px 2px #969696; }
+  text-shadow: 1px 1px 2px #969696;
+  margin: 0; }
   .navbar-light .navbar-brand:hover {
     color: #2f94f6; }
 
