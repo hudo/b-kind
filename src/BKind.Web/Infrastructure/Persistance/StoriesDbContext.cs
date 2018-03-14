@@ -17,6 +17,7 @@ namespace BKind.Web.Infrastructure.Persistance
         public DbSet<Story> Stories { get; set; }
         public DbSet<StoryTags> StoryTags { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<Page> Pages { get; set; }
 
         public void BeginTransaction()
         {
@@ -108,6 +109,18 @@ namespace BKind.Web.Infrastructure.Persistance
 
             modelBuilder.Entity<Story>()
                 .HasIndex(x => x.Slug).IsUnique();
+
+            modelBuilder.Entity<Page>()
+                .HasOne(x => x.CreatedByUser).WithMany()
+                .HasForeignKey(x => x.CreatedBy);
+
+            modelBuilder.Entity<Page>()
+                .HasOne(x => x.ModifiedByUser).WithMany()
+                .HasForeignKey(x => x.ModifiedBy);
+
+            modelBuilder.Entity<Page>().Property(x => x.Title).IsRequired();
+            modelBuilder.Entity<Page>().Property(x => x.Slug).IsRequired();
+            modelBuilder.Entity<Page>().HasIndex(x => x.Slug);
         }
     }
 }

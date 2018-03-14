@@ -13,9 +13,10 @@ using System;
 namespace BKind.Web.Migrations
 {
     [DbContext(typeof(StoriesDbContext))]
-    partial class StoriesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180314223050_AddPages")]
+    partial class AddPages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
