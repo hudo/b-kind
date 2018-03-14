@@ -28,7 +28,7 @@
                     </form>
                 </div>
             </div>
-            <div class="card">
+            <div class="card mb-4">
                 <div class="card-body">
                     <section class="side-widget news mb-3">
                         <h5 class="mb-3"><span>News</span></h5>
@@ -41,6 +41,16 @@
                     <section class="side-widget tags mt-5 mb-3 ">
                         <h5 class="mb-3"><span>Tags</span></h5>
                         @(await Component.InvokeAsync<TagCloudViewComponent>())
+                    </section>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-body">
+                    <section class="side-widget news mb-3">
+                        @*<h5 class="mb-3"><span>Twitter</span></h5>*@
+                        <a class="twitter-timeline" href="https://twitter.com/RippleAct?ref_src=twsrc%5Etfw" data-height="500" data-chrome="nofooter noborders">Tweets by RippleAct</a>
+                        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>            
                     </section>
                 </div>
             </div>
