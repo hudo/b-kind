@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using BKind.Web.Controllers;
 using BKind.Web.Core.StandardQueries;
 using BKind.Web.Features.Pages.Models;
@@ -35,7 +36,20 @@ namespace BKind.Web.Areas.Editor.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(PageEditModel model)
         {
-            return View();
+            if (!ModelState.IsValid)
+                return View(model);
+
+            model.User = await GetLoggedUserAsync();
+
+            var response = await _mediator.Send(model);
+
+            if(response.HasErrors)
+            {
+                MapToModelState(response);
+                return View(model);
+            }
+
+            return RedirectToAction("Edit", new { id=response.Result.Id });
         }
     }
 }

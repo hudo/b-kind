@@ -105,6 +105,11 @@ namespace BKind.Web
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "page",
+                    template: "page/{*slug}",
+                    defaults: new {controller = "Pages", action = "Index"});
+
+                routes.MapRoute(
                     name: "areas",
                     template: "{area:exists}/{controller=home}/{action=index}/{id?}"
                 );
