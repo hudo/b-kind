@@ -4,8 +4,10 @@ services:
   bkind.web:
     image: bkind.web
     build:
-      context: .
-      dockerfile: ../BKind.Web/Dockerfile
+      context: ../
+      dockerfile: ./Dockerfile
+    ports:
+       - "8080:8080"
     depends_on:
       - db
   db:
@@ -14,3 +16,11 @@ services:
     environment:
       POSTGRESS_USER: postgres
       POSTGRES_PASSWORD: Bkind123!
+      POSTGRES_DB: bkind
+    ports:
+      - '5430:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:
+    
