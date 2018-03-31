@@ -40,18 +40,22 @@
             <header class="row">
                 <div class="col">
                     <nav class="navbar navbar-light ra-navbar">
-                        <ul class="navbar-nav flex-row ra-nav-menu">
-                            <li class="nav-item mr-3">
-                                <a class="nav-link" href="/">Home</a>
-                            </li>
-                            <li class="nav-item mr-3">
-                                <a class="nav-link" href="~/page/about">About</a>
-                            </li>
-                        </ul>
                         <a class="navbar-brand" href="/">
                             <img src="~/images/6235-Ripple-Act-Logo.png" />
                         </a>
-                        @(await Component.InvokeAsync<AccountViewComponent>())
+                        <div>
+                            <ul class="navbar-nav flex-row ra-nav-menu">
+
+                                <li class="nav-item active mr-3">
+                                    <a class="nav-link" href="/">Home</a>
+                                </li>
+                                <li class="nav-item mr-3">
+                                    <a class="nav-link" href="#">About</a>
+                                </li>
+                            </ul>
+
+                            @(await Component.InvokeAsync<AccountViewComponent>())
+                        </div>
                     </nav>
                 </div>
             </header>
