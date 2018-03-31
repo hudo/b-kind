@@ -1,0 +1,33 @@
+﻿@using BKind.Web.Features.Pages.Models
+@model PageEditModel
+
+<div class="col mb-5">
+    <h2 class="mb-5">Edit page @Model.Page?.Title</h2>
+    <form method="post">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => x.Page.Id)
+
+        <div class="form-group row">
+            <label asp-for="Page.Title"></label>
+            <input type="text" asp-for="Page.Title" class="form-control" />
+            <span asp-validation-for="Page.Title"></span>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Page.Slug"></label>
+            <input type="text" asp-for="Page.Slug" class="form-control" />
+            <span asp-validation-for="Page.Slug"></span>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Page.Content"></label>
+            <textarea asp-for="Page.Content" class="form-control" rows="15"></textarea>
+            <span asp-validation-for="Page.Content"></span>
+        </div>
+
+        <div class="form-group row">
+            <input class="btn btn-primary" type="submit" value="Save" />
+            @Html.ValidationSummary()
+        </div>
+    </form>
+</div>

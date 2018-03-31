@@ -17,6 +17,7 @@ namespace BKind.Web.Infrastructure.Persistance
         public DbSet<Story> Stories { get; set; }
         public DbSet<StoryTags> StoryTags { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<Page> Pages { get; set; }
         public DbSet<News> Newses { get; set; }
 
         public void BeginTransaction()
@@ -110,13 +111,15 @@ namespace BKind.Web.Infrastructure.Persistance
             modelBuilder.Entity<Story>()
                 .HasIndex(x => x.Slug).IsUnique();
 
+            modelBuilder.Entity<Page>().HasOne(x => x.CreatedByUser).WithMany().HasForeignKey(x => x.CreatedBy);
+            modelBuilder.Entity<Page>().HasOne(x => x.ModifiedByUser).WithMany().HasForeignKey(x => x.ModifiedBy);
+            modelBuilder.Entity<Page>().Property(x => x.Title).IsRequired();
+            modelBuilder.Entity<Page>().Property(x => x.Slug).IsRequired();
+            modelBuilder.Entity<Page>().HasIndex(x => x.Slug);
+
             modelBuilder.Entity<News>().Property(x => x.Title).IsRequired();
-
             modelBuilder.Entity<News>().Property(x => x.Content).IsRequired();
-
-            modelBuilder.Entity<News>()
-                .ToTable("News")
-                .HasIndex(x => x.Published);
+            modelBuilder.Entity<News>().ToTable("News").HasIndex(x => x.Published);
         }
     }
 }
