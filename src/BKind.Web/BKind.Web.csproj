@@ -14,6 +14,16 @@
     <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Migrations\20180331134621_AddedNews.cs" />
+    <Compile Remove="Migrations\20180331134621_AddedNews.Designer.cs" />
+    <Compile Remove="Migrations\20180331134805_AddedNews.cs" />
+    <Compile Remove="Migrations\20180331134805_AddedNews.Designer.cs" />
+    <Compile Remove="Migrations\20180331134918_AddedNews.cs" />
+    <Compile Remove="Migrations\20180331134918_AddedNews.Designer.cs" />
+    <Compile Remove="Migrations\20180331135023_AddedNews.cs" />
+    <Compile Remove="Migrations\20180331135023_AddedNews.Designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Update="wwwroot\**\*;**\*.cshtml;appsettings.json;web.config">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>

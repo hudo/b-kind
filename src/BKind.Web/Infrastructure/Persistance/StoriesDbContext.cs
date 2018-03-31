@@ -17,6 +17,7 @@ namespace BKind.Web.Infrastructure.Persistance
         public DbSet<Story> Stories { get; set; }
         public DbSet<StoryTags> StoryTags { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<News> Newses { get; set; }
 
         public void BeginTransaction()
         {
@@ -108,6 +109,14 @@ namespace BKind.Web.Infrastructure.Persistance
 
             modelBuilder.Entity<Story>()
                 .HasIndex(x => x.Slug).IsUnique();
+
+            modelBuilder.Entity<News>().Property(x => x.Title).IsRequired();
+
+            modelBuilder.Entity<News>().Property(x => x.Content).IsRequired();
+
+            modelBuilder.Entity<News>()
+                .ToTable("News")
+                .HasIndex(x => x.Published);
         }
     }
 }

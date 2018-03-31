@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRESS_USER: postgres
+      POSTGRES_PASSWORD: Bkind123!
+      POSTGRES_DB: bkind
+    ports:
+      - '5430:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:
+    
