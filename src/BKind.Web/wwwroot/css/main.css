@@ -6174,64 +6174,63 @@ label {
 .nav-link {
   padding: 0.5rem 1rem 0; }
 
-.ra-navbar {
-  cursor: pointer; }
-  .ra-navbar .ra-menu-wrapper {
-    padding-left: 3rem;
-    flex: 1; }
-    .ra-navbar .ra-menu-wrapper .ra-nav-profile {
-      padding: 0;
+.ra-navbar .ra-menu-wrapper {
+  padding-left: 3rem;
+  flex: 1;
+  cursor: default; }
+  .ra-navbar .ra-menu-wrapper .ra-nav-profile {
+    padding: 0;
+    margin: 0;
+    list-style: none; }
+    .ra-navbar .ra-menu-wrapper .ra-nav-profile li {
+      line-height: 30px; }
+  .ra-navbar .ra-menu-wrapper .ra-profile-menu {
+    position: relative;
+    display: flex; }
+    .ra-navbar .ra-menu-wrapper .ra-profile-menu button {
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+      outline: none;
+      color: #333;
+      cursor: pointer; }
+      .ra-navbar .ra-menu-wrapper .ra-profile-menu button .fa-chevron-up {
+        display: none; }
+    .ra-navbar .ra-menu-wrapper .ra-profile-menu ul {
+      display: none;
+      list-style: none;
+      background-color: white;
+      border: 1px solid rgba(0, 0, 0, 0.125);
+      box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+      border-radius: 0;
       margin: 0;
-      list-style: none; }
-      .ra-navbar .ra-menu-wrapper .ra-nav-profile li {
-        line-height: 30px; }
-    .ra-navbar .ra-menu-wrapper .ra-profile-menu {
-      position: relative;
-      display: flex; }
-      .ra-navbar .ra-menu-wrapper .ra-profile-menu button {
-        background-color: transparent;
-        border: none;
-        box-shadow: none;
-        outline: none;
-        color: #333;
-        cursor: pointer; }
-        .ra-navbar .ra-menu-wrapper .ra-profile-menu button .fa-chevron-up {
-          display: none; }
-      .ra-navbar .ra-menu-wrapper .ra-profile-menu ul {
-        display: none;
-        list-style: none;
-        background-color: white;
-        border: 1px solid rgba(0, 0, 0, 0.125);
-        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
-        border-radius: 0;
-        margin: 0;
-        top: 100%;
-        margin-top: 8px;
-        position: absolute;
-        padding: 0;
-        top: 100%;
-        width: 160px;
-        z-index: 100; }
-        .ra-navbar .ra-menu-wrapper .ra-profile-menu ul:before, .ra-navbar .ra-menu-wrapper .ra-profile-menu ul:after {
-          content: "";
-          right: auto;
-          position: absolute; }
-        .ra-navbar .ra-menu-wrapper .ra-profile-menu ul:before {
-          top: -16px;
-          left: 7px;
-          border: 8px solid transparent;
-          border-bottom-color: rgba(27, 31, 35, 0.15); }
-        .ra-navbar .ra-menu-wrapper .ra-profile-menu ul:after {
-          top: -14px;
-          left: 8px;
-          border: 7px solid transparent;
-          border-bottom-color: white; }
-        .ra-navbar .ra-menu-wrapper .ra-profile-menu ul li {
-          padding: 8px 12px;
-          width: 100%; }
-    .ra-navbar .ra-menu-wrapper .ra-profile-menu.open button .fa-chevron-down {
-      display: none; }
-    .ra-navbar .ra-menu-wrapper .ra-profile-menu.open button .fa-chevron-up {
-      display: inline-block; }
-    .ra-navbar .ra-menu-wrapper .ra-profile-menu.open ul {
-      display: block; }
+      top: 100%;
+      margin-top: 8px;
+      position: absolute;
+      padding: 0;
+      top: 100%;
+      width: 160px;
+      z-index: 100; }
+      .ra-navbar .ra-menu-wrapper .ra-profile-menu ul:before, .ra-navbar .ra-menu-wrapper .ra-profile-menu ul:after {
+        content: "";
+        right: auto;
+        position: absolute; }
+      .ra-navbar .ra-menu-wrapper .ra-profile-menu ul:before {
+        top: -16px;
+        left: 7px;
+        border: 8px solid transparent;
+        border-bottom-color: rgba(27, 31, 35, 0.15); }
+      .ra-navbar .ra-menu-wrapper .ra-profile-menu ul:after {
+        top: -14px;
+        left: 8px;
+        border: 7px solid transparent;
+        border-bottom-color: white; }
+      .ra-navbar .ra-menu-wrapper .ra-profile-menu ul li {
+        padding: 8px 12px;
+        width: 100%; }
+  .ra-navbar .ra-menu-wrapper .ra-profile-menu.open button .fa-chevron-down {
+    display: none; }
+  .ra-navbar .ra-menu-wrapper .ra-profile-menu.open button .fa-chevron-up {
+    display: inline-block; }
+  .ra-navbar .ra-menu-wrapper .ra-profile-menu.open ul {
+    display: block; }

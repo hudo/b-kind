@@ -40,11 +40,11 @@
 }
 
 .ra-navbar {
-    cursor: pointer;
 
     .ra-menu-wrapper {
         padding-left: 3rem;
         flex: 1;
+        cursor: default;
 
         .ra-nav-profile {
             padding: 0;

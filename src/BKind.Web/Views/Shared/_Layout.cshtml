@@ -43,28 +43,18 @@
                         <a class="navbar-brand d-flex" href="/">
                             <img src="~/images/6235-Ripple-Act-Logo.png" />
                         </a>
-                        <div class="d-flex justify-content-between ra-menu-wrapper">
-                            <ul class="navbar-nav flex-row ra-nav-menu">
-                                <li class="nav-item active mr-3">
-                                    <a class="nav-link" href="/">Home</a>
-                                </li>
-                                <li class="nav-item mr-3">
-                                    <a class="nav-link" href="~/page/about">About</a>
-                                </li>
-                            </ul>
-                            @(await Component.InvokeAsync<AccountViewComponent>())
-                        </div>
+                        @(await Component.InvokeAsync<AccountViewComponent>())
                     </nav>
                 </div>
             </header>
         </div>
     </nav>
     @*<section class="ra-banner">
-        <h2>
-            Ensign Babyface! <br />
-            Fate protects fools, little children and ships named Enterprise. Well, I'll say this for him - he's sure of himself. and attack the Romulans.
-        </h2>
-    </section>*@
+            <h2>
+                Ensign Babyface! <br />
+                Fate protects fools, little children and ships named Enterprise. Well, I'll say this for him - he's sure of himself. and attack the Romulans.
+            </h2>
+        </section>*@
     <main role="main" class="container-fluid">
         @RenderBody()
     </main>

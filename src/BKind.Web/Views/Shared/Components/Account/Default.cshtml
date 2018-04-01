@@ -1,0 +1,48 @@
+﻿@model string
+
+@{
+    var isAuthenticated = !String.IsNullOrEmpty(Model);
+}
+
+<div class="d-flex justify-content-between ra-menu-wrapper">
+    @*<button class="ra-menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>*@
+
+    <ul class="navbar-nav flex-row ra-nav-menu">
+        <li class="nav-item active mr-3">
+            <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item mr-3">
+            <a class="nav-link" href="~/page/about">About</a>
+        </li>
+    </ul>
+
+    @if (isAuthenticated)
+    {
+
+        <div class="ra-profile-menu">
+            <button id="ra-profile-btn">
+                <span class="fa fa-user-circle-o pr-1"></span>
+                @Model
+                <span class="fa fa-chevron-down"></span>
+                <span class="fa fa-chevron-up"></span>
+            </button>
+            <ul>
+                <li> <a asp-controller="Account" asp-action="Signout">Signout</a></li>
+            </ul>
+        </div>
+
+    }
+    else
+    {
+        <ul class="d-flex flex-row ra-nav-profile">
+            <li class="ml-3 btn-group">
+                <a class="btn btn-sm btn-info" asp-controller="Account" asp-action="Login">Login</a>
+                <a class="btn btn-sm btn-secondary" asp-controller="Account" asp-action="Register">Sign up</a>
+            </li>
+        </ul>
+    }
+</div>

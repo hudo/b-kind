@@ -6,10 +6,9 @@ namespace BKind.Web.Features.Account
     {
         public IViewComponentResult Invoke()
         {
-            if (User.Identity.IsAuthenticated)
-                return View("Welcome", User.Identity.Name);
+            var username = User.Identity.IsAuthenticated ? User.Identity.Name : string.Empty;
 
-            return View("Login");
+            return View("Default", username);
         }
     }
 }
