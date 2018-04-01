@@ -28,5 +28,22 @@ namespace BKind.Web.Areas.Editor.Controllers
 
             return View(model);
         }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async  Task<IActionResult> Edit(NewsInputModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var result = await _mediator.Send(model);
+
+            if(result.HasErrors)
+            {
+                MapToModelState(result);
+                return View(model);
+            }
+
+            return Redirect("/");
+        }
     }
 }

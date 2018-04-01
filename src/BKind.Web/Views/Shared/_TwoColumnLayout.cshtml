@@ -1,3 +1,4 @@
+@using BKind.Web.Features.News
 
 @{
     Layout = "_Layout";
@@ -30,14 +31,7 @@
             </div>
             <div class="card mb-4">
                 <div class="card-body">
-                    <section class="side-widget news mb-3">
-                        <h5 class="mb-3"><span>News</span></h5>
-                        <ul class="info-list">
-                            <li><a href="#">Soft kitty warm kitty little ball of furr!</a></li>
-                            <li><a href="#">Cat fur is the new black</a></li>
-                            <li><a href="#">Poop in a handbag look delicious</a></li>
-                        </ul>
-                    </section>
+                    @(await Component.InvokeAsync<NewsWidgetViewComponent>())
                     <section class="side-widget tags mt-5 mb-3 ">
                         <h5 class="mb-3"><span>Tags</span></h5>
                         @(await Component.InvokeAsync<TagCloudViewComponent>())

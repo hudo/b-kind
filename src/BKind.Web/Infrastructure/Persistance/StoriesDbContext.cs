@@ -64,62 +64,65 @@ namespace BKind.Web.Infrastructure.Persistance
             }
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            modelBuilder.Entity<User>().HasKey(x => x.Id);
+            builder.Entity<User>().HasKey(x => x.Id);
 
-            modelBuilder.Entity<Visitor>().HasBaseType<Role>();
-            modelBuilder.Entity<Administrator>().HasBaseType<Role>();
-            modelBuilder.Entity<Reviewer>().HasBaseType<Role>();
+            builder.Entity<Visitor>().HasBaseType<Role>();
+            builder.Entity<Administrator>().HasBaseType<Role>();
+            builder.Entity<Reviewer>().HasBaseType<Role>();
 
-            modelBuilder.Entity<Author>().HasBaseType<Role>()
+            builder.Entity<Author>().HasBaseType<Role>()
                 .HasMany(x => x.Stories)
                 .WithOne(x => x.Author)
                 .HasForeignKey(x => x.AuthorId);
 
-            modelBuilder.Entity<User>()
+            builder.Entity<User>()
                 .HasMany(x => x.Roles)
                 .WithOne(x => x.User)
                 .HasForeignKey(x => x.UserId);
 
-            modelBuilder.Entity<StoryVotes>()
+            builder.Entity<StoryVotes>()
                 .HasOne(x => x.Story)
                 .WithMany(x => x.Votes)
                 .HasForeignKey(x => x.StoryId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<StoryVotes>()
+            builder.Entity<StoryVotes>()
                 .HasOne(x => x.User)
                 .WithMany(x => x.Votes)
                 .HasForeignKey(x => x.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<StoryTags>()
+            builder.Entity<StoryTags>()
                 .HasOne(x => x.Story)
                 .WithMany(x => x.StoryTags);
 
-            modelBuilder.Entity<StoryTags>()
+            builder.Entity<StoryTags>()
                 .HasOne(x => x.Tag)
                 .WithMany(x => x.StoryTags);
 
-            modelBuilder.Entity<StoryTags>()
+            builder.Entity<StoryTags>()
                 .HasKey(x => new { x.StoryId, x.TagId });
 
-            modelBuilder.Entity<User>()
+            builder.Entity<User>()
                 .Property(x => x.Nickname).IsRequired().HasDefaultValue(string.Empty);
 
-            modelBuilder.Entity<Story>()
+            builder.Entity<Story>()
                 .HasIndex(x => x.Slug).IsUnique();
 
-            modelBuilder.Entity<Page>().HasOne(x => x.CreatedByUser).WithMany().HasForeignKey(x => x.CreatedBy);
-            modelBuilder.Entity<Page>().HasOne(x => x.ModifiedByUser).WithMany().HasForeignKey(x => x.ModifiedBy);
-            modelBuilder.Entity<Page>().Property(x => x.Title).IsRequired();
-            modelBuilder.Entity<Page>().Property(x => x.Slug).IsRequired();
-            modelBuilder.Entity<Page>().HasIndex(x => x.Slug);
+            builder.Entity<Page>().HasOne(x => x.CreatedByUser).WithMany().HasForeignKey(x => x.CreatedBy);
+            builder.Entity<Page>().HasOne(x => x.ModifiedByUser).WithMany().HasForeignKey(x => x.ModifiedBy);
+            builder.Entity<Page>().Property(x => x.Title).IsRequired();
+            builder.Entity<Page>().Property(x => x.Slug).IsRequired();
+            builder.Entity<Page>().HasIndex(x => x.Slug);
 
-            modelBuilder.Entity<News>().Property(x => x.Title).IsRequired();
-            modelBuilder.Entity<News>().Property(x => x.Content).IsRequired();
-            modelBuilder.Entity<News>().ToTable("News").HasIndex(x => x.Published);
+            builder.Entity<News>().Property(x => x.Title).IsRequired();
+            builder.Entity<News>().Property(x => x.Content).IsRequired();
+            builder.Entity<News>().Property(x => x.Slug).IsRequired();
+            builder.Entity<News>().ToTable("News").HasIndex(x => x.Published);
+            builder.Entity<News>().HasIndex(x => x.Slug).IsUnique(true);
+
         }
     }
 }

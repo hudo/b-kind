@@ -1,0 +1,15 @@
+﻿@model BKind.Web.Features.News.Models.NewsWidgetModel
+
+<section class="side-widget news mb-3">
+    <h5 class="mb-3"><span>News</span></h5>
+    <ul class="info-list">
+        @foreach (var item in Model.Newses)
+        {
+            <li><a href="~/news/@item.Slug">@item.Title</a></li>
+        }
+    </ul>
+    @if(Model.CanAdd)
+    {
+        <a asp-area="Editor" asp-controller="News" asp-action="Edit">Add news item</a>
+    }
+</section>
