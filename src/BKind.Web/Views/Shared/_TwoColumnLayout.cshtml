@@ -1,33 +1,55 @@
-
 @{
     Layout = "_Layout";
 }
 
 <div class="container">
     <section class="row mb-5 mt-5">
-        <main class="col-8">
+        <main class="col-sm-8">
+            <section class="d-md-none ra-search-share">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <form class="form-inline">
+                            <div class="input-group w-100">
+                                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                                <button class="input-group-addon" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <form class="form-inline">
+                            <div class="input-group w-100">
+                                <a asp-controller="Story" asp-action="Share" asp-area="Editor">Create & share your story!</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
             @RenderBody()
         </main>
-        <aside role="article" class="col-4">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <form class="form-inline">
-                        <div class="input-group w-100">
-                            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                            <button class="input-group-addon" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                        </div>
-                    </form>
+        <aside role="article" class="col-sm-4">
+            <section class="d-none d-md-flex flex-column">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <form class="form-inline">
+                            <div class="input-group w-100">
+                                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                                <button class="input-group-addon" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            <div class="card mb-4">
-                <div class="card-body">
-                    <form class="form-inline">
-                        <div class="input-group w-100">
-                            <a asp-controller="Story" asp-action="Share" asp-area="Editor">Share your story!</a>
-                        </div>
-                    </form>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <form class="form-inline">
+                            <div class="input-group w-100">
+                                <a asp-controller="Story" asp-action="Share" asp-area="Editor">Create & share your story!</a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            </section>
             <div class="card mb-4">
                 <div class="card-body">
                     <section class="side-widget news mb-3">
@@ -44,13 +66,12 @@
                     </section>
                 </div>
             </div>
-            
+
             <div class="card">
-                <div class="card-body">
-                    <section class="side-widget news mb-3">
-                        @*<h5 class="mb-3"><span>Twitter</span></h5>*@
+                <div class="card-body p-0">
+                    <section class="side-widget news">
                         <a class="twitter-timeline" href="https://twitter.com/RippleAct?ref_src=twsrc%5Etfw" data-height="500" data-chrome="nofooter noborders">Tweets by RippleAct</a>
-                        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>            
+                        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                     </section>
                 </div>
             </div>

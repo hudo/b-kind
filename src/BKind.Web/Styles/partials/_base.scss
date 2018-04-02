@@ -150,13 +150,13 @@ body.secondary {
     }
 }
 
-/*.ra-banner {
-    height: 500px;
-    background-image: url('../images/free-happy-wallpapers.jpg');
+.ra-banner {
+    height: 300px;
+    background-image: url('../images/home_bg_3.png');
     background-repeat: no-repeat;
     background-position: center 85%;
     background-size: 100%;
-}*/
+}
 
 aside[role=article] {
     .side-widget h5 {
@@ -188,6 +188,7 @@ footer[role=main] {
 
 // HOMEPAGE
 //...................................
+
 .section-title {
     align-items: center;
     border-bottom: 3px solid gray;
@@ -278,6 +279,19 @@ footer[role=main] {
                     border-bottom: 1px solid $green;
                 }
             }
+        }
+    }
+}
+
+// PAGES
+//...................................
+
+@media (max-width: 576px) {
+    // hide widgets for the mobile
+    .ra-page-trimmed {
+        .ra-search-share,
+        aside {
+            display: none;
         }
     }
 }
