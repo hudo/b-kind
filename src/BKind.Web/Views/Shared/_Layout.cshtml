@@ -39,16 +39,8 @@
         <div class="container">
             <header class="row">
                 <div class="col">
-                    <nav class="navbar navbar-light ra-navbar">
-                        <ul class="navbar-nav flex-row ra-nav-menu">
-                            <li class="nav-item mr-3">
-                                <a class="nav-link" href="/">Home</a>
-                            </li>
-                            <li class="nav-item mr-3">
-                                <a class="nav-link" href="~/page/about">About</a>
-                            </li>
-                        </ul>
-                        <a class="navbar-brand" href="/">
+                    <nav class="navbar navbar-light ra-navbar justify-content-between">
+                        <a class="navbar-brand ra-logo d-flex" href="/">
                             <img src="~/images/6235-Ripple-Act-Logo.png" />
                         </a>
                         @(await Component.InvokeAsync<AccountViewComponent>())
@@ -57,12 +49,6 @@
             </header>
         </div>
     </nav>
-    @*<section class="ra-banner">
-        <h2>
-            Ensign Babyface! <br />
-            Fate protects fools, little children and ships named Enterprise. Well, I'll say this for him - he's sure of himself. and attack the Romulans.
-        </h2>
-    </section>*@
     <main role="main" class="container-fluid">
         @RenderBody()
     </main>
