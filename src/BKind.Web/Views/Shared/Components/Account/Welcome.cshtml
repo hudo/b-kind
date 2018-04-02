@@ -1,8 +1,13 @@
 ﻿@model string
 
-<ul class="d-flex flex-row ra-nav-profile">
-    <li>Welcome @Model!</li>
-    <li class="ml-3 btn-group">
-        <a class="btn btn-sm btn-info" asp-controller="Account" asp-action="Signout">Signout</a>
-    </li>
-</ul>
+<div class="ra-profile-menu">
+    <button id="ra-profile-btn">
+        <span class="fa fa-user-circle-o pr-1"></span>
+        @Model
+        <span class="fa fa-chevron-down"></span>
+        <span class="fa fa-chevron-up"></span>
+    </button>
+    <ul>
+        <li> <a asp-controller="Account" asp-action="Signout">Signout</a></li>
+    </ul>
+</div>

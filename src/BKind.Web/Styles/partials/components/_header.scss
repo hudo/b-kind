@@ -1,0 +1,250 @@
+﻿@import "../_variables.scss";
+
+.ra-logo img{
+    height: 50px;
+    width: auto;
+}
+// Navigation
+//...................................
+.ra-bg-light {
+    background-color: white;
+    box-shadow: $box-shadow-default;
+}
+
+.navbar-light .navbar-brand {
+    color: $blue-light;
+    font-family: $font-logo;
+    font-size: 1.75rem;
+    text-shadow: 1px 1px 2px rgba(150, 150, 150, 1);
+    margin: 0;
+
+    &:hover {
+        color: $blue-light-10;
+    }
+}
+
+.navbar-light.ra-navbar .navbar-nav .active > .nav-link,
+.navbar-light.ra-navbar .navbar-nav .nav-link.active {
+    color: $font-color;
+}
+
+.navbar-light.ra-navbar .navbar-nav .active > .nav-link,
+.navbar-light.ra-navbar .navbar-nav .nav-link.active,
+.navbar-light.ra-navbar .navbar-nav .nav-link {
+    color: $font-color;
+}
+
+.navbar-light.ra-navbar .navbar-nav li.active a,
+.navbar-light.ra-navbar .navbar-nav li:hover a {
+    // border-bottom: 2px solid $font-color;
+    font-weight: bold;
+}
+
+.nav-link {
+    padding: 0.5rem 1rem 0;
+}
+
+.ra-navbar {
+
+    .ra-menu-wrapper {
+        padding-left: 3rem;
+        flex: 1;
+        cursor: default;
+
+        .ra-nav-profile {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+
+            li {
+                line-height: 30px;
+            }
+        }
+
+        .ra-profile-menu {
+            position: relative;
+            display: flex;
+
+            button {
+                background-color: transparent;
+                border: none;
+                box-shadow: none;
+                outline: none;
+                color: $font-color;
+                cursor: pointer;
+
+                .fa-chevron-up, .caret-base-up {
+                    display: none;
+                }
+            }
+
+            ul {
+                display: none;
+                list-style: none;
+                background-color: white;
+                border: 1px solid rgba(0, 0, 0, 0.125);
+                box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+                border-radius: 0;
+                margin: 0;
+                top: 100%;
+                margin-top: 8px;
+                position: absolute;
+                padding: 0;
+                top: 100%;
+                width: 160px;
+                z-index: 100;
+
+                li {
+                    padding: 8px 12px;
+                    width: 100%;
+                }
+
+                a {
+                    color: $font-color;
+
+                    &:hover {
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+
+        .ra-profile-menu.open {
+            button {
+                .fa-chevron-down {
+                    display: none;
+                }
+
+                .fa-chevron-up, {
+                    display: inline-block;
+                }
+            }
+
+            ul {
+                display: block;
+            }
+        }
+        // mobile nav
+        // ....................
+        .ra-context-menu {
+            background-color: white;
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+            border-radius: 0;
+            display: none;
+            flex-direction: column;
+            margin: 0;
+            top: 100%;
+            margin-top: 8px;
+            position: absolute;
+            padding: 0;
+            top: 100%;
+            width: 180px;
+            z-index: 100;
+
+            &.dd-caret:before,
+            &.dd-caret:after {
+                left: auto;
+            }
+
+            &.dd-caret:before {
+                right: 8px;
+            }
+
+            &.dd-caret:after {
+                right: 9px;
+            }
+
+            span, a {
+                color: $font-color;
+                font-size: 14px;
+            }
+
+            a:hover {
+                font-weight: bold;
+            }
+
+            .ra-menu-toggle {
+                cursor: pointer;
+            }
+
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                padding-top: 10px;
+
+                &.user-menu {
+                    padding-top: 0;
+                }
+            }
+
+            li {
+                padding: 8px 12px;
+                width: 100%;
+
+                &:first-child {
+                    padding-bottom: 0;
+                }
+
+                &:hover a {
+                    font-weight: bold;
+                }
+            }
+
+            li.active {
+                font-weight: bold;
+                background-color: #f7f7f7;
+            }
+
+            li.separator {
+                height: 1px;
+                margin: 8px 1px;
+                background-color: #e1e4e8;
+                padding: 0;
+            }
+        }
+
+        .ra-context-menu.open {
+            display: flex;
+        }
+    }
+}
+
+// Mobile menu toggle
+.ra-menu-toggle {
+    background-color: white;
+    border: 0;
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
+
+    > span {
+        display: block;
+        width: 35px;
+        height: 5px;
+        background-color: #e15700;
+        margin: 6px 0;
+        transition: 0.4s;
+    }
+}
+
+.ra-menu-toggle.open {
+
+    > span:nth-child(1) {
+        -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+        transform: rotate(-45deg) translate(-9px, 6px);
+    }
+
+    > span:nth-child(2) {
+        opacity: 0;
+    }
+
+    > span:nth-child(3) {
+        -webkit-transform: rotate(45deg) translate(-8px, -8px);
+        transform: rotate(45deg) translate(-8px, -8px);
+    }
+}
+
