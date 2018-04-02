@@ -1,32 +1,35 @@
 ﻿@using BKind.Web.Areas.Editor.News.Models
 @model BKind.Web.Areas.Editor.News.Models.NewsInputModel
 
-<div class="col mb-5">
-<h2 class="mb-5">Edit news item @Model.News?.Title</h2>
-<form method="post">
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(x => x.News.Id)
+<div class="row">
+    <div class="col mb-5">
+        <h2 class="mb-5">Edit news item @Model.News?.Title</h2>
+        <form method="post">
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(x => x.News.Id)
 
-    <div class="form-group row">
-        <label asp-for="News.Title"></label>
-        <input type="text" asp-for="News.Title" class="form-control" />
-        <span asp-validation-for="News.Title"></span>
-    </div>
+            <div class="form-group">
+                <label asp-for="News.Title"></label>
+                <input type="text" asp-for="News.Title" class="form-control" />
+                <span asp-validation-for="News.Title"></span>
+            </div>
 
-    <div class="form-group row">
-        <label asp-for="News.Link"></label>
-        <input type="text" asp-for="News.Link" class="form-control" />
-        <span asp-validation-for="News.Link"></span>
-    </div>
+            <div class="form-group">
+                <label asp-for="News.Link"></label>
+                <input type="text" asp-for="News.Link" class="form-control" />
+                <span asp-validation-for="News.Link"></span>
+            </div>
 
-    <div class="form-group row">
-        <label asp-for="News.Content"></label>
-        <textarea asp-for="News.Content" class="form-control" rows="15"></textarea>
-        <span asp-validation-for="News.Content"></span>
-    </div>
+            <div class="form-group">
+                <label asp-for="News.Content"></label>
+                <textarea asp-for="News.Content" class="form-control" rows="15"></textarea>
+                <span asp-validation-for="News.Content"></span>
+            </div>
 
-    <div class="form-group row">
-        <input class="btn btn-primary" type="submit" value="Save" />
-        @Html.ValidationSummary()
+            <div class="form-group">
+                <input class="btn btn-primary" type="submit" value="Save" />
+                @Html.ValidationSummary()
+            </div>
+        </form>
     </div>
-</form>
+</div>
