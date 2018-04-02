@@ -1,15 +1,22 @@
 ﻿using System.Threading.Tasks;
+using BKind.Web.Core;
 using BKind.Web.Features.Account.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace BKind.Web.Controllers.Account
 {
     public class AccountController : BkindControllerBase
     {
-        public AccountController(IMediator mediator) : base(mediator) {}
+        private readonly IMemoryCache _cache;
+
+        public AccountController(IMediator mediator, IMemoryCache cache) : base(mediator)
+        {
+            _cache = cache;
+        }
         
         public IActionResult Login() => View(new LoginInputModel());
      
@@ -52,6 +59,9 @@ namespace BKind.Web.Controllers.Account
         public async Task<IActionResult> Signout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            _cache.Remove(CacheKeys.UserWithUsername(User.Identity.Name));
+
             return Redirect("/home/index");
         }
     }

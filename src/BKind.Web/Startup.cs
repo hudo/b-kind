@@ -40,7 +40,7 @@ namespace BKind.Web
 
             services.AddDbContext<StoriesDbContext>(o => o.UseNpgsql(Configuration.GetConnectionString("BkindPsql")));
 
-            services.AddDistributedMemoryCache();
+            services.AddMemoryCache();
             services.AddSession();
 
             services.AddLogging();
@@ -108,6 +108,11 @@ namespace BKind.Web
                     name: "page",
                     template: "page/{*slug}",
                     defaults: new {controller = "Pages", action = "Index"});
+
+                routes.MapRoute(
+                    name: "news",
+                    template: "news/{*slug}",
+                    defaults: new { controller = "News", action = "Index" });
 
                 routes.MapRoute(
                     name: "areas",

@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BKind.Web.Areas.Editor.Controllers
 {
     [Authorize]
-    [Area("Editor")]
+    [Area(Areas.Editor)]
     public class StoryController : BkindControllerBase
     {
         public StoryController(IMediator mediator) : base(mediator)

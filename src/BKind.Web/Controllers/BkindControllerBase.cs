@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using BKind.Web.Core;
 using BKind.Web.Core.StandardQueries;
+using BKind.Web.Features.Account.Contracts;
 using BKind.Web.Model;
 using BKind.Web.ViewModels;
 using MediatR;
@@ -39,11 +40,11 @@ namespace BKind.Web.Controllers
 
             if (_loggedUser != null) return _loggedUser;
 
-            var user = await _mediator.Send(new GetOneQuery<User>(x => x.Username == User.Identity.Name, x => x.Roles));
+            var user = await _mediator.Send(new GetUserQuery(User.Identity.Name));
 
-            _loggedUser = user;
+            _loggedUser = user.Result;
 
-            return user;
+            return _loggedUser;
         }
 
         public override void OnActionExecuted(ActionExecutedContext context)
