@@ -6179,6 +6179,10 @@ label {
   border: 8px solid transparent;
   border-bottom-color: #333; }
 
+.ra-logo img {
+  height: 50px;
+  width: auto; }
+
 .ra-bg-light {
   background-color: white;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2); }
