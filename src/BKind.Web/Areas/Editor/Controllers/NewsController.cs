@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using BKind.Web.Controllers;
 using BKind.Web.Core.StandardQueries;
+using BKind.Web.Features.News.Commands;
 using BKind.Web.Features.News.Models;
 using BKind.Web.Model;
 using MediatR;
@@ -42,6 +44,16 @@ namespace BKind.Web.Areas.Editor.Controllers
                 MapToModelState(result);
                 return View(model);
             }
+
+            return Redirect("/");
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _mediator.Send(new DeleteNewsCommand(id, await GetLoggedUserAsync()));
+
+            if (result.HasErrors)
+                return BadRequest(string.Join(", ", result.Errors.Select(x => x.Message)));
 
             return Redirect("/");
         }

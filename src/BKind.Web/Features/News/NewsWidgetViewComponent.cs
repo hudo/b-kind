@@ -23,7 +23,7 @@ namespace BKind.Web.Features.News
 
             model.Newses = await _mediator.Send(new GetAllQuery<Model.News>(
                 new PagedOptions<Model.News>(
-                    pageSize: 5,
+                    pageSize: 10,
                     orderBy: x => x.Published, 
                     ascending: false)));
                 
