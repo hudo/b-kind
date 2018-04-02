@@ -9,6 +9,10 @@ $(function () {
         $(".ra-context-menu").toggleClass("open");
     });
 
+    $("#ra-menu-toggle").on("click", function () {
+        $(this).toggleClass("open");
+    });
+
 });
 
 $(document).mouseup(function (e) {

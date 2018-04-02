@@ -452,3 +452,24 @@ label {
         border-bottom-color: white;
     }
 }
+
+.caret-base-up,
+.caret-base-down {
+    display: inline-block;
+
+    &:before {
+        content: "";
+        /*position: absolute;
+        top: 5px;*/
+    }
+}
+
+.caret-base-up:before {
+    border: 8px solid transparent;
+    border-top-color: $font-color;
+}
+
+.caret-base-down:before {
+    border: 8px solid transparent;
+    border-bottom-color: $font-color;
+}
