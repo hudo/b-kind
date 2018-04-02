@@ -6114,6 +6114,10 @@ label {
   .container {
     max-width: 1440px; } }
 
+@media (min-width: 576px) {
+  .container {
+    max-width: 100%; } }
+
 @-webkit-keyframes pulse {
   0% {
     -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.4); }
@@ -6133,21 +6137,6 @@ label {
     -moz-box-shadow: 0 0 0 0 transparent;
     box-shadow: 0 0 0 0 transparent; } }
 
-/*.material-icons.md-18 {
-    font-size: 18px;
-}
-
-.material-icons.md-24 {
-    font-size: 24px;
-}
-
-.material-icons.md-36 {
-    font-size: 36px;
-}
-
-.material-icons.md-48 {
-    font-size: 48px;
-}*/
 .text-sm {
   font-size: 12px; }
 
