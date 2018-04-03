@@ -18,8 +18,11 @@ namespace BKind.Web.Controllers.Account
             _cache = cache;
         }
         
-        public IActionResult Login() => View(new LoginInputModel());
-     
+        public IActionResult Login(string returnUrl)
+        {
+            return View(new LoginInputModel { ReturnUrl = returnUrl });
+        }
+
         [HttpPost]
         public async Task<IActionResult> Login(LoginInputModel inputModel)
         {
@@ -33,6 +36,9 @@ namespace BKind.Web.Controllers.Account
                 MapToModelState(response);
                 return View(inputModel);
             }
+
+            if (!string.IsNullOrEmpty(inputModel.ReturnUrl))
+                return Redirect(inputModel.ReturnUrl);
 
             return RedirectToAction("Index", "Home");
         }

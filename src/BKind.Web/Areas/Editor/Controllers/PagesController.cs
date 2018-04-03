@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using BKind.Web.Controllers;
 using BKind.Web.Core.StandardQueries;
 using BKind.Web.Features.Pages.Models;
+using BKind.Web.Infrastructure;
 using BKind.Web.Model;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -10,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BKind.Web.Areas.Editor.Controllers
 {
-    [Authorize]
+    [AdminsOnly]
     [Area("Editor")]
     public class PagesController : BkindControllerBase
     {

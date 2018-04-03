@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BKind.Web.Core;
 using BKind.Web.Features.Account.Contracts;
 using BKind.Web.Infrastructure.Helpers;
+using BKind.Web.Model;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -35,8 +36,9 @@ namespace BKind.Web.Features.Account.Domain
             {
                 var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Result.Username) };
 
-                foreach (var role in user.Result.Roles)
-                    claims.Add(new Claim(ClaimTypes.Role, role.Name));
+                claims.Add(new Claim("isAdmin", user.Result.Is<Administrator>().ToString()));
+                claims.Add(new Claim("isReviewer", user.Result.Is<Reviewer>().ToString()));
+                claims.Add(new Claim("fullname", $"{user.Result.FirstName} {user.Result.LastName}"));
 
                 await _httpContext.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                     new ClaimsPrincipal(new ClaimsIdentity(claims, "form")));

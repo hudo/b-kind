@@ -9,7 +9,8 @@
     <h2>Login</h2>
 
     <form asp-action="Login" method="post">
-        @*@Html.AntiForgeryToken()*@
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => x.ReturnUrl)
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">

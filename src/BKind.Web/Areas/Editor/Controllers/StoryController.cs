@@ -5,6 +5,7 @@ using BKind.Web.Core.StandardQueries;
 using BKind.Web.Features.Stories.Commands;
 using BKind.Web.Features.Stories.Contracts;
 using BKind.Web.Features.Stories.Queries;
+using BKind.Web.Infrastructure;
 using BKind.Web.Model;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -12,7 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BKind.Web.Areas.Editor.Controllers
 {
-    [Authorize]
     [Area(Areas.Editor)]
     public class StoryController : BkindControllerBase
     {

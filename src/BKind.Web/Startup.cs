@@ -45,7 +45,18 @@ namespace BKind.Web
 
             services.AddLogging();
 
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.AccessDeniedPath = "/account/login";
+                    options.LoginPath = "/account/login";
+                    options.LogoutPath = "/account/signout";
+                });
+            
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("isAdmin", policy => policy.RequireClaim("isAdmin", "True"));
+            });
 
             var container = new Container(c =>
             {

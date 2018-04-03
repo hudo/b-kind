@@ -4,15 +4,15 @@ using BKind.Web.Controllers;
 using BKind.Web.Core.StandardQueries;
 using BKind.Web.Features.News.Commands;
 using BKind.Web.Features.News.Models;
+using BKind.Web.Infrastructure;
 using BKind.Web.Model;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BKind.Web.Areas.Editor.Controllers
 {
-    [Authorize]
     [Area(Areas.Editor)]
+    [AdminsOnly]
     public class NewsController : BkindControllerBase
     {
         public NewsController(IMediator mediator) : base(mediator)
