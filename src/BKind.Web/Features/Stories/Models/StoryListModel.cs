@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using BKind.Web.Features.Shared;
+using BKind.Web.Infrastructure;
 using BKind.Web.Model;
-using BKind.Web.ViewModels;
 
 namespace BKind.Web.Features.Stories.Contracts
 {

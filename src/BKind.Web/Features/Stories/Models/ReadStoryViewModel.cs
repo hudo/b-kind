@@ -1,5 +1,6 @@
-﻿using BKind.Web.Model;
-using BKind.Web.ViewModels;
+﻿using BKind.Web.Features.Shared;
+using BKind.Web.Infrastructure;
+using BKind.Web.Model;
 
 namespace BKind.Web.Features.Stories.Contracts
 {

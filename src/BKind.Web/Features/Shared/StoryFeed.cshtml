@@ -1,0 +1,37 @@
+﻿@using BKind.Web.Infrastructure.Helpers
+@model BKind.Web.Features.Stories.Contracts.StoryListModel
+@{
+    var last = Model.Stories.LastOrDefault();
+}
+
+@foreach (var story in Model.Stories)
+{
+<div class="col mb-1 ra-story">
+    <div class="card card-box">
+        <div class="card-body">
+            @if (!string.IsNullOrEmpty(story.Title))
+            {
+                <h2 class="card-title"><a asp-controller="Stories" asp-action="read" asp-route-id="@story.Slug">@story.Title</a></h2>
+            }
+            <p class="card-text">
+                @story.Content.Shorten(300)
+            </p>
+        </div>
+        <div class="card-subtitle mb-2">
+            <h6 class="text-muted">
+                by <a asp-controller="Stories" asp-action="list" asp-route-author="@story.AuthorName">@story.AuthorName</a>
+                on @story.Created.ToString("dd/MM/yyyy"), @story.FormattedStatus
+                Read time: @story.Content.ReadTime() min,
+                Likes: @story.ThumbsUp
+            </h6>  
+        </div>
+        <div class="card-footer">
+            @await Component.InvokeAsync("StoryButtons", new { story = story, userWithRoles = Model.UserWithRoles })
+        </div>
+    </div>
+    @if (story != last)
+    {
+        <hr/>
+    }
+</div>
+}
