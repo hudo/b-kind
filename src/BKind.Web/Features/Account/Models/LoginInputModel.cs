@@ -1,5 +1,6 @@
 ﻿using BKind.Web.Core;
-using BKind.Web.ViewModels;
+using BKind.Web.Features.Shared;
+using BKind.Web.Infrastructure;
 using MediatR;
 
 namespace BKind.Web.Features.Account.Contracts

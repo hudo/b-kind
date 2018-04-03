@@ -22,12 +22,12 @@ namespace BKind.Web.Infrastructure.Helpers
             return hashed;
         }
 
-        public static string GenerateUniqueRandomToken()
+        public static string GenerateUniqueRandomToken(int length)
         {
             const string availableChars = "0123456789abcdefghijklmnopqrstuvwxyz";
             using (var generator = new RNGCryptoServiceProvider())
             {
-                var bytes = new byte[8];
+                var bytes = new byte[length];
                 generator.GetBytes(bytes);
                 var chars = bytes.Select(b => availableChars[b % availableChars.Length]);
                 var token = new string(chars.ToArray());

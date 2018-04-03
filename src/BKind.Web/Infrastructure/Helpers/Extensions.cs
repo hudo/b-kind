@@ -17,7 +17,7 @@ namespace BKind.Web.Infrastructure.Helpers
             return exception;
         }
 
-        public static string GenerateSlug(this string phrase)
+        public static string GenerateSlug(this string phrase, int length = 45)
         {
             string str = phrase.ToLower();
             // invalid chars           
@@ -25,7 +25,7 @@ namespace BKind.Web.Infrastructure.Helpers
             // convert multiple spaces into one space   
             str = Regex.Replace(str, @"\s+", " ").Trim();
             // cut and trim 
-            str = str.Substring(0, str.Length <= 45 ? str.Length : 45).Trim();
+            str = str.Substring(0, str.Length <= length ? str.Length : length).Trim();
             str = Regex.Replace(str, @"\s", "-"); // hyphens   
             return str;
         }

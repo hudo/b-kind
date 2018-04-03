@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using BKind.Web.Core;
+using BKind.Web.Features.Shared;
+using BKind.Web.Infrastructure;
 using BKind.Web.Model;
-using BKind.Web.ViewModels;
 using MediatR;
 
 namespace BKind.Web.Features.Account.Contracts

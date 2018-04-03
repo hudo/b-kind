@@ -14,33 +14,19 @@
     <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Migrations\20180331134621_AddedNews.cs" />
-    <Compile Remove="Migrations\20180331134621_AddedNews.Designer.cs" />
-    <Compile Remove="Migrations\20180331134805_AddedNews.cs" />
-    <Compile Remove="Migrations\20180331134805_AddedNews.Designer.cs" />
-    <Compile Remove="Migrations\20180331134918_AddedNews.cs" />
-    <Compile Remove="Migrations\20180331134918_AddedNews.Designer.cs" />
-    <Compile Remove="Migrations\20180331135023_AddedNews.cs" />
-    <Compile Remove="Migrations\20180331135023_AddedNews.Designer.cs" />
-    <Compile Remove="Migrations\20180331202541_AddedNews.cs" />
-    <Compile Remove="Migrations\20180331202541_AddedNews.Designer.cs" />
-    <Compile Remove="Migrations\20180401191052_AddedNewsSlug.cs" />
-    <Compile Remove="Migrations\20180401191052_AddedNewsSlug.Designer.cs" />
-    <Compile Remove="Migrations\20180401191213_AddedNewsSlug.cs" />
-    <Compile Remove="Migrations\20180401191213_AddedNewsSlug.Designer.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Update="wwwroot\**\*;**\*.cshtml;appsettings.json;web.config">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="7.5.2" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="7.5.2" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
-    <PackageReference Include="FluentValidation" Version="7.2.1" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="7.2.1" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.0.0" />
+    <PackageReference Include="Microsoft.NETCore.App" Version="2.0.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.0.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.1" />
+    <PackageReference Include="OdeToCode.AddFeatureFolders" Version="2.0.1" />
     <PackageReference Include="StructureMap.Microsoft.DependencyInjection" Version="1.4.0" />
     <PackageReference Include="MediatR" Version="3.0.1" />
     <PackageReference Include="System.ValueTuple" Version="4.4.0" />
@@ -48,9 +34,5 @@
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Areas\Editor\Data\" />
-    <Folder Include="Areas\Editor\Models\" />
   </ItemGroup>
 </Project>

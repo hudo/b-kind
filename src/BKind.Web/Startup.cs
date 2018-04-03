@@ -36,6 +36,8 @@ namespace BKind.Web
                     opt.Filters.Add(typeof(DbContextTransactionFilter));
                 })
                 .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>())
+                .AddFeatureFolders()
+                .AddAreaFeatureFolders()
                 .AddControllersAsServices();
 
             services.AddDbContext<StoriesDbContext>(o => o.UseNpgsql(Configuration.GetConnectionString("BkindPsql")));
@@ -119,6 +121,11 @@ namespace BKind.Web
                     name: "page",
                     template: "page/{*slug}",
                     defaults: new {controller = "Pages", action = "Index"});
+                
+                routes.MapRoute(
+                    name: "story",
+                    template: "story/{slug}/{title}",
+                    defaults: new {controller = "Stories", action = "Read"});
 
                 routes.MapRoute(
                     name: "news",
@@ -127,12 +134,11 @@ namespace BKind.Web
 
                 routes.MapRoute(
                     name: "areas",
-                    template: "{area:exists}/{controller=home}/{action=index}/{id?}"
-                );
-
+                    template: "{area:exists}/{controller=home}/{action=index}/{id?}");
+                    
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=home}/{action=index}/{id?}");
+                        name: "default",
+                        template: "{controller=home}/{action=index}/{id?}");
             });
         }
 
