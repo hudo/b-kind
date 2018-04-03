@@ -121,6 +121,11 @@ namespace BKind.Web
                     name: "page",
                     template: "page/{*slug}",
                     defaults: new {controller = "Pages", action = "Index"});
+                
+                routes.MapRoute(
+                    name: "story",
+                    template: "story/{slug}/{title}",
+                    defaults: new {controller = "Stories", action = "Read"});
 
                 routes.MapRoute(
                     name: "news",

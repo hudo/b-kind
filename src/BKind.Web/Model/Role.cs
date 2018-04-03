@@ -33,7 +33,7 @@ namespace BKind.Web.Model
 
         public Story CreateNewStory(string title, string content)
         {
-            var slug = StringHelpers.GenerateUniqueRandomToken();
+            var slug = StringHelpers.GenerateUniqueRandomToken(4);
             
             return new Story(title, content, slug, this.Id, Status.Draft);
         }

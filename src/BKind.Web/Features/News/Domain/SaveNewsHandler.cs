@@ -25,10 +25,9 @@ namespace BKind.Web.Features.News.Domain
 
             Model.News news = null;
 
-            if (message.News.Id > 0)
-                await _mediator.Send(new GetByIdQuery<Model.News>(message.News.Id));
-            else
-                news = new Model.News();
+            news = message.News.Id > 0
+                ? await _mediator.Send(new GetByIdQuery<Model.News>(message.News.Id))
+                : new Model.News();
 
             news.Published = DateTime.UtcNow;
             news.Title = message.News.Title;

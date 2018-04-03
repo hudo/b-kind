@@ -17,10 +17,10 @@ namespace BKind.Web.Features.Stories
     {
         public StoriesController(IMediator mediator) : base(mediator) {}
 
-        public async Task<IActionResult> Read(string id)
+        public async Task<IActionResult> Read(string slug)
         {
             var user = await GetLoggedUserAsync();
-            var stories = await _mediator.Send(new ListStoriesQuery { StorySlug = id, UserWithRoles = user, IncludeTags = true});
+            var stories = await _mediator.Send(new ListStoriesQuery { StorySlug = slug, UserWithRoles = user, IncludeTags = true});
 
             if (stories == null || !stories.Any()) return NotFound();
 
