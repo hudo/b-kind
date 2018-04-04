@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using BKind.Web.Infrastructure.Helpers;
 using BKind.Web.Infrastructure.Persistance;
@@ -46,8 +47,11 @@ namespace BKind.Web
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseUrls("http://0.0.0.0:8050")
+                .UseIISIntegration()
+                .UseStartup<Startup>()
                 .Build();
     }
 }
