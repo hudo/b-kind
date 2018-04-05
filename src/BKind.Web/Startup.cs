@@ -31,10 +31,7 @@ namespace BKind.Web
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(opt =>
-                {
-                    opt.Filters.Add(typeof(DbContextTransactionFilter));
-                })
+            services.AddMvc()
                 .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>())
                 .AddFeatureFolders()
                 .AddAreaFeatureFolders()
