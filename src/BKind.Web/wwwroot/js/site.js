@@ -1,15 +1,15 @@
 
 $(function () {
 
-    $("#ra-profile-btn").on("click", function () {
+    $("#ra-profile-btn").on("click touch", function () {
         $(".ra-profile-menu").toggleClass("open");
     });
 
-    $("#ra-menu-toggle").on("click", function () {
+    $("#ra-menu-toggle").on("click touch", function () {
         $(".ra-context-menu").toggleClass("open");
     });
 
-    $("#ra-menu-toggle").on("click", function () {
+    $("#ra-menu-toggle").on("click touch", function () {
         $(this).toggleClass("open");
     });
 

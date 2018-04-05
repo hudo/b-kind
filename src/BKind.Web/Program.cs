@@ -19,26 +19,28 @@ namespace BKind.Web
 
             Task.Run(() =>
             {
-                using (var scope = host.Services.CreateScope())
+                try
                 {
-                    var logger = scope.ServiceProvider.GetService<ILogger<Program>>();
-
-                    try
+                    using (var scope = host.Services.CreateScope())
                     {
+                        var logger = scope.ServiceProvider.GetService<ILogger<Program>>();
+
                         var dbContext = scope.ServiceProvider.GetService<StoriesDbContext>();
 
                         dbContext.Database.Migrate();
 
                         logger.LogDebug("Migration done.");
-                        
+
                         dbContext.EnsureDataSeed();
 
                         logger.LogDebug("Seeding done.");
                     }
-                    catch (Exception e)
-                    {
-                        logger.LogError(e, $"Error with data seed: {e.Unwrap().Message}");
-                    }
+                }
+                catch (Exception e)
+                {
+                    //logger.LogError(e, $"Error with data seed: {e.Unwrap().Message}");
+                    Console.WriteLine("Couldn't run migrations");
+                    Console.WriteLine(e.Unwrap().Message);
                 }
             });
 
