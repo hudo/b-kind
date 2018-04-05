@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BKind.Web.Features.News.Models
+namespace BKind.Web.Features.News
 {
     public class NewsWidgetModel
     {

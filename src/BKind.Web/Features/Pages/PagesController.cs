@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using BKind.Web.Core.StandardQueries;
-using BKind.Web.Features.Pages.Models;
 using BKind.Web.Features.Shared;
 using BKind.Web.Infrastructure;
 using BKind.Web.Model;

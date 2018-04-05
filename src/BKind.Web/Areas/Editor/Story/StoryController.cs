@@ -1,8 +1,9 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using BKind.Web.Areas.Editor.Story.Domain;
+using BKind.Web.Areas.Editor.Story.Models;
 using BKind.Web.Core.StandardQueries;
 using BKind.Web.Features.Shared;
-using BKind.Web.Features.Stories.Commands;
 using BKind.Web.Features.Stories.Contracts;
 using BKind.Web.Features.Stories.Queries;
 using BKind.Web.Model;

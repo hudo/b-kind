@@ -1,10 +1,9 @@
 ﻿using BKind.Web.Core;
 using BKind.Web.Features.Shared;
-using BKind.Web.Infrastructure;
 using BKind.Web.Model;
 using MediatR;
 
-namespace BKind.Web.Features.Pages.Models
+namespace BKind.Web.Areas.Editor.Pages.Models
 {
     public class PageEditModel : ViewModelBase, IRequest<Response<Page>>
     {

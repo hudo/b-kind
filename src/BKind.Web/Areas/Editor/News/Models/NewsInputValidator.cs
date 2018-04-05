@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace BKind.Web.Features.News.Models
+namespace BKind.Web.Areas.Editor.News.Models
 {
     public class NewsInputValidator : AbstractValidator<NewsInputModel>
     {

@@ -1,7 +1,7 @@
 ﻿using BKind.Web.Core;
 using MediatR;
 
-namespace BKind.Web.Features.Stories.Commands
+namespace BKind.Web.Features.Stories.Models
 {
     public class IncreaseStoryViewCountCommand : IRequest<Response>
     {

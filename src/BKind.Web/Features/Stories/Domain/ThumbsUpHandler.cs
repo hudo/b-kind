@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using BKind.Web.Core;
 using BKind.Web.Core.StandardQueries;
-using BKind.Web.Features.Stories.Commands;
+using BKind.Web.Features.Stories.Models;
 using BKind.Web.Features.Stories.Queries;
 using BKind.Web.Infrastructure.Helpers;
 using BKind.Web.Model;

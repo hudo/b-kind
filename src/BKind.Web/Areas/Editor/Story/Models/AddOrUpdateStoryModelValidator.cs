@@ -1,11 +1,10 @@
-﻿using BKind.Web.Features.Stories.Contracts;
-using FluentValidation;
+﻿using FluentValidation;
 
-namespace BKind.Web.Features.Stories.Models
+namespace BKind.Web.Areas.Editor.Story.Models
 {
-    public class CreateStoryModelValidator : AbstractValidator<AddOrUpdateStoryInputModel>
+    public class AddOrUpdateStoryModelValidator : AbstractValidator<AddOrUpdateStoryInputModel>
     {
-        public CreateStoryModelValidator()
+        public AddOrUpdateStoryModelValidator()
         {
             RuleFor(x => x.Content).NotEmpty();
             

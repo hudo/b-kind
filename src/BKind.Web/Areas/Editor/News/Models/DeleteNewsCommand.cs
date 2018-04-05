@@ -2,7 +2,7 @@
 using BKind.Web.Model;
 using MediatR;
 
-namespace BKind.Web.Features.News.Commands
+namespace BKind.Web.Areas.Editor.News.Models
 {
     public class DeleteNewsCommand : IRequest<Response>
     {

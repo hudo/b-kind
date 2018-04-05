@@ -2,7 +2,7 @@
 using BKind.Web.Model;
 using MediatR;
 
-namespace BKind.Web.Features.Stories.Commands
+namespace BKind.Web.Areas.Editor.Story.Models
 {
     public class ChangeStatusCommand : IRequest<Response>
     {

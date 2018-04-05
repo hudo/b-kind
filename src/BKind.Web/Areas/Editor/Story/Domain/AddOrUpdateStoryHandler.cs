@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using BKind.Web.Areas.Editor.Story.Models;
 using BKind.Web.Core;
 using BKind.Web.Core.StandardQueries;
-using BKind.Web.Features.Stories.Contracts;
 using BKind.Web.Infrastructure.Helpers;
 using BKind.Web.Model;
 using MediatR;
 
-namespace BKind.Web.Features.Stories.Domain
+namespace BKind.Web.Areas.Editor.Story.Domain
 {
-    public class AddOrUpdateStoryHandler : IAsyncRequestHandler<AddOrUpdateStoryInputModel, Response<Story>>
+    public class AddOrUpdateStoryHandler : IAsyncRequestHandler<AddOrUpdateStoryInputModel, Response<Model.Story>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMediator _mediator;
@@ -21,9 +21,9 @@ namespace BKind.Web.Features.Stories.Domain
             _mediator = mediator;
         }
 
-        public async Task<Response<Story>> Handle(AddOrUpdateStoryInputModel message)
+        public async Task<Response<Model.Story>> Handle(AddOrUpdateStoryInputModel message)
         {
-            var response = new Response<Story>();
+            var response = new Response<Model.Story>();
 
             var user = await _mediator.Send(new GetOneQuery<User>(x => x.Id == message.UserId, u => u.Roles));
 
@@ -46,7 +46,7 @@ namespace BKind.Web.Features.Stories.Domain
             }
             else author = user.GetRole<Author>();
 
-            Story story;
+            Model.Story story;
             if (message.StoryId.HasValue)
             {
                 story = await GetAndUpdateAsync(message);
@@ -82,7 +82,7 @@ namespace BKind.Web.Features.Stories.Domain
             return response;
         }
 
-        private async Task UpdateTags(AddOrUpdateStoryInputModel message, Story story)
+        private async Task UpdateTags(AddOrUpdateStoryInputModel message, Model.Story story)
         {
             var storyTags = await _mediator.Send(new GetAllQuery<StoryTags>(x => x.StoryId == story.Id));
 
@@ -122,9 +122,9 @@ namespace BKind.Web.Features.Stories.Domain
             await _unitOfWork.Commit();
         }
 
-        private async Task<Story> GetAndUpdateAsync(AddOrUpdateStoryInputModel message)
+        private async Task<Model.Story> GetAndUpdateAsync(AddOrUpdateStoryInputModel message)
         {
-            var story = await _mediator.Send(new GetByIdQuery<Story>(message.StoryId.Value));
+            var story = await _mediator.Send(new GetByIdQuery<Model.Story>(message.StoryId.Value));
             story.Title = message.StoryTitle;
             story.Content = message.Content;
             return story;

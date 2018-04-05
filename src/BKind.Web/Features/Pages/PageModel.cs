@@ -1,8 +1,7 @@
 ﻿using BKind.Web.Features.Shared;
-using BKind.Web.Infrastructure;
 using BKind.Web.Model;
 
-namespace BKind.Web.Features.Pages.Models
+namespace BKind.Web.Features.Pages
 {
     public class PageModel : ViewModelBase
     {

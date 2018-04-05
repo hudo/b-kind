@@ -1,7 +1,6 @@
 ﻿using BKind.Web.Features.Shared;
-using BKind.Web.Infrastructure;
 
-namespace BKind.Web.Features.News.Models
+namespace BKind.Web.Features.News
 {
     public class NewsModel : ViewModelBase
     {

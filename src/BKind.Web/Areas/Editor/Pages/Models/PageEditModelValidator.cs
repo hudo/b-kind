@@ -1,7 +1,6 @@
-﻿using BKind.Web.Features.Pages.Models;
-using FluentValidation;
+﻿using FluentValidation;
 
-namespace BKind.Web.Features.Pages
+namespace BKind.Web.Areas.Editor.Pages.Models
 {
     public class PageEditModelValidator : AbstractValidator<PageEditModel>
     {

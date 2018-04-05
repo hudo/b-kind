@@ -1,9 +1,8 @@
 ﻿using BKind.Web.Core;
 using BKind.Web.Features.Shared;
-using BKind.Web.Infrastructure;
 using MediatR;
 
-namespace BKind.Web.Features.News.Models
+namespace BKind.Web.Areas.Editor.News.Models
 {
     public class NewsInputModel : ViewModelBase, IRequest<Response<Model.News>>
     {

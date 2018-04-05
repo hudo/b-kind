@@ -1,9 +1,8 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using BKind.Web.Areas.Editor.News.Models;
 using BKind.Web.Core.StandardQueries;
 using BKind.Web.Features.Account.Domain;
-using BKind.Web.Features.News.Commands;
-using BKind.Web.Features.News.Models;
 using BKind.Web.Features.Shared;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

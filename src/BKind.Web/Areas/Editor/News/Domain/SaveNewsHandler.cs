@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
+using BKind.Web.Areas.Editor.News.Models;
 using BKind.Web.Core;
 using BKind.Web.Core.StandardQueries;
-using BKind.Web.Features.News.Models;
 using BKind.Web.Infrastructure.Helpers;
 using MediatR;
 
-namespace BKind.Web.Features.News.Domain
+namespace BKind.Web.Areas.Editor.News.Domain
 {
     public class SaveNewsHandler : IAsyncRequestHandler<NewsInputModel, Response<Model.News>>
     {

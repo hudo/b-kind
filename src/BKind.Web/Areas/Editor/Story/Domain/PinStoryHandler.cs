@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
+using BKind.Web.Areas.Editor.Story.Models;
 using BKind.Web.Core;
-using BKind.Web.Features.Stories.Commands;
 using BKind.Web.Features.Stories.Queries;
 using BKind.Web.Model;
 using MediatR;
 
-namespace BKind.Web.Features.Stories.Domain
+namespace BKind.Web.Areas.Editor.Story.Domain
 {
     public class PinStoryHandler : IAsyncRequestHandler<PinStoryCommand, Response>
     {

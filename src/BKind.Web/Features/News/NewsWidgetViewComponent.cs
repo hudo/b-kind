@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using BKind.Web.Core.StandardQueries;
 using BKind.Web.Features.Account.Contracts;
-using BKind.Web.Features.News.Models;
 using BKind.Web.Model;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

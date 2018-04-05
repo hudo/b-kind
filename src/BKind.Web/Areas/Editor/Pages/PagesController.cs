@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
+using BKind.Web.Areas.Editor.Pages.Models;
 using BKind.Web.Core.StandardQueries;
 using BKind.Web.Features.Account.Domain;
-using BKind.Web.Features.Pages.Models;
 using BKind.Web.Features.Shared;
 using BKind.Web.Model;
 using MediatR;

@@ -2,7 +2,7 @@
 using BKind.Web.Model;
 using MediatR;
 
-namespace BKind.Web.Features.Stories.Commands
+namespace BKind.Web.Features.Stories.Models
 {
     public class ThumbsUpCommand : IRequest<Response>
     {

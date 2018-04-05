@@ -1,8 +1,7 @@
 ﻿using BKind.Web.Features.Shared;
 using BKind.Web.Features.Stories.Contracts;
-using BKind.Web.Infrastructure;
 
-namespace BKind.Web.Features.Home.Models
+namespace BKind.Web.Features.Home
 {
     public class HomePageViewModel : ViewModelBase
     {

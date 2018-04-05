@@ -1,14 +1,11 @@
 ﻿using BKind.Web.Core;
-using BKind.Web.Features.Account;
 using BKind.Web.Features.Account.Models;
 using BKind.Web.Features.Shared;
-using BKind.Web.Infrastructure;
-using BKind.Web.Model;
 using MediatR;
 
-namespace BKind.Web.Features.Stories.Contracts
+namespace BKind.Web.Areas.Editor.Story.Models
 {
-    public class AddOrUpdateStoryInputModel : ViewModelBase, IRequest<Response<Story>>, IUserIdentifier
+    public class AddOrUpdateStoryInputModel : ViewModelBase, IRequest<Response<Model.Story>>, IUserIdentifier
     {
         public AddOrUpdateStoryInputModel()
         {
@@ -22,7 +19,7 @@ namespace BKind.Web.Features.Stories.Contracts
 
         public int UserId { get; set; }
 
-        public static AddOrUpdateStoryInputModel From(Story story)
+        public static AddOrUpdateStoryInputModel From(Model.Story story)
         {
             return new AddOrUpdateStoryInputModel
             {

@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Linq;
-using System.Net.Mail;
 using System.Threading.Tasks;
+using BKind.Web.Areas.Editor.Pages.Models;
 using BKind.Web.Core;
 using BKind.Web.Core.StandardQueries;
-using BKind.Web.Features.Pages.Models;
 using BKind.Web.Infrastructure.Helpers;
 using BKind.Web.Model;
 using MediatR;
 
-namespace BKind.Web.Features.Pages.Domain
+namespace BKind.Web.Areas.Editor.Pages.Domain
 {
     public class SavePageHandler : IAsyncRequestHandler<PageEditModel, Response<Page>>
     {
