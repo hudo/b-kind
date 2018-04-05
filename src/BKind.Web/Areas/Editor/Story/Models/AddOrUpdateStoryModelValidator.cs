@@ -11,6 +11,12 @@ namespace BKind.Web.Areas.Editor.Story.Models
             RuleFor(x => x.StoryTitle).NotEmpty()
                 .When(x => x.Content?.Length > 200)
                 .WithMessage("Story is longer than 200 characters, please use title!");
+
+            RuleFor(x => x.Image).Custom((file, ctx) =>
+            {
+                var a = file.ContentType;
+            });
+
         }
     }
 }

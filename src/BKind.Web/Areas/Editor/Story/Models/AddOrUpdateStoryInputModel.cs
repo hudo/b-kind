@@ -2,6 +2,7 @@
 using BKind.Web.Features.Account.Models;
 using BKind.Web.Features.Shared;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace BKind.Web.Areas.Editor.Story.Models
 {
@@ -16,6 +17,8 @@ namespace BKind.Web.Areas.Editor.Story.Models
         public string StoryTitle { get; set; }
         public string Content { get; set; }
         public string Tags { get; set; }
+        public IFormFile Image { get; set; }
+        
 
         public int UserId { get; set; }
 
