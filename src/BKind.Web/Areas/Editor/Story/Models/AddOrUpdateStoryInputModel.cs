@@ -18,6 +18,8 @@ namespace BKind.Web.Areas.Editor.Story.Models
         public string Content { get; set; }
         public string Tags { get; set; }
         public IFormFile Image { get; set; }
+
+        public string ExistingImage { get; set; }
         
 
         public int UserId { get; set; }

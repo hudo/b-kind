@@ -28,6 +28,15 @@
                 <input type="file" asp-for="Image" class="form-control" />
                 <small class="form-text text-muted">Try to keep image dimensions reasonable, up to 800px in width or height, and size below 200kb. Image will be resized to fit into specific area.</small>
                 <span asp-validation-for="Image"></span>
+                @if(!string.IsNullOrEmpty(Model.ExistingImage))
+                {
+                    <div>
+                        <a href="@Model.ExistingImage" target="_blank">
+                            Existing photo: <br />
+                            <img src="@Model.ExistingImage" width="150" />
+                        </a>
+                    </div>
+                }
             </div>
             <div class="form-group">
                 <label>Tags:</label>

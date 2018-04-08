@@ -35,7 +35,7 @@ namespace BKind.Web.Features.Stories.Domain
 
             try
             {
-                await _unitOfWork.Commit();
+                await _unitOfWork.CommitAsync();
             }
             catch(Exception e)
             {

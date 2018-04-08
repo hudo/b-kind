@@ -54,7 +54,7 @@ namespace BKind.Web.Features.Account.Domain
                 try
                 {
                     _unitOfWork.Add(user);
-                    await _unitOfWork.Commit();
+                    await _unitOfWork.CommitAsync();
                 }
                 catch(Exception e)
                 {

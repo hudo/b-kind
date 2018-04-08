@@ -34,7 +34,7 @@ namespace BKind.Web.Areas.Editor.Story.Domain
             
             _uow.Update(story);
 
-            await _uow.Commit();
+            await _uow.CommitAsync();
 
             return response;
         }

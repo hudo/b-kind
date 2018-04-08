@@ -15,6 +15,8 @@ using System.IO;
 using BKind.Web.Infrastructure;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using System.Threading.Tasks;
+using BKind.Web.Services;
+using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BKind.Web
@@ -41,8 +43,9 @@ namespace BKind.Web
 
             services.AddMemoryCache();
             services.AddSession();
-
             services.AddLogging();
+
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
@@ -80,6 +83,8 @@ namespace BKind.Web
 
                 c.For<IUnitOfWork>().Use<EfUnitOfWork>();
                 c.For<DbContext>().Use<StoriesDbContext>();
+
+                c.For<IStorageService>().Use<AzureStorageService>();
 
                 c.For<IHttpContextAccessor>().Use<HttpContextAccessor>().Singleton();
             });

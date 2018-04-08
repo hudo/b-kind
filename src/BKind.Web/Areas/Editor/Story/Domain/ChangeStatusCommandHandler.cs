@@ -38,7 +38,7 @@ namespace BKind.Web.Areas.Editor.Story.Domain
 
             try
             {
-                await _unitOfWork.Commit();
+                await _unitOfWork.CommitAsync();
             }
             catch (Exception e)
             {

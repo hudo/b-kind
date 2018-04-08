@@ -66,7 +66,7 @@ namespace BKind.Web.Areas.Editor.Pages.Domain
                     _uow.Update(page);
                 }
 
-                await _uow.Commit();
+                await _uow.CommitAsync();
             }
             catch (Exception e)
             {

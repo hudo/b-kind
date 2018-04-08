@@ -36,7 +36,7 @@ namespace BKind.Web.Areas.Editor.Story.Domain
 
             try
             {
-                await _uow.Commit();
+                await _uow.CommitAsync();
             }
             catch (Exception e)
             {

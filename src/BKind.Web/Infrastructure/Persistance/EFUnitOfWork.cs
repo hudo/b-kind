@@ -36,7 +36,7 @@ namespace BKind.Web.Infrastructure.Persistance
             _db.Set<T>().Remove(entity);
         }
 
-        public async Task Commit()
+        public async Task CommitAsync()
         {
             // review this 
             using (var transaction = await _db.Database.BeginTransactionAsync())

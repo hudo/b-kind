@@ -49,7 +49,7 @@ namespace BKind.Web.Features.Account.Domain
 
                     _unitOfWork.Update(user.Result);
 
-                    await _unitOfWork.Commit();
+                    await _unitOfWork.CommitAsync();
                 }
                 catch(Exception e)
                 {

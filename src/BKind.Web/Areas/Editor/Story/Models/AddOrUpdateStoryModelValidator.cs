@@ -1,9 +1,12 @@
-﻿using FluentValidation;
+﻿using System.Linq;
+using FluentValidation;
 
 namespace BKind.Web.Areas.Editor.Story.Models
 {
     public class AddOrUpdateStoryModelValidator : AbstractValidator<AddOrUpdateStoryInputModel>
     {
+        private string[] _allowedTypes = new[] { "image/jpeg", "image/png" };
+
         public AddOrUpdateStoryModelValidator()
         {
             RuleFor(x => x.Content).NotEmpty();
@@ -14,7 +17,12 @@ namespace BKind.Web.Areas.Editor.Story.Models
 
             RuleFor(x => x.Image).Custom((file, ctx) =>
             {
-                var a = file.ContentType;
+                if(file == null) return; 
+
+                if(!_allowedTypes.Contains(file.ContentType))
+                {
+                    ctx.AddFailure("Image", $"JPG and PNG files supported. You uploaded {file.ContentType}");
+                }
             });
 
         }

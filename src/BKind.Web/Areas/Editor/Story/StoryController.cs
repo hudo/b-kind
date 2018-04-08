@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using BKind.Web.Areas.Editor.Story.Domain;
 using BKind.Web.Areas.Editor.Story.Models;
+using BKind.Web.Core;
 using BKind.Web.Core.StandardQueries;
 using BKind.Web.Features.Shared;
 using BKind.Web.Features.Stories.Contracts;
@@ -10,14 +11,18 @@ using BKind.Web.Model;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace BKind.Web.Areas.Editor.Story
 {
     [Area(Areas.Editor)]
     public class StoryController : BkindControllerBase
     {
-        public StoryController(IMediator mediator) : base(mediator)
+        private readonly AppSettings _appSettings;
+
+        public StoryController(IMediator mediator, IOptions<AppSettings> appSettings) : base(mediator)
         {
+            _appSettings = appSettings.Value;
         }
 
         public ActionResult Share() => View(new AddOrUpdateStoryInputModel());
@@ -59,6 +64,9 @@ namespace BKind.Web.Areas.Editor.Story
             model.Content = story.Content;
             model.Tags = string.Join(',', tags.Select(x => x.Title));
             model.Title = $"Edit {story.Title}";
+
+            if (!string.IsNullOrEmpty(story.Photo))
+                model.ExistingImage = $"{_appSettings.StorageDomain}{_appSettings.StoryPhotoContainer}/{story.Photo}";
 
             if (TempData.ContainsKey(_ErrorKey))
                 model.Informations.Add((string)TempData[_ErrorKey]);

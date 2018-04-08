@@ -43,7 +43,7 @@ namespace BKind.Web.Areas.Editor.News.Domain
 
             try
             {
-                await _uow.Commit();
+                await _uow.CommitAsync();
 
                 response.Result = news;
             }

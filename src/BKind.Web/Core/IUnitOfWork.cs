@@ -11,6 +11,6 @@ namespace BKind.Web.Core
         void Update<T>(T entity) where T : class;
         void Delete<T>(T entity) where T : class;
 
-        Task Commit();
+        Task CommitAsync();
     }
 }

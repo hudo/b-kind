@@ -35,7 +35,7 @@ namespace BKind.Web.Areas.Editor.News.Domain
             try
             {
                 _uow.Delete(news);
-                await _uow.Commit();
+                await _uow.CommitAsync();
             }
             catch (Exception e)
             {

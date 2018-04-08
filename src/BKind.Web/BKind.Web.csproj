@@ -29,6 +29,7 @@
     <PackageReference Include="StructureMap.Microsoft.DependencyInjection" Version="1.4.0" />
     <PackageReference Include="MediatR" Version="3.0.1" />
     <PackageReference Include="System.ValueTuple" Version="4.4.0" />
+    <PackageReference Include="WindowsAzure.Storage" Version="9.1.1" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
