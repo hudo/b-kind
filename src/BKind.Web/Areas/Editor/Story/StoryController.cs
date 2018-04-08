@@ -20,6 +20,7 @@ namespace BKind.Web.Areas.Editor.Story
         {
         }
 
+        [Authorize]
         public ActionResult Share() => View(new AddOrUpdateStoryInputModel());
 
         [ValidateAntiForgeryToken]
