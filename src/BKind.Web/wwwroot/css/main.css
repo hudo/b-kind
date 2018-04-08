@@ -6098,6 +6098,12 @@ footer[role=main] {
 label {
   font-weight: bold; }
 
+label + .form-text {
+  margin-top: 0; }
+
+.form-control {
+  border-radius: 0; }
+
 .field-validation-error {
   background-color: rgba(255, 0, 0, 0.4);
   border-bottom-left-radius: 0.25rem;
@@ -6109,7 +6115,20 @@ label {
 
 .input-validation-error {
   border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0; }
+  border-bottom-right-radius: 0;
+  border: 1px solid rgba(255, 0, 0, 0.4); }
+
+.validation-summary-errors {
+  padding: .5rem 1rem;
+  background-color: rgba(255, 0, 0, 0.15);
+  border-radius: 0;
+  border: 1px solid rgba(255, 0, 0, 0.4);
+  margin-bottom: 1rem; }
+  .validation-summary-errors ul {
+    margin-bottom: 0;
+    padding: 0;
+    list-style-position: inside;
+    font-size: 14px; }
 
 @media (min-width: 1400px) {
   .container {
