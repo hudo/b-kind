@@ -4,7 +4,7 @@
 @using BKind.Web.Infrastructure.Helpers
 @model BKind.Web.Areas.Editor.Story.Models.AddOrUpdateStoryInputModel
 
-@{ 
+@{
     Model.BodyClass = "ra-page-trimmed";
 }
 
@@ -15,26 +15,26 @@
         <form method="post">
             @Html.AntiForgeryToken()
             @Html.HiddenFor(x => x.StoryId)
+            @Html.ValidationSummary()
             <div class="form-group">
-                <label>Title:</label>
-                <input type="text" asp-for="StoryTitle" class="form-control" maxlength="70" />
-                <small class="form-text text-muted">Optional, for longer stories: add your story title. Focus on keeping the title under 70 characters.</small>
+                <label class="mb-0">Title:</label>
+                <small class="form-text text-muted mb-1">Optional, for longer stories: add your story title. Focus on keeping the title under 70 characters.</small>
+                <input type="text" asp-for="StoryTitle" class="form-control" />
                 <span asp-validation-for="StoryTitle"></span>
             </div>
             <div class="form-group">
-                <label>Content:</label>
+                <label class="mb-0">Content:</label>
+                <small class="form-text text-muted mb-1">Add your story.</small>
                 <textarea type="text" asp-for="Content" class="form-control" rows="15"></textarea>
-                <small class="form-text text-muted">Add your story.</small>
                 <span asp-validation-for="Content"></span>
             </div>
             <div class="form-group">
-                <label>Tags:</label>
-                <input type="text" class="form-control" asp-for="Tags">
+                <label class="mb-0">Tags:</label>
                 <small class="form-text text-muted">Story tags, separated by comma.</small>
+                <input type="text" class="form-control" asp-for="Tags">
                 <span asp-validation-for="Tags"></span>
             </div>
             <input class="btn btn-primary" type="submit" value="Submit story" />
-            @Html.ValidationSummary()
         </form>
     </div>
 </div>
