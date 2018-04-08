@@ -7,7 +7,7 @@
 
 <div class="row">
     <div class="col mb-5">
-        <h2 class="mb-3">Edit news item @Model.News?.Title</h2>
+        <h2 class="mb-3">@(!isEdit ? "Add news" : "Edit news item" + Model.News?.Title)</h2>
         <form method="post">
             @Html.AntiForgeryToken()
             @Html.HiddenFor(x => x.News.Id)

@@ -6,6 +6,7 @@
 
 @{
     Model.BodyClass = "ra-page-trimmed";
+    var isEdit = Model.StoryId.GetValueOrDefault(0) > 0;
 }
 
 <div class="row">
