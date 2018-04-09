@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using BKind.Web.Core;
 using BKind.Web.Core.StandardQueries;
 using BKind.Web.Features.Shared;
 using BKind.Web.Features.Stories.Contracts;
@@ -8,21 +9,26 @@ using BKind.Web.Model;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace BKind.Web.Features.Home
 {
     public class HomeController : BkindControllerBase
     {
+        private readonly AppSettings _appSettings;
         private readonly ILogger _logger;
 
-        public HomeController(IMediator mediator, ILogger<HomeController> logger) : base(mediator)
+        public HomeController(IMediator mediator, IOptions<AppSettings> appSettings, ILogger<HomeController> logger) : base(mediator)
         {
+            _appSettings = appSettings.Value;
             _logger = logger;
         }
 
         public async Task<IActionResult> Index()
         {
             var user = await GetLoggedUserAsync();
+
+            var photoPrefix = $"{_appSettings.StorageDomain}{_appSettings.StoryPhotoContainer}";
 
             var model = new HomePageViewModel
             {
@@ -32,10 +38,10 @@ namespace BKind.Web.Features.Home
                     await _mediator.Send(new ListStoriesQuery
                     {
                         UserWithRoles = user, 
-                        Paging = new PagedOptions<Story>(pageSize: 5, orderBy: s => s.Modified, @ascending: false),
+                        Paging = new PagedOptions<Story>(pageSize: 5, orderBy: s => s.Created, @ascending: false),
                         Pinned = false
                     }),
-                    user),
+                    user, photoPrefix),
                 Recommended = new StoryListModel(
                     await _mediator.Send(new ListStoriesQuery
                     {
@@ -43,7 +49,7 @@ namespace BKind.Web.Features.Home
                         Paging = new PagedOptions<Story>(pageSize: 5, orderBy: s => s.Views, @ascending: false),
                         Pinned = true
                     }),
-                    user)
+                    user, photoPrefix)
             };
 
             return View(model);

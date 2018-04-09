@@ -18,11 +18,14 @@ namespace BKind.Web.Features.Stories.Contracts
         public int ThumbsUp { get; set; }
         public bool Pinned { get; set; }
         public string AuthorName { get; set; }
+        public string Photo { get; set; }
         public int AuthorId { get; set; }
         public DateTime Created { get; set; }
         public Status Status { get; set; }
         public List<string> Tags { get; set; }
         public int Views { get; set; }
+
+        public bool HasPhoto() => !string.IsNullOrEmpty(Photo);
 
         public string FormattedStatus
         {

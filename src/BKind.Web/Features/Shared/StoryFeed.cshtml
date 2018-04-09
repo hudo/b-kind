@@ -14,12 +14,15 @@
             {
                 <h2 class="card-title">
                     <a asp-route="story" asp-route-slug="@story.Slug" asp-route-title="@story.Title.GenerateSlug()">@story.Title</a>
-
                 </h2>
             }
-            <p class="card-text">
+            @if (story.HasPhoto())
+            {
+                <img src="@Model.GenerateUrl(story)" align="left" width="250" class="mr-4"/>
+            }
+            <div class="card-text">
                 @story.Content.Shorten(300)
-            </p>
+            </div>
         </div>
         <div class="card-subtitle mb-2">
             <h6 class="text-muted">

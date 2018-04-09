@@ -5,7 +5,7 @@ namespace BKind.Web.Areas.Editor.Story.Models
 {
     public class AddOrUpdateStoryModelValidator : AbstractValidator<AddOrUpdateStoryInputModel>
     {
-        private string[] _allowedTypes = new[] { "image/jpeg", "image/png" };
+        private readonly string[] _allowedTypes = new[] { "image/jpeg", "image/png" };
 
         public AddOrUpdateStoryModelValidator()
         {

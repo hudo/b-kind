@@ -1,22 +1,27 @@
 using System.Linq;
 using System.Threading.Tasks;
+using BKind.Web.Core;
 using BKind.Web.Core.StandardQueries;
 using BKind.Web.Features.Shared;
 using BKind.Web.Features.Stories.Contracts;
-using BKind.Web.Features.Stories.Domain;
 using BKind.Web.Features.Stories.Models;
 using BKind.Web.Features.Stories.Queries;
-using BKind.Web.Infrastructure;
 using BKind.Web.Model;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace BKind.Web.Features.Stories
 {
     public class StoriesController : BkindControllerBase
     {
-        public StoriesController(IMediator mediator) : base(mediator) {}
+        private readonly AppSettings _appSetting;
+
+        public StoriesController(IMediator mediator, IOptions<AppSettings> appSetting) : base(mediator)
+        {
+            _appSetting = appSetting.Value;
+        }
 
         public async Task<IActionResult> Read(string slug)
         {
@@ -26,6 +31,7 @@ namespace BKind.Web.Features.Stories
             if (stories == null || !stories.Any()) return NotFound();
 
             var model = new ReadStoryViewModel(stories[0], user);
+            model.PhotoUrl = $"{_appSetting.StorageDomain}{_appSetting.StoryPhotoContainer}/{stories[0].Photo}";
 
             await _mediator.Send(new IncreaseStoryViewCountCommand(stories[0].Id));
 
@@ -41,7 +47,7 @@ namespace BKind.Web.Features.Stories
             var stories = await _mediator.Send(new ListStoriesQuery
             {
                 UserWithRoles = user,
-                Paging = new PagedOptions<Story>(page, orderBy: x => x.Modified, @ascending: false),
+                Paging = new PagedOptions<Story>(page, orderBy: x => x.Created, @ascending: false),
                 Pinned = recommended,
                 Tag = tag,
                 AuthorNick = author,

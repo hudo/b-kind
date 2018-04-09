@@ -1,5 +1,4 @@
 ﻿using BKind.Web.Features.Shared;
-using BKind.Web.Infrastructure;
 using BKind.Web.Model;
 
 namespace BKind.Web.Features.Stories.Contracts
@@ -13,6 +12,8 @@ namespace BKind.Web.Features.Stories.Contracts
         }
 
         public StoryProjection Story { get; set; }
+
+        public string PhotoUrl { get; set; }
 
         public User LoggedUser { get; set; }
 

@@ -125,11 +125,6 @@ namespace BKind.Web.Areas.Editor.Story.Domain
             return false;
         }
 
-        public async Task DeletePhoto(string fileName)
-        {
-
-        }
-
         private async Task UpdateTags(AddOrUpdateStoryInputModel message, Model.Story story)
         {
             var storyTags = await _mediator.Send(new GetAllQuery<StoryTags>(x => x.StoryId == story.Id));

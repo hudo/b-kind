@@ -14,7 +14,7 @@ namespace BKind.Web.Features.Stories
             var model = new StoryButtonsViewModel();
 
             model.Slug = story.Slug;
-            model.CanEdit = userWithRoles.GetRole<Author>()?.Id == story.AuthorId;
+            model.CanEdit = userWithRoles.GetRole<Author>()?.Id == story.AuthorId || userWithRoles.Is<Administrator>();
             model.CanUnpublish = story.Status == Status.Published && (model.CanEdit || userWithRoles.Is<Administrator>() || userWithRoles.Is<Reviewer>());
             model.CanVote = !model.CanEdit;
             model.CanPublish = (userWithRoles.Is<Reviewer>() || userWithRoles.Is<Administrator>()) && story.Status == Status.Draft;

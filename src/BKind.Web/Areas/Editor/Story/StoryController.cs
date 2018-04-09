@@ -56,7 +56,11 @@ namespace BKind.Web.Areas.Editor.Story
             var story = await _mediator.Send(new GetStoryQuery(id));
             var user = await GetLoggedUserAsync();
 
-            if (story == null || story.AuthorId != user.GetRole<Author>()?.Id) return NotFound();
+            if (story == null)
+                return NotFound("Story not found");
+
+            if(story.AuthorId != user.GetRole<Author>()?.Id && !user.Is<Administrator>())
+                return Unauthorized();
 
             var tags = await _mediator.Send(new GetAllQuery<Tag>(tag => tag.StoryTags.Any(st => st.StoryId == story.Id)));
 

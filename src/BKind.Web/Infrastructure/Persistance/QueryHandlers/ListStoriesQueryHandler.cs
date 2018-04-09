@@ -82,7 +82,8 @@ namespace BKind.Web.Infrastructure.Persistance.QueryHandlers
                     ThumbsUp = story.ThumbsUp,
                     Slug = story.Slug,
                     Views = story.Views,
-                    Status = story.Status
+                    Status = story.Status,
+                    Photo = story.Photo
                 }).ToListAsync();
 
             if(message.IncludeTags)

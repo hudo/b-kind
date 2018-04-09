@@ -2,12 +2,16 @@
    
 <div class="card mb-4">
     <div class="card-body">
-        <h2>@Model.Story.Title</h2>        
+        <h2 class="mb-4">@Model.Story.Title</h2>
+        @if (Model.Story.HasPhoto())
+        {
+            <img src="@Model.PhotoUrl" width="400" class="mr-4" align="left"/>
+        }
+        <div class="card-text mb-4">
+            @Model.Story.Content
+        </div>
         <p class="card-text">
-            @Model.Story.Content        
-        </p>
-        <p class="card-text">
-            written by <a asp-controller="stories" asp-action="list" asp-route-author="@Model.Story.AuthorName">@Model.Story.AuthorName</a> 
+            written by <a asp-controller="stories" asp-action="list" asp-route-author="@Model.Story.AuthorName">@Model.Story.AuthorName</a>
             on @Model.Story.Created.ToShortDateString()
         </p>
         <p class="card-text text-muted">
