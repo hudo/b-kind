@@ -25,6 +25,7 @@ namespace BKind.Web.Areas.Editor.Story
             _appSettings = appSettings.Value;
         }
 
+        [Authorize]
         public ActionResult Share() => View(new AddOrUpdateStoryInputModel());
 
         [ValidateAntiForgeryToken]
@@ -81,13 +82,14 @@ namespace BKind.Web.Areas.Editor.Story
             var user = await GetLoggedUserAsync();
             model.UserId = user.Id;
 
+            if (!ModelState.IsValid)
+                return View("Share", model);
+
             var response = await _mediator.Send(model);
 
             if (response.HasErrors)
             {
-                foreach (var responseError in response.Errors)
-                    ModelState.AddModelError(responseError.Key, responseError.Message);
-
+                MapToModelState(response);
                 return View("Share", model);
             }
 
