@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 using System;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BKind.Web.Migrations
 {

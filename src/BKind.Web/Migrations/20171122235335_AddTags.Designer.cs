@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using BKind.Web.Infrastructure.Persistance;
 using BKind.Web.Model;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BKind.Web.Migrations
 {

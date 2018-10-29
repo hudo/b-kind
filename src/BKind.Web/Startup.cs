@@ -16,7 +16,6 @@ using BKind.Web.Infrastructure;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using System.Threading.Tasks;
 using BKind.Web.Services;
-using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BKind.Web
